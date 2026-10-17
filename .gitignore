@@ -1,0 +1,10 @@
+﻿# Réglages locaux Claude Code
+.claude/settings.local.json
+
+# Système
+.DS_Store
+Thumbs.db
+
+# Éditeur
+.idea/
+.vscode/
