@@ -1,0 +1,52 @@
+{
+  "hours": ["9h", "10h", "11h", "12h", "13h", "14h", "15h", "16h", "17h", "18h", "19h", "20h", "21h", "22h"],
+  "programme": ["IN", "OFF"],
+  "categories": [
+    { "label": "Spectacle musical", "token": "musical" },
+    { "label": "Clown", "token": "clown" },
+    { "label": "Danse", "token": "danse" },
+    { "label": "Théâtre pour enfants", "token": "enfants" },
+    { "label": "Performance", "token": "performance" },
+    { "label": "Marionnette", "token": "marionnette" },
+    { "label": "Cirque", "token": "cirque" },
+    { "label": "Déambulation", "token": "deambulation" },
+    { "label": "Théâtre de rue", "token": "rue" },
+    { "label": "Cabaret", "token": "cabaret" },
+    { "label": "Concert", "token": "concert" },
+    { "label": "Lieux du festival", "token": "lieux-festival" },
+    { "label": "Lieux de convivialité", "token": "lieux-convivialite" }
+  ],
+  "zones": [
+    "Place de l’Hôtel de Ville",
+    "Place du châtelet",
+    "Conservatoire",
+    "Espace des Arts",
+    "École de l’Est",
+    "Terrain Vannier",
+    "Parc Georges Nouelle",
+    "Bastions",
+    "Abattoir",
+    "Place G. de Gaulle",
+    "Place Saint Vincent"
+  ],
+  "regions": [
+    "Auvergne-Rhône-Alpes",
+    "Bretagne",
+    "Grand Est",
+    "Internationale",
+    "Bourgogne-Franche-Comté",
+    "Centre-Val de Loire",
+    "Corse",
+    "Guadeloupe",
+    "Guyane",
+    "Hauts-de-France",
+    "Île-de-France",
+    "Normandie",
+    "Martinique",
+    "Nouvelle-Aquitaine",
+    "Occitanie",
+    "Pays de la Loire",
+    "Provence-Alpes-Côte d’Azur",
+    "Mayotte"
+  ]
+}

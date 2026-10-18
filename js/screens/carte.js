@@ -3,6 +3,7 @@ import { loadJSON } from "../data.js";
 import { loadShows } from "../shows.js";
 import * as store from "../store.js";
 import { buildStyle } from "../map/style.js";
+import { loadMapLibre } from "../map/loader.js";
 import { createVenuePin, createServicePin, createUserMarker, createHintBubble } from "../map/markers.js";
 
 /**
@@ -164,7 +165,7 @@ async function build() {
   );
   screen = h("section", { class: "screen screen--map", dataset: { screen: "carte" } }, canvas, ...createSearch(), filterButton);
 
-  const maplibregl = window.maplibregl;
+  const maplibregl = await loadMapLibre();
   map = new maplibregl.Map({
     container: canvas,
     style: buildStyle(),

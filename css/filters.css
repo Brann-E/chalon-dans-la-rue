@@ -1,0 +1,326 @@
+/* Feuille « Filtres » : page plein écran qui glisse depuis le bas. */
+
+.filters {
+  display: flex;
+  flex-direction: column;
+  background: var(--color-sky);
+}
+
+.filters__header {
+  position: relative;
+  flex: none;
+  display: flex;
+  align-items: flex-end;
+  height: var(--filters-header-height);
+  background: var(--color-yellow);
+}
+
+.filters__bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: var(--filters-bar-height);
+  border-block: var(--hairline) solid var(--color-line-strong);
+}
+
+.filters__close {
+  display: grid;
+  place-items: center;
+  width: var(--filters-divider-x);
+  height: 100%;
+  border-right: var(--hairline) solid var(--color-line-strong);
+}
+
+.filters__close img {
+  width: var(--filters-close-size);
+  height: var(--filters-close-size);
+}
+
+.filters__title {
+  position: absolute;
+  left: var(--filters-title-x);
+  font-size: var(--text-md);
+  font-weight: var(--weight-bold);
+  line-height: var(--leading-link);
+  color: var(--color-ink);
+}
+
+.filters__reset {
+  padding: 0 var(--content-inset);
+  font-size: var(--text-md);
+  font-weight: var(--weight-bold);
+  line-height: var(--leading-link);
+  color: var(--color-brand);
+}
+
+.filters__body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0 var(--content-inset);
+  scrollbar-width: none;
+}
+
+.filters__body::-webkit-scrollbar {
+  display: none;
+}
+
+.filters__section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--filters-title-gap);
+  padding: var(--filters-section-pad-top) 0 var(--filters-section-pad-bottom);
+  border-bottom: var(--hairline) solid var(--color-line);
+}
+
+.filters__section-title {
+  font-size: var(--text-md);
+  font-weight: var(--weight-bold);
+  line-height: var(--daybar-label-leading);
+  color: var(--color-black);
+}
+
+.filters__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.filters__chips .chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.chip__dot {
+  flex: none;
+  width: var(--chip-dot);
+  height: var(--chip-dot);
+  background: var(--dot, var(--color-ink));
+  border-radius: 50%;
+}
+
+.filters__hours {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--text-sm);
+  line-height: var(--leading-sm);
+  color: var(--color-black);
+}
+
+.select {
+  width: var(--select-width);
+  height: var(--select-height);
+  padding: 0 var(--space-1) 0 var(--space-2);
+  appearance: none;
+  background: var(--color-surface) url("../assets/icon-chevron-down.svg") no-repeat right var(--space-0-5) center / var(--filters-close-size);
+  border: 0;
+  border-radius: var(--radius-xs);
+  box-shadow: var(--shadow-chip);
+  font: inherit;
+  font-size: var(--text-sm);
+  color: var(--color-ink);
+}
+
+.select--empty {
+  color: var(--color-select-text);
+}
+
+.filters__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Interrupteur « Compagnies émergentes » */
+.switch {
+  position: relative;
+  flex: none;
+  width: var(--switch-width);
+  height: var(--switch-height);
+  background: var(--color-switch-off);
+  border-radius: var(--radius-pill);
+  transition: background var(--duration-move) var(--ease-move);
+}
+
+.switch::after {
+  content: "";
+  position: absolute;
+  top: calc((var(--switch-height) - var(--switch-knob)) / 2);
+  left: calc((var(--switch-height) - var(--switch-knob)) / 2);
+  width: var(--switch-knob);
+  height: var(--switch-knob);
+  background: var(--color-white);
+  border-radius: 50%;
+  box-shadow: var(--shadow-chip);
+  transition: transform var(--duration-move) var(--ease-move);
+}
+
+.switch[aria-checked="true"] {
+  background: var(--color-chip-selected);
+}
+
+.switch[aria-checked="true"]::after {
+  transform: translateX(calc(var(--switch-width) - var(--switch-height)));
+}
+
+.filters__link {
+  align-self: flex-start;
+  font-size: var(--text-sm);
+  font-weight: var(--weight-bold);
+  line-height: var(--leading-sm);
+  font-style: italic;
+  text-decoration: underline;
+  color: var(--color-ink);
+}
+
+.filters__footer {
+  flex: none;
+  display: grid;
+  place-items: center;
+  height: var(--filters-footer-height);
+  background: var(--color-yellow);
+  border-top: var(--hairline) solid var(--color-line-strong);
+}
+
+.filters__cta {
+  display: grid;
+  place-items: center;
+  width: var(--filters-cta-width);
+  height: var(--cta-height);
+  background: var(--color-cta);
+  border-radius: var(--radius-xs);
+  box-shadow: var(--shadow-cta);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-semibold);
+  line-height: var(--leading-sm);
+  color: var(--color-surface);
+}
+
+/* ---- Feuille « Filtres carte » : carte flottante au-dessus du plan --------------- */
+.mapfilters {
+  pointer-events: none;
+}
+
+.mapfilters__stack {
+  position: absolute;
+  top: var(--mapfilters-top);
+  inset-inline: var(--content-inset);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--mapfilters-confirm-gap);
+}
+
+.mapfilters__card {
+  width: 100%;
+  overflow: hidden;
+  background: var(--color-sky);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-card);
+  pointer-events: auto;
+}
+
+.mapfilters__heading {
+  display: grid;
+  place-items: center;
+  height: var(--mapfilters-heading-height);
+  background: var(--color-yellow);
+  font-size: var(--text-md);
+  font-weight: var(--weight-bold);
+  line-height: var(--leading-link);
+  color: var(--color-black);
+}
+
+.mapfilters__list {
+  list-style: none;
+  padding: var(--space-3) var(--content-inset);
+}
+
+.mapfilters__row {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: var(--mapfilters-label-gap);
+  height: var(--mapfilters-row-pitch);
+  cursor: pointer;
+  font-size: var(--text-md);
+  line-height: var(--leading-link);
+  color: var(--color-black);
+}
+
+.mapfilters__row input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.checkbox {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: var(--mapfilters-checkbox);
+  height: var(--mapfilters-checkbox);
+  background: var(--color-surface);
+  border-radius: var(--radius-xs);
+}
+
+.checkbox img {
+  width: var(--chip-dot);
+  height: var(--chip-dot);
+  opacity: 0;
+}
+
+.mapfilters__row input:checked + .checkbox {
+  background: var(--color-checkbox-on);
+}
+
+.mapfilters__row input:checked + .checkbox img {
+  opacity: 1;
+}
+
+.mapfilters__row input:focus-visible + .checkbox {
+  outline: 2px solid var(--color-ink);
+}
+
+.mapfilters__icon {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: var(--mapfilters-icon);
+  height: var(--mapfilters-icon);
+}
+
+.mapfilters__icon img {
+  width: 100%;
+  height: 100%;
+}
+
+.mapfilters__icon .map-service {
+  width: 100%;
+  height: 100%;
+}
+
+.mapfilters__dot {
+  width: var(--chip-dot);
+  height: var(--chip-dot);
+  background: var(--dot);
+  border-radius: 50%;
+}
+
+.mapfilters__confirm {
+  display: grid;
+  place-items: center;
+  width: var(--filter-button-size);
+  height: var(--filter-button-size);
+  background: var(--color-confirm);
+  border-radius: 50%;
+  box-shadow: var(--shadow-float);
+  pointer-events: auto;
+}
+
+.mapfilters__confirm img {
+  width: var(--filter-button-icon);
+  height: var(--filter-button-icon);
+}

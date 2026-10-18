@@ -4,10 +4,22 @@
  */
 const STORAGE_KEY = "chalon-dans-la-rue:v1";
 
+const defaultFilters = () => ({
+  from: "", // heure de début (ex. "9h"), vide = aucune
+  to: "",
+  days: [], // "10/07"…
+  programme: [], // "IN" | "OFF"
+  categories: [],
+  emerging: false,
+  zones: [],
+  regions: [],
+});
+
 const defaults = () => ({
   favorites: [], // ids de spectacles
   planning: {}, // idSpectacle -> index de la représentation épinglée
   layers: {}, // clé de calque -> visible ; absent = valeur par défaut de data/layers.json
+  filters: defaultFilters(), // filtres de la liste Découvrir
 });
 
 function read() {
@@ -75,6 +87,22 @@ export function setLayer(key, visible) {
 
 export function resetLayers() {
   commit({ ...state, layers: {} });
+}
+
+export const getFilters = () => ({ ...defaultFilters(), ...state.filters });
+
+export function setFilters(patch) {
+  commit({ ...state, filters: { ...getFilters(), ...patch } });
+}
+
+export function resetFilters() {
+  commit({ ...state, filters: defaultFilters() });
+}
+
+/** Un groupe de filtres (ex. « categories ») a-t-il une sélection active ? */
+export function isFilterActive(group) {
+  const value = getFilters()[group];
+  return Array.isArray(value) ? value.length > 0 : Boolean(value);
 }
 
 export function reset() {

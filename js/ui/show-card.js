@@ -48,8 +48,10 @@ export function createRep(rep, index, { slot = false } = {}) {
  * @param {object} show
  * @param {{compact?: boolean, plannedIndex?: number}} [options]
  */
-export function createShowCard(show, { compact = false, plannedIndex = null } = {}) {
+export function createShowCard(show, { compact = false, plannedIndex = null, onlySpot = null } = {}) {
   const planned = plannedIndex !== null;
+  // `onlySpot` : n'affiche que les représentations d'un lieu (fiche d'un repère de la carte).
+  const reps = show.reps.map((rep, index) => ({ rep, index })).filter(({ rep }) => onlySpot === null || rep.spot === onlySpot);
   const card = h(
     "article",
     { class: "show-card", dataset: { show: show.id, accent: show.accent } },
@@ -103,7 +105,7 @@ export function createShowCard(show, { compact = false, plannedIndex = null } = 
             "div",
             { class: "reps" },
             h("h4", { class: "reps__title" }, "Représentations"),
-            h("div", { class: "reps__row" }, show.reps.map((rep, index) => createRep(rep, index)))
+            h("div", { class: "reps__row" }, reps.map(({ rep, index }) => createRep(rep, index)))
           )
       )
     )

@@ -1,0 +1,97 @@
+/* Couche de panneaux (fiche d'un lieu, fiche spectacle, feuilles de filtres) et ses transitions. */
+
+.overlay-layer {
+  position: absolute;
+  inset: 0;
+  z-index: var(--z-overlay);
+  pointer-events: none;
+}
+
+.overlay-panel {
+  position: absolute;
+  inset: 0;
+  pointer-events: auto;
+  opacity: 0;
+  transition: opacity var(--duration-move) var(--ease-move), transform var(--duration-move) var(--ease-move);
+}
+
+.overlay-panel--slide-up { transform: translateY(var(--overlay-travel)); }
+.overlay-panel--slide-left { transform: translateX(var(--overlay-travel)); }
+
+.overlay-panel.is-open {
+  opacity: 1;
+  transform: none;
+}
+
+/* ---- Fiche d'un lieu ---------------------------------------------------------- */
+.venue {
+  display: flex;
+  flex-direction: column;
+  background: var(--color-overlay);
+  backdrop-filter: blur(var(--overlay-blur));
+}
+
+.venue__header {
+  position: relative;
+  flex: none;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: var(--space-2);
+  height: var(--venue-header-height);
+  padding-bottom: var(--space-3);
+  background: var(--color-yellow);
+  box-shadow: var(--shadow-float);
+}
+
+.venue__title {
+  font-size: var(--text-xl);
+  font-weight: var(--weight-bold);
+  line-height: var(--leading-sm);
+  color: var(--color-black);
+}
+
+.badge--large {
+  width: var(--badge-large);
+  height: var(--badge-large);
+  font-size: var(--text-sm);
+  line-height: var(--leading-sm);
+}
+
+.venue__body {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--space-3) var(--content-inset) var(--clearance-lists);
+  scrollbar-width: none;
+}
+
+.venue__body::-webkit-scrollbar {
+  display: none;
+}
+
+.venue__empty {
+  padding: var(--space-8) var(--space-4);
+  text-align: center;
+  color: var(--color-ink);
+}
+
+/* Bouton rond de fermeture (rouge, croix blanche). */
+.round-close {
+  position: absolute;
+  left: 50%;
+  bottom: var(--round-close-bottom);
+  display: grid;
+  place-items: center;
+  width: var(--filter-button-size);
+  height: var(--filter-button-size);
+  transform: translateX(-50%);
+  background: var(--color-brand);
+  border-radius: 50%;
+  box-shadow: var(--shadow-float);
+}
+
+.round-close img {
+  width: var(--round-close-icon);
+  height: var(--round-close-icon);
+  filter: brightness(0) invert(1);
+}

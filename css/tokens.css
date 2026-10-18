@@ -251,6 +251,47 @@
   --shadow-float: 0 4px 4px rgb(0 0 0 / 25%);
   --attribution-bottom: 104px;
 
+  /* ---- Panneaux (fiche d'un lieu, fiche spectacle, filtres) ------------- */
+  /* Valeurs estimées sur les captures de la maquette, à confirmer dans Figma. */
+  --color-overlay: rgb(251 251 251 / 82%);
+  --overlay-blur: 2px;
+  --overlay-travel: 100%;
+  --venue-header-height: 100px;
+  --badge-large: 24px;
+  --round-close-bottom: 20px;
+  --round-close-icon: 20px;
+
+  /* ---- Feuille « Filtres » (valeurs estimées sur capture, à confirmer) -- */
+  --filters-header-height: 109px;
+  --filters-bar-height: 50px;
+  --filters-close-size: 22px;
+  --filters-divider-x: 65px;
+  --filters-title-x: 80px;
+  --filters-footer-height: 98px;
+  --filters-cta-width: 300px;
+  --filters-section-pad-top: 12px;
+  --filters-section-pad-bottom: 18px;
+  --filters-title-gap: 8px;
+  --select-width: 60px;
+  --select-height: 33px;
+  --switch-width: 42px;
+  --switch-height: 24px;
+  --switch-knob: 20px;
+  --color-switch-off: #dce3ea;
+  --color-select-text: #cbd2d9;
+  --chip-dot: 15px;
+
+  /* ---- Feuille « Filtres carte » (valeurs estimées sur capture) --------- */
+  --mapfilters-top: 164px;
+  --mapfilters-heading-height: 58px;
+  --mapfilters-row-pitch: 38px;
+  --mapfilters-confirm-gap: 17px;
+  --mapfilters-checkbox: 24px;
+  --mapfilters-icon: 24px;
+  --mapfilters-label-gap: 12px;
+  --color-confirm: #82ff9d;
+  --color-checkbox-on: #ffff99;
+
   /* ---- Planning : sélecteur de date et créneau ------------------------- */
   --daybar-padding-top: 8px;
   --daybar-label-leading: 19px;
