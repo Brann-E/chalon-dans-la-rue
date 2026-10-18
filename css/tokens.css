@@ -172,6 +172,35 @@
   --hairline-thin: 0.5px;
   --clearance-cards: 134px;
 
+  /* ---- États vides (Favoris, Planning) --------------------------------- */
+  --color-cta: #eb6460;
+  --color-border-soft: #f5f5f5;
+  --shadow-cta: 0 1px 3px rgb(0 0 0 / 30%), 0 4px 8px 3px rgb(0 0 0 / 15%);
+  --shadow-demo: 0 2px 3px rgb(0 0 0 / 30%), 0 6px 10px 4px rgb(0 0 0 / 15%);
+  --space-6: 24px;
+  --empty-padding-top: 120px;
+  --empty-title-height: 48px;
+  --empty-title-leading: 47.7px;
+  --empty-lead-width: 306px;
+  --empty-lead-leading: 22px;
+  --empty-art-size: 128px;
+  --empty-hint-width: 284px;
+  --empty-hint-leading: 19px;
+  --cta-width: 213px;
+  --cta-height: 40px;
+  --cta-icon-large: 23px;
+  --cta-icon-small: 16px;
+  --highlight-width: 168.1px;
+  --highlight-height: 40px;
+  --highlight-rotation: -6.09deg;
+  --highlight-offset-y: -1.8px;
+  --demo-right: 11.5px;
+  --demo-bottom: 111px;
+  --demo-height: 33px;
+  --demo-width: 112.5px;
+  --cards-top-space-lists: 12px;
+  --clearance-lists: 144px;
+
   /* ---- Découvrir : barre de recherche et pastilles --------------------- */
   --filterbar-gap: 12px;
   --search-height: 24px;

@@ -46,6 +46,13 @@ export function toggleFavorite(showId) {
   commit({ ...state, favorites });
 }
 
+/** Ajoute plusieurs favoris d'un coup, en conservant l'ordre et sans doublon. */
+export function addFavorites(showIds) {
+  const favorites = [...state.favorites];
+  for (const id of showIds) if (!favorites.includes(id)) favorites.push(id);
+  commit({ ...state, favorites });
+}
+
 /** Épingle une représentation ; un nouvel appui sur la même la retire (une seule par spectacle). */
 export function togglePin(showId, index) {
   const planning = { ...state.planning };

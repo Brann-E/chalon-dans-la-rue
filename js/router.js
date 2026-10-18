@@ -27,3 +27,4 @@ export async function navigate(id) {
 }
 
 export const current = () => currentId;
+export const has = (id) => screens.has(id);

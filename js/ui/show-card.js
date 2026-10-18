@@ -41,7 +41,11 @@ function createRep(show, rep, index) {
   );
 }
 
-export function createShowCard(show) {
+/**
+ * @param {object} show
+ * @param {{compact?: boolean}} [options] `compact` : variante « Carte favoris », sans représentations.
+ */
+export function createShowCard(show, { compact = false } = {}) {
   const card = h(
     "article",
     { class: "show-card", dataset: { show: show.id, accent: show.accent } },
@@ -86,13 +90,14 @@ export function createShowCard(show) {
           h("p", { class: "show-card__summary" }, show.summary),
           h("button", { class: "pill", type: "button", dataset: { open: "" } }, "Lire plus")
         ),
-        h("hr", { class: "rule rule--medium rule--thin" }),
-        h(
-          "div",
-          { class: "reps" },
-          h("h4", { class: "reps__title" }, "Représentations"),
-          h("div", { class: "reps__row" }, show.reps.map((rep, index) => createRep(show, rep, index)))
-        )
+        !compact && h("hr", { class: "rule rule--medium rule--thin" }),
+        !compact &&
+          h(
+            "div",
+            { class: "reps" },
+            h("h4", { class: "reps__title" }, "Représentations"),
+            h("div", { class: "reps__row" }, show.reps.map((rep, index) => createRep(show, rep, index)))
+          )
       )
     )
   );
