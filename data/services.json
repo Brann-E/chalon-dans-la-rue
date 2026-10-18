@@ -1,0 +1,10 @@
+[
+  { "type": "wc", "label": "Sanitaires", "lat": 46.78095, "lng": 4.85335 },
+  { "type": "wc", "label": "Sanitaires", "lat": 46.78235, "lng": 4.85795 },
+  { "type": "wc-pmr", "label": "Sanitaires accessibles aux PMR", "lat": 46.78005, "lng": 4.85585 },
+  { "type": "water", "label": "Point d’eau", "lat": 46.78155, "lng": 4.8601 },
+  { "type": "water", "label": "Point d’eau", "lat": 46.7791, "lng": 4.8547 },
+  { "type": "shower", "label": "Douches", "lat": 46.78395, "lng": 4.8559 },
+  { "type": "parking", "label": "Parking", "lat": 46.78275, "lng": 4.85215 },
+  { "type": "parking-pmr", "label": "Places véhicules réservées aux PMR", "lat": 46.7812, "lng": 4.8579 }
+]

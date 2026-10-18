@@ -7,6 +7,7 @@ import { renderMenu } from "./screens/menu.js";
 import { renderDecouvrir } from "./screens/decouvrir.js";
 import { renderFavoris } from "./screens/favoris.js";
 import { renderPlanning } from "./screens/planning.js";
+import { renderCarte } from "./screens/carte.js";
 import { renderPlaceholder } from "./screens/placeholder.js";
 
 const app = document.getElementById("app");
@@ -25,6 +26,7 @@ register("menu", { tab: "menu", render: renderMenu });
 register("decouvrir", { tab: "decouvrir", render: renderDecouvrir });
 register("favoris", { tab: "favoris", render: renderFavoris });
 register("planning", { tab: "planning", render: renderPlanning });
+register("carte", { tab: "carte", render: renderCarte });
 
 // Événements émis par les composants ; les écrans de destination arrivent aux étapes suivantes.
 app.addEventListener("navigate", (event) => {
@@ -37,4 +39,4 @@ app.addEventListener("show-on-map", (event) => {
   if (has("carte")) navigate("carte", { focus: event.detail });
 });
 
-await navigate("decouvrir");
+await navigate("carte");

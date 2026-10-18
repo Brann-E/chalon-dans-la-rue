@@ -5,10 +5,7 @@
       "name": "chalon-dans-la-rue",
       "autoPort": true,
       "runtimeExecutable": "C:\\Users\\brann\\AppData\\Local\\Programs\\Python\\Python313\\python.exe",
-      "runtimeArgs": [
-        "-c",
-        "import os,http.server\nclass H(http.server.SimpleHTTPRequestHandler):\n    def end_headers(self):\n        self.send_header(\"Cache-Control\",\"no-store, must-revalidate\")\n        super().end_headers()\n    def send_header(self,k,v):\n        if k==\"Last-Modified\": return\n        super().send_header(k,v)\np=int(os.environ.get(\"PORT\",\"8000\"))\nhttp.server.ThreadingHTTPServer((\"127.0.0.1\",p),H).serve_forever()"
-      ],
+      "runtimeArgs": ["tools/dev-server.py"],
       "port": 8000
     }
   ]

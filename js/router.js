@@ -17,10 +17,10 @@ export function register(id, definition) {
   screens.set(id, definition);
 }
 
-export async function navigate(id) {
+export async function navigate(id, params = {}) {
   const definition = screens.get(id);
   if (!definition) throw new Error(`Écran inconnu : ${id}`);
-  const element = await definition.render();
+  const element = await definition.render(params);
   host.replaceChildren(element);
   currentId = id;
   onChange({ id, tab: definition.tab ?? id });

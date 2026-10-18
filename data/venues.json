@@ -1,0 +1,17 @@
+[
+  { "spot": 1, "name": "Place de l’Hôtel de ville", "kind": "spectacle", "lat": 46.78079, "lng": 4.85273 },
+  { "spot": 3, "name": "Parc Georges Nouelle", "kind": "spectacle", "lat": 46.78512, "lng": 4.86212 },
+  { "spot": 6, "name": "Conservatoire", "kind": "spectacle", "lat": 46.77877, "lng": 4.84775 },
+  { "spot": 14, "name": "Bastions", "kind": "spectacle", "lat": 46.78588, "lng": 4.85726 },
+  { "spot": 15, "name": "Espace des Arts", "kind": "spectacle", "lat": 46.77916, "lng": 4.84922 },
+  { "spot": 17, "name": "Place Saint-Vincent", "kind": "spectacle", "lat": 46.78213, "lng": 4.85849 },
+  { "spot": 18, "name": "Place du Châtelet", "kind": "spectacle", "lat": 46.78064, "lng": 4.85639 },
+  { "spot": 19, "name": "Cour St-Georges", "kind": "spectacle", "lat": 46.7799, "lng": 4.8512 },
+  { "spot": 25, "name": "Place du Général de Gaulle", "kind": "spectacle", "lat": 46.78379, "lng": 4.85317 },
+  { "spot": 32, "name": "L’Abattoir", "kind": "spectacle", "lat": 46.7751, "lng": 4.84517 },
+  { "spot": 43, "name": "Maison des vins", "kind": "festival", "lat": 46.78345, "lng": 4.8618 },
+  { "spot": 44, "name": "Terrain Vannier", "kind": "convivialite", "lat": 46.78435, "lng": 4.8605 },
+  { "spot": 56, "name": "Cour de la Maison de Quartier-centre", "kind": "spectacle", "lat": 46.77852, "lng": 4.86021 },
+  { "spot": 68, "name": "Place Sainte-Marie", "kind": "spectacle", "lat": 46.78201, "lng": 4.86086 },
+  { "spot": 73, "name": "Rue d’Uxelles", "kind": "spectacle", "lat": 46.77958, "lng": 4.86106 }
+]

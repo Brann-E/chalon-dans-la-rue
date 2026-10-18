@@ -1,0 +1,187 @@
+/* Écran Carte : fond interactif MapLibre, recherche, bouton filtre, repères. */
+
+.screen--map {
+  background: var(--map-background);
+}
+
+/* Spécificité renforcée : maplibre-gl.css impose « position: relative » à ce conteneur. */
+.screen--map .map-canvas {
+  position: absolute;
+  inset: 0;
+}
+
+/* ---- Barre de recherche ---------------------------------------------------- */
+.map-search {
+  position: absolute;
+  z-index: 2;
+  top: var(--map-search-top);
+  inset-inline: var(--map-search-inset);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--map-search-gap);
+  height: var(--map-search-height);
+  padding: var(--map-search-padding-y) var(--map-search-padding-x);
+  background: var(--color-white);
+  border-radius: var(--radius-pill);
+  box-shadow: inset 0 0 0 var(--map-search-border) var(--color-sky);
+}
+
+.map-search__input {
+  flex: 1;
+  min-width: 0;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  font: inherit;
+  font-size: var(--text-search);
+  line-height: var(--leading-search);
+  color: var(--color-ink);
+}
+
+.map-search__input::placeholder {
+  color: var(--color-ink);
+  opacity: 1;
+}
+
+.map-search__icon {
+  flex: none;
+  width: var(--map-search-icon);
+  height: var(--map-search-icon);
+}
+
+.map-suggestions {
+  position: absolute;
+  z-index: 3;
+  top: calc(var(--map-search-top) + var(--map-search-height) + var(--suggestions-gap));
+  inset-inline: var(--map-search-inset);
+  max-height: var(--suggestions-max-height);
+  overflow-y: auto;
+  list-style: none;
+  background: var(--color-white);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-card);
+}
+
+.map-suggestions__item {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: var(--space-2) var(--space-3);
+  text-align: left;
+  font-size: var(--text-sm);
+  line-height: var(--leading-sm);
+  color: var(--color-ink);
+}
+
+.map-suggestions__item:hover,
+.map-suggestions__item:focus-visible {
+  background: var(--color-sky);
+}
+
+.map-suggestions__sub {
+  font-size: var(--text-xs);
+  line-height: var(--leading-xs);
+  color: var(--color-ink);
+  opacity: 0.7;
+}
+
+/* ---- Bouton filtre ----------------------------------------------------------- */
+.map-filter {
+  position: absolute;
+  z-index: 2;
+  left: 50%;
+  bottom: var(--filter-button-bottom);
+  display: grid;
+  place-items: center;
+  width: var(--filter-button-size);
+  height: var(--filter-button-size);
+  transform: translateX(-50%);
+  background: var(--color-surface);
+  border-radius: 50%;
+  box-shadow: var(--shadow-float);
+}
+
+.map-filter img {
+  width: var(--filter-button-icon);
+  height: var(--filter-button-icon);
+}
+
+/* ---- Repères ------------------------------------------------------------------ */
+.map-pin {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: var(--pin-size);
+  height: var(--pin-size);
+  background: var(--color-cta);
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 var(--pin-border) var(--color-surface);
+  font-size: var(--pin-text);
+  font-weight: var(--weight-bold);
+  line-height: var(--pin-leading);
+  color: var(--color-surface);
+}
+
+.map-pin[data-kind="festival"] { background: var(--color-pin-festival); }
+.map-pin[data-kind="convivialite"] { background: var(--color-pin-convivialite); }
+
+.map-pin.is-focus {
+  animation: pin-pulse var(--pulse-duration) ease-out 2;
+}
+
+@keyframes pin-pulse {
+  from { box-shadow: inset 0 0 0 var(--pin-border) var(--color-surface), 0 0 0 0 var(--color-cta); }
+  to { box-shadow: inset 0 0 0 var(--pin-border) var(--color-surface), 0 0 0 var(--space-4) transparent; }
+}
+
+.map-service {
+  display: grid;
+  place-items: center;
+  width: var(--service-size);
+  height: var(--service-size);
+  background: var(--color-pin-service);
+  border-radius: 50%;
+  font-size: var(--service-text);
+  font-weight: var(--weight-bold);
+  line-height: 1;
+  color: var(--color-surface);
+}
+
+.map-service[data-type="water"],
+.map-service[data-type="shower"] { background: var(--color-pin-water); }
+.map-service[data-type="parking"],
+.map-service[data-type="parking-pmr"] { background: var(--color-pin-parking); }
+
+.map-user {
+  width: var(--user-marker-size);
+  height: var(--user-marker-size);
+}
+
+.map-user img {
+  width: 100%;
+  height: 100%;
+}
+
+.map-hint {
+  position: absolute;
+  top: calc(var(--pin-size) / 2 + var(--hint-bubble-dy) - var(--hint-bubble-size) / 2);
+  left: calc(var(--pin-size) / 2 + var(--hint-bubble-dx) - var(--hint-bubble-size) / 2);
+  width: var(--hint-bubble-size);
+  height: var(--hint-bubble-size);
+  pointer-events: none;
+}
+
+.map-hint img {
+  width: 100%;
+  height: 100%;
+}
+
+/* ---- Attribution (obligatoire) : discrète, au-dessus de la barre du bas ------- */
+.screen--map .maplibregl-ctrl-bottom-left {
+  bottom: var(--attribution-bottom);
+}
+
+.screen--map .maplibregl-ctrl-attrib {
+  font-family: var(--font-sans);
+}

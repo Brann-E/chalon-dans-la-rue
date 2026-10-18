@@ -204,6 +204,53 @@
   --cards-top-space-lists: 12px;
   --clearance-lists: 144px;
 
+  /* ---- Carte : couleurs du fond de plan (mesurées sur la maquette) ------- */
+  --map-background: #c6d2d8;
+  --map-road: #fcfcfc;
+  --map-water: #78ccf6;
+  --map-park: #96c01e;
+  --map-institution: #e4e4a8;
+  --map-grey: #e4e4e4;
+  --map-rail: #b4bec4;
+  --map-label: #4a4f55;
+  --map-label-halo: #ffffff;
+  --map-water-label: #2f86b8;
+
+  /* ---- Carte : repères, recherche et bouton filtre ---------------------- */
+  --pin-size: 22px;
+  --pin-border: 1px;
+  --pin-text: 12px;
+  --pin-leading: 14px;
+  --color-pin-festival: #654092;
+  --color-pin-convivialite: #00a7b6;
+  --color-pin-service: #006e95;
+  --color-pin-water: #3099cd;
+  --color-pin-parking: #46bde7;
+  --service-size: 20px;
+  --service-text: 9px;
+  --pulse-duration: 1.2s;
+  --suggestions-gap: 8px;
+  --suggestions-max-height: 280px;
+  --user-marker-size: 32px;
+  --hint-bubble-size: 71px;
+  --hint-bubble-dx: -37.5px;
+  --hint-bubble-dy: 22.5px;
+  --map-search-top: 54px;
+  --map-search-inset: 18px;
+  --map-search-height: 45px;
+  --map-search-padding-y: 8px;
+  --map-search-padding-x: 16px;
+  --map-search-gap: 28px;
+  --map-search-border: 5px;
+  --map-search-icon: 24px;
+  --text-search: 16px;
+  --leading-search: 19px;
+  --filter-button-size: 54px;
+  --filter-button-icon: 24px;
+  --filter-button-bottom: 122px;
+  --shadow-float: 0 4px 4px rgb(0 0 0 / 25%);
+  --attribution-bottom: 104px;
+
   /* ---- Planning : sélecteur de date et créneau ------------------------- */
   --daybar-padding-top: 8px;
   --daybar-label-leading: 19px;
