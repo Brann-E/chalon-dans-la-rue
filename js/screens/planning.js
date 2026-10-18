@@ -1,5 +1,6 @@
 import { h } from "../dom.js";
 import { loadJSON } from "../data.js";
+import { loadShows } from "../shows.js";
 import * as store from "../store.js";
 import { createScreen } from "../ui/screen.js";
 import { createShowCard } from "../ui/show-card.js";
@@ -43,7 +44,7 @@ const chronological = (a, b) => {
 };
 
 export async function renderPlanning() {
-  const [shows, event] = await Promise.all([loadJSON("data/shows.json"), loadJSON("data/event.json")]);
+  const [shows, event] = await Promise.all([loadShows(), loadJSON("data/event.json")]);
   const byId = new Map(shows.map((show) => [show.id, show]));
   const planned = store.getPlanning().filter(({ showId }) => byId.has(showId));
 

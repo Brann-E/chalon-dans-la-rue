@@ -7,6 +7,7 @@ const STORAGE_KEY = "chalon-dans-la-rue:v1";
 const defaults = () => ({
   favorites: [], // ids de spectacles
   planning: {}, // idSpectacle -> index de la représentation épinglée
+  layers: {}, // clé de calque -> visible ; absent = valeur par défaut de data/layers.json
 });
 
 function read() {
@@ -63,6 +64,17 @@ export function togglePin(showId, index) {
 
 export function setPin(showId, index) {
   commit({ ...state, planning: { ...state.planning, [showId]: index } });
+}
+
+/** Visibilité d'un calque de la carte ; `fallback` : valeur par défaut si l'utilisateur n'a rien choisi. */
+export const isLayerOn = (key, fallback) => (key in state.layers ? state.layers[key] : fallback);
+
+export function setLayer(key, visible) {
+  commit({ ...state, layers: { ...state.layers, [key]: visible } });
+}
+
+export function resetLayers() {
+  commit({ ...state, layers: {} });
 }
 
 export function reset() {

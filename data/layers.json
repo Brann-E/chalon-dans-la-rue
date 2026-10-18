@@ -1,0 +1,14 @@
+[
+  { "key": "position", "label": "Ma position", "default": true },
+  { "key": "spectacle", "label": "Spectacles", "default": true },
+  { "key": "restauration", "label": "Restauration", "default": false },
+  { "key": "buvette", "label": "Buvette", "default": false },
+  { "key": "festival", "label": "Lieux du festival", "default": false },
+  { "key": "convivialite", "label": "Lieux de convivialité", "default": false },
+  { "key": "water", "label": "Points d’eau", "default": false },
+  { "key": "wc", "label": "Sanitaires", "default": false },
+  { "key": "wc-pmr", "label": "Sanitaires accessibles aux PMR", "default": false },
+  { "key": "shower", "label": "Douches", "default": false },
+  { "key": "parking", "label": "Parking", "default": false },
+  { "key": "parking-pmr", "label": "Places véhicules réservées aux PMR", "default": false }
+]

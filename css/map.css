@@ -108,6 +108,11 @@
 }
 
 /* ---- Repères ------------------------------------------------------------------ */
+/* Spécificité renforcée : les repères définissent leur propre « display ». */
+:is(.map-pin, .map-service, .map-user).is-hidden {
+  display: none;
+}
+
 .map-pin {
   position: relative;
   display: grid;

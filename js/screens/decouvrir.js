@@ -1,5 +1,5 @@
 import { h, img } from "../dom.js";
-import { loadJSON } from "../data.js";
+import { loadShows } from "../shows.js";
 import { createScreen } from "../ui/screen.js";
 import { createShowCard } from "../ui/show-card.js";
 
@@ -8,7 +8,7 @@ const CHIPS = ["Horaire", "Date", "IN/OFF", "Catégorie", "Compagnie émergente"
 const normalize = (text) => text.normalize("NFD").replace(/\p{Diacritic}/gu, "").toLowerCase();
 
 export async function renderDecouvrir() {
-  const shows = await loadJSON("data/shows.json");
+  const shows = await loadShows();
   const cards = h("div", { class: "cards" });
   const empty = h("p", { class: "empty-results", hidden: true }, "Aucun spectacle ne correspond à votre recherche.");
   const entries = shows.map((show) => ({ show, el: createShowCard(show) }));

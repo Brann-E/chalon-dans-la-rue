@@ -1,10 +1,458 @@
 [
-  { "type": "wc", "label": "Sanitaires", "lat": 46.78095, "lng": 4.85335 },
-  { "type": "wc", "label": "Sanitaires", "lat": 46.78235, "lng": 4.85795 },
-  { "type": "wc-pmr", "label": "Sanitaires accessibles aux PMR", "lat": 46.78005, "lng": 4.85585 },
-  { "type": "water", "label": "Point d’eau", "lat": 46.78155, "lng": 4.8601 },
-  { "type": "water", "label": "Point d’eau", "lat": 46.7791, "lng": 4.8547 },
-  { "type": "shower", "label": "Douches", "lat": 46.78395, "lng": 4.8559 },
-  { "type": "parking", "label": "Parking", "lat": 46.78275, "lng": 4.85215 },
-  { "type": "parking-pmr", "label": "Places véhicules réservées aux PMR", "lat": 46.7812, "lng": 4.8579 }
+  {
+    "type": "wc",
+    "label": "Sanitaires",
+    "lat": 46.776714,
+    "lng": 4.861215
+  },
+  {
+    "type": "shower",
+    "label": "Douches",
+    "lat": 46.776707,
+    "lng": 4.86133
+  },
+  {
+    "type": "parking",
+    "label": "Parking de l'Hôtel de ville",
+    "lat": 46.780592,
+    "lng": 4.853279
+  },
+  {
+    "type": "water",
+    "label": "Point d’eau",
+    "lat": 46.780651,
+    "lng": 4.852897
+  },
+  {
+    "type": "water",
+    "label": "Point d’eau",
+    "lat": 46.780058,
+    "lng": 4.851493
+  },
+  {
+    "type": "water",
+    "label": "Point d’eau",
+    "lat": 46.780951,
+    "lng": 4.854009
+  },
+  {
+    "type": "water",
+    "label": "Point d’eau",
+    "lat": 46.781195,
+    "lng": 4.855269
+  },
+  {
+    "type": "water",
+    "label": "Point d’eau",
+    "lat": 46.781355,
+    "lng": 4.856999
+  },
+  {
+    "type": "wc",
+    "label": "Sanitaires",
+    "lat": 46.781441,
+    "lng": 4.858718
+  },
+  {
+    "type": "water",
+    "label": "Point d’eau",
+    "lat": 46.781883,
+    "lng": 4.858364
+  },
+  {
+    "type": "water",
+    "label": "Point d’eau",
+    "lat": 46.78321,
+    "lng": 4.857033
+  },
+  {
+    "type": "water",
+    "label": "Point d’eau",
+    "lat": 46.779919,
+    "lng": 4.855179
+  },
+  {
+    "type": "water",
+    "label": "Point d’eau",
+    "lat": 46.782179,
+    "lng": 4.858722
+  },
+  {
+    "type": "water",
+    "label": "Point d’eau",
+    "lat": 46.783261,
+    "lng": 4.862061
+  },
+  {
+    "type": "water",
+    "label": "Point d’eau",
+    "lat": 46.782671,
+    "lng": 4.859661
+  },
+  {
+    "type": "water",
+    "label": "Point d’eau",
+    "lat": 46.779581,
+    "lng": 4.851786
+  },
+  {
+    "type": "water",
+    "label": "Point d’eau",
+    "lat": 46.780233,
+    "lng": 4.849511
+  },
+  {
+    "type": "water",
+    "label": "Point d’eau",
+    "lat": 46.778984,
+    "lng": 4.863854
+  },
+  {
+    "type": "water",
+    "label": "Point d’eau",
+    "lat": 46.783766,
+    "lng": 4.848506
+  },
+  {
+    "type": "water",
+    "label": "Point d’eau",
+    "lat": 46.782545,
+    "lng": 4.848696
+  },
+  {
+    "type": "parking",
+    "label": "Parking Hôtel",
+    "lat": 46.783277,
+    "lng": 4.84606
+  },
+  {
+    "type": "water",
+    "label": "Point d’eau",
+    "lat": 46.781242,
+    "lng": 4.852364
+  },
+  {
+    "type": "water",
+    "label": "Point d’eau",
+    "lat": 46.786305,
+    "lng": 4.85235
+  },
+  {
+    "type": "water",
+    "label": "Point d’eau",
+    "lat": 46.787053,
+    "lng": 4.853578
+  },
+  {
+    "type": "water",
+    "label": "Point d’eau",
+    "lat": 46.779798,
+    "lng": 4.855667
+  },
+  {
+    "type": "parking",
+    "label": "Parking La Banque",
+    "lat": 46.782582,
+    "lng": 4.850834
+  },
+  {
+    "type": "water",
+    "label": "Point d’eau",
+    "lat": 46.78344,
+    "lng": 4.858852
+  },
+  {
+    "type": "parking",
+    "label": "Parking la Colombière",
+    "lat": 46.785333,
+    "lng": 4.845185
+  },
+  {
+    "type": "water",
+    "label": "Point d’eau",
+    "lat": 46.783843,
+    "lng": 4.861866
+  },
+  {
+    "type": "wc",
+    "label": "Sanitaires",
+    "lat": 46.784987,
+    "lng": 4.860405
+  },
+  {
+    "type": "wc-pmr",
+    "label": "Sanitaires accessibles aux PMR",
+    "lat": 46.784842,
+    "lng": 4.85783
+  },
+  {
+    "type": "wc",
+    "label": "Sanitaires",
+    "lat": 46.780257,
+    "lng": 4.862008
+  },
+  {
+    "type": "wc",
+    "label": "Sanitaires",
+    "lat": 46.782808,
+    "lng": 4.847633
+  },
+  {
+    "type": "wc",
+    "label": "Sanitaires",
+    "lat": 46.784646,
+    "lng": 4.852918
+  },
+  {
+    "type": "water",
+    "label": "Point d’eau",
+    "lat": 46.78297,
+    "lng": 4.848307
+  },
+  {
+    "type": "parking",
+    "label": "Parking relais \"Sucrerie\"",
+    "lat": 46.775439,
+    "lng": 4.844607
+  },
+  {
+    "type": "water",
+    "label": "Point d’eau",
+    "lat": 46.780251,
+    "lng": 4.86116
+  },
+  {
+    "type": "water",
+    "label": "Point d’eau",
+    "lat": 46.778079,
+    "lng": 4.860528
+  },
+  {
+    "type": "wc-pmr",
+    "label": "Sanitaires accessibles aux PMR",
+    "lat": 46.779517,
+    "lng": 4.853714
+  },
+  {
+    "type": "water",
+    "label": "Point d’eau",
+    "lat": 46.780739,
+    "lng": 4.85352
+  },
+  {
+    "type": "water",
+    "label": "Point d’eau",
+    "lat": 46.783671,
+    "lng": 4.853684
+  },
+  {
+    "type": "water",
+    "label": "Point d’eau",
+    "lat": 46.785214,
+    "lng": 4.858623
+  },
+  {
+    "type": "water",
+    "label": "Point d’eau",
+    "lat": 46.783889,
+    "lng": 4.860637
+  },
+  {
+    "type": "parking",
+    "label": "Place du 19 Mars 1962",
+    "lat": 46.782418,
+    "lng": 4.846825
+  },
+  {
+    "type": "parking",
+    "label": "Place du Général de Gaulle",
+    "lat": 46.783928,
+    "lng": 4.853671
+  },
+  {
+    "type": "parking",
+    "label": "Place du Collège",
+    "lat": 46.784732,
+    "lng": 4.858433
+  },
+  {
+    "type": "parking",
+    "label": "Parking Place Mathias",
+    "lat": 46.78597,
+    "lng": 4.859515
+  },
+  {
+    "type": "parking",
+    "label": "Place de Beaune",
+    "lat": 46.784968,
+    "lng": 4.855161
+  },
+  {
+    "type": "parking",
+    "label": "Quai Sainte-Marie",
+    "lat": 46.782214,
+    "lng": 4.861834
+  },
+  {
+    "type": "parking",
+    "label": "Parking de la Motte",
+    "lat": 46.784499,
+    "lng": 4.856507
+  },
+  {
+    "type": "parking",
+    "label": "Quai de la Poterne",
+    "lat": 46.781197,
+    "lng": 4.858436
+  },
+  {
+    "type": "parking",
+    "label": "Place du Cloître",
+    "lat": 46.782096,
+    "lng": 4.859704
+  },
+  {
+    "type": "parking",
+    "label": "Parc des Expositions",
+    "lat": 46.786763,
+    "lng": 4.865721
+  },
+  {
+    "type": "parking",
+    "label": "Parking de l'IUT de Chalon-sur-Saône",
+    "lat": 46.777078,
+    "lng": 4.854993
+  },
+  {
+    "type": "parking",
+    "label": "Place de l'Abbé Moreau",
+    "lat": 46.781211,
+    "lng": 4.846868
+  },
+  {
+    "type": "parking",
+    "label": "Parking Lapray",
+    "lat": 46.783448,
+    "lng": 4.85943
+  },
+  {
+    "type": "parking",
+    "label": "Parking du Chatelet",
+    "lat": 46.780751,
+    "lng": 4.85624
+  },
+  {
+    "type": "parking",
+    "label": "Place Pontus de Thiard",
+    "lat": 46.782685,
+    "lng": 4.854733
+  },
+  {
+    "type": "parking",
+    "label": "Place de l'Obélisque",
+    "lat": 46.784507,
+    "lng": 4.852522
+  },
+  {
+    "type": "parking",
+    "label": "Place Carrée",
+    "lat": 46.785106,
+    "lng": 4.850718
+  },
+  {
+    "type": "parking",
+    "label": "Place de la République",
+    "lat": 46.783499,
+    "lng": 4.848223
+  },
+  {
+    "type": "parking",
+    "label": "Place Saint-Jean de Maizel",
+    "lat": 46.779027,
+    "lng": 4.851161
+  },
+  {
+    "type": "parking",
+    "label": "Esplanade Sainte-Marie",
+    "lat": 46.784254,
+    "lng": 4.865082
+  },
+  {
+    "type": "parking",
+    "label": "Place Sainte-Marie",
+    "lat": 46.781996,
+    "lng": 4.860885
+  },
+  {
+    "type": "parking",
+    "label": "Parking du Carmel",
+    "lat": 46.783984,
+    "lng": 4.859593
+  },
+  {
+    "type": "parking",
+    "label": "Parking Promenade Sainte-Marie",
+    "lat": 46.784318,
+    "lng": 4.862364
+  },
+  {
+    "type": "parking",
+    "label": "Quai Sainte-Marie",
+    "lat": 46.782567,
+    "lng": 4.862902
+  },
+  {
+    "type": "wc",
+    "label": "Sanitaires",
+    "lat": 46.775145,
+    "lng": 4.861079
+  },
+  {
+    "type": "parking",
+    "label": "Place Thévenin",
+    "lat": 46.779915,
+    "lng": 4.862299
+  },
+  {
+    "type": "parking-pmr",
+    "label": "Places véhicules réservées aux PMR",
+    "lat": 46.777577,
+    "lng": 4.855693
+  },
+  {
+    "type": "parking-pmr",
+    "label": "Places véhicules réservées aux PMR",
+    "lat": 46.777329,
+    "lng": 4.855852
+  },
+  {
+    "type": "parking-pmr",
+    "label": "Places véhicules réservées aux PMR",
+    "lat": 46.777379,
+    "lng": 4.855821
+  },
+  {
+    "type": "parking-pmr",
+    "label": "Places véhicules réservées aux PMR",
+    "lat": 46.777428,
+    "lng": 4.855789
+  },
+  {
+    "type": "parking-pmr",
+    "label": "Places véhicules réservées aux PMR",
+    "lat": 46.777478,
+    "lng": 4.855757
+  },
+  {
+    "type": "parking-pmr",
+    "label": "Places véhicules réservées aux PMR",
+    "lat": 46.777528,
+    "lng": 4.855725
+  },
+  {
+    "type": "parking",
+    "label": "Place Ronde",
+    "lat": 46.786003,
+    "lng": 4.853316
+  }
 ]

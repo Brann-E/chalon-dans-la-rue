@@ -1,5 +1,5 @@
 import { h } from "../dom.js";
-import { loadJSON } from "../data.js";
+import { loadShows } from "../shows.js";
 import * as store from "../store.js";
 import { createScreen } from "../ui/screen.js";
 import { createShowCard } from "../ui/show-card.js";
@@ -13,7 +13,7 @@ const DEMO_FAVORITES = ["fidji", "clap", "le-p-d", "hypothese"];
  * Retirer un cœur ne supprime pas la carte tant qu'on reste sur l'écran (comme dans la maquette).
  */
 export async function renderFavoris() {
-  const shows = await loadJSON("data/shows.json");
+  const shows = await loadShows();
   const ids = store.getFavorites();
 
   if (ids.length === 0) {

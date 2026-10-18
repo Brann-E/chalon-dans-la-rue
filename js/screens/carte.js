@@ -1,11 +1,14 @@
 import { h, img } from "../dom.js";
 import { loadJSON } from "../data.js";
+import { loadShows } from "../shows.js";
+import * as store from "../store.js";
 import { buildStyle } from "../map/style.js";
 import { createVenuePin, createServicePin, createUserMarker, createHintBubble } from "../map/markers.js";
 
 /**
  * Écran Carte (Accueil) : vraie carte interactive MapLibre centrée sur le centre-ville de
- * Chalon-sur-Saône, avec repères cliquables, recherche à suggestions et bouton filtre.
+ * Chalon-sur-Saône, avec les 82 lieux du plan du festival, les services (OpenStreetMap),
+ * une recherche à suggestions et le bouton filtre. Les calques se règlent dans « Filtres carte ».
  * L'écran est un singleton : le fond de carte garde sa vue quand on change d'onglet.
  */
 const DEMO_HINT_SPOT = 68; // repère portant la bulle « CLICK HERE » de la maquette
@@ -16,13 +19,22 @@ let screen = null;
 let map = null;
 let venues = [];
 let shows = [];
-const pins = new Map(); // spot -> { venue, el }
+let layerDefs = [];
+const venuePins = new Map(); // spot -> { venue, el }
+const layered = []; // { layer, el } : tout repère rattaché à un calque
 
 const normalize = (text) => text.normalize("NFD").replace(/\p{Diacritic}/gu, "").toLowerCase();
 const emit = (name, detail) => screen.dispatchEvent(new CustomEvent(name, { bubbles: true, detail }));
 
+function applyLayers() {
+  const byKey = new Map(layerDefs.map((layer) => [layer.key, layer]));
+  for (const { layer, el } of layered) {
+    el.classList.toggle("is-hidden", !store.isLayerOn(layer, byKey.get(layer)?.default ?? true));
+  }
+}
+
 function focusVenue(spot) {
-  const entry = pins.get(Number(spot));
+  const entry = venuePins.get(Number(spot));
   if (!entry) return;
   map.flyTo({ center: [entry.venue.lng, entry.venue.lat], zoom: Math.max(map.getZoom(), FOCUS_ZOOM), duration: 800 });
   entry.el.classList.add("is-focus");
@@ -30,21 +42,24 @@ function focusVenue(spot) {
 }
 
 function selectVenue(venue) {
-  pins.get(venue.spot)?.el.querySelector(".map-hint")?.remove();
+  venuePins.get(venue.spot)?.el.querySelector(".map-hint")?.remove();
   emit("open-venue", { spot: venue.spot });
 }
 
-/** Suggestions : lieux par nom, spectacles par titre / compagnie / catégorie (centrés sur leur lieu). */
+/** Suggestions : lieux par nom ou adresse, spectacles par titre / compagnie / catégorie. */
 function suggestionsFor(query) {
   const q = normalize(query.trim());
   if (!q) return [];
   const results = [];
   for (const venue of venues) {
-    if (normalize(venue.name).includes(q)) results.push({ label: venue.name, sub: `Lieu · repère ${venue.spot}`, spot: venue.spot });
+    if (normalize(`${venue.name} ${venue.address}`).includes(q)) {
+      results.push({ label: venue.name, sub: `Repère ${venue.spot}${venue.address ? ` · ${venue.address}` : ""}`, spot: venue.spot });
+    }
   }
   for (const show of shows) {
-    const haystack = normalize([show.title, show.company, show.category].join(" "));
-    if (haystack.includes(q)) results.push({ label: show.title, sub: `${show.company} · ${show.reps[0].venue}`, spot: show.reps[0].spot });
+    if (normalize([show.title, show.company, show.category].join(" ")).includes(q)) {
+      results.push({ label: show.title, sub: `${show.company} · ${show.reps[0].venue}`, spot: show.reps[0].spot });
+    }
   }
   return results.slice(0, 6);
 }
@@ -125,14 +140,16 @@ function locateUser(marker) {
 }
 
 async function build() {
-  const [venueData, services, showData, event] = await Promise.all([
+  const [venueData, services, showData, event, layers] = await Promise.all([
     loadJSON("data/venues.json"),
     loadJSON("data/services.json"),
-    loadJSON("data/shows.json"),
+    loadShows(),
     loadJSON("data/event.json"),
+    loadJSON("data/layers.json"),
   ]);
   venues = venueData;
   shows = showData;
+  layerDefs = layers;
 
   const canvas = h("div", { class: "map-canvas" });
   const filterButton = h(
@@ -164,18 +181,24 @@ async function build() {
   map.addControl(new maplibregl.AttributionControl({ compact: true }), "bottom-left");
 
   for (const service of services) {
-    new maplibregl.Marker({ element: createServicePin(service), anchor: "center" }).setLngLat([service.lng, service.lat]).addTo(map);
+    const el = createServicePin(service);
+    layered.push({ layer: service.type, el });
+    new maplibregl.Marker({ element: el, anchor: "center" }).setLngLat([service.lng, service.lat]).addTo(map);
   }
   for (const venue of venues) {
     const el = createVenuePin(venue, selectVenue);
     if (venue.spot === DEMO_HINT_SPOT) el.append(createHintBubble());
-    pins.set(venue.spot, { venue, el });
+    venuePins.set(venue.spot, { venue, el });
+    layered.push({ layer: venue.kind, el });
     new maplibregl.Marker({ element: el, anchor: "center" }).setLngLat([venue.lng, venue.lat]).addTo(map);
   }
 
-  const userMarker = new maplibregl.Marker({ element: createUserMarker(() => locateUser(userMarker)), anchor: "center" })
-    .setLngLat(USER_FALLBACK)
-    .addTo(map);
+  const userEl = createUserMarker(() => locateUser(userMarker));
+  const userMarker = new maplibregl.Marker({ element: userEl, anchor: "center" }).setLngLat(USER_FALLBACK).addTo(map);
+  layered.push({ layer: "position", el: userEl });
+
+  applyLayers();
+  store.subscribe(applyLayers);
 }
 
 /** @param {{focus?: {spot: number}}} [params] */
