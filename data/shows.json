@@ -1,0 +1,273 @@
+[
+  {
+    "id": "le-p-d",
+    "title": "LE P*D*",
+    "company": "Jeanine Machine",
+    "accent": "violet",
+    "duration": "2h15",
+    "age": "Dès 12 ans",
+    "location": "Rue d’Uxelles",
+    "category": "Déambulation",
+    "programme": "IN",
+    "summary": "Au milieu de l’espace public, un homme nous raconte les luttes qui ont  fait l’histoire de la culture homosexuelle du 20ème siècle et qui  participent à la culture queer d’aujourd’hui. Il traverse le temps pour...",
+    "photo": {
+      "src": "assets/show-lepd.jpg",
+      "mode": "stretch",
+      "sx": 0.9994040727615356,
+      "sy": 0.40942031145095825,
+      "tx": 0.00029797377646900713,
+      "ty": 0.12737761437892914
+    },
+    "reps": [
+      {
+        "date": "10/07",
+        "time": "17h00",
+        "spot": 73,
+        "venue": "Rue d’Uxelles"
+      },
+      {
+        "date": "11/07",
+        "time": "17h00",
+        "spot": 73,
+        "venue": "Rue d’Uxelles"
+      },
+      {
+        "date": "12/07",
+        "time": "17h00",
+        "spot": 73,
+        "venue": "Rue d’Uxelles"
+      },
+      {
+        "date": "13/07",
+        "time": "17h00",
+        "spot": 73,
+        "venue": "Rue d’Uxelles"
+      }
+    ]
+  },
+  {
+    "id": "fidji",
+    "title": "FIDJI",
+    "company": "La Dépliante",
+    "accent": "orange",
+    "duration": "0h50",
+    "age": "Dès 10 ans",
+    "location": "Cour St-Georges",
+    "category": "Théâtre de rue",
+    "programme": "OFF",
+    "summary": "Mordant, grinçant, badass, un  personnage décapant entre la comédie sociale anglaise et l'antihéros de  Marvel. Strasky attend son chat, l'occasion pour lui de partager avec  philosophie ses réflexions...",
+    "photo": {
+      "src": "assets/show-fidji5.jpg",
+      "mode": "stretch",
+      "sx": 1,
+      "sy": 0.40942031145095825,
+      "tx": 3.552713678800501e-15,
+      "ty": 0.17491868138313293
+    },
+    "reps": [
+      {
+        "date": "10/07",
+        "time": "9h30",
+        "spot": 19,
+        "venue": "Cour St-Georges"
+      },
+      {
+        "date": "11/07",
+        "time": "9h30",
+        "spot": 19,
+        "venue": "Cour St-Georges"
+      },
+      {
+        "date": "12/07",
+        "time": "9h30",
+        "spot": 19,
+        "venue": "Cour St-Georges"
+      },
+      {
+        "date": "13/07",
+        "time": "9h30",
+        "spot": 19,
+        "venue": "Cour St-Georges"
+      }
+    ]
+  },
+  {
+    "id": "clap",
+    "title": "CLAP!",
+    "company": "SopaLoca",
+    "accent": "indigo",
+    "duration": "1h20",
+    "age": "Tout public",
+    "location": "Place Sainte-Marie",
+    "category": "Spectacle musical",
+    "programme": "OFF",
+    "summary": "Fini la fanfare ! Les sept membres de SopaLoca, révoltés par\nleurs conditions de travail d’orchestre de rue, décident de\nchanger de plan de carrière : arrêter la fanfare et faire du...",
+    "photo": {
+      "src": "assets/show-generic.jpg",
+      "mode": "cover"
+    },
+    "reps": [
+      {
+        "date": "10/07",
+        "time": "15h",
+        "spot": 68,
+        "venue": "Place Sainte-Marie"
+      },
+      {
+        "date": "11/07",
+        "time": "15h",
+        "spot": 68,
+        "venue": "Place Sainte-Marie"
+      },
+      {
+        "date": "12/07",
+        "time": "15h",
+        "spot": 68,
+        "venue": "Place Sainte-Marie"
+      },
+      {
+        "date": "13/07",
+        "time": "15h",
+        "spot": 68,
+        "venue": "Place Sainte-Marie"
+      }
+    ]
+  },
+  {
+    "id": "hypothese",
+    "title": "Hypothèse",
+    "company": "Pudding théâtre",
+    "accent": "orange",
+    "duration": "1h20",
+    "age": "Tout public",
+    "location": "Place de l’Hôtel de ville",
+    "category": "Théâtre de rue",
+    "programme": "IN",
+    "summary": "Hypothèse, c'est un spectacle en mouvement qui voyage sur l'échelle du temps et fait se croiser les univers du savoir et de l'imaginaire. Hypothèse, c'est 7 artistes au plateau qui...",
+    "photo": {
+      "src": "assets/show-screenshot.jpg",
+      "mode": "stretch",
+      "sx": 0.9141495227813721,
+      "sy": 0.46311473846435547,
+      "tx": 0.08172556757926941,
+      "ty": 0.4035055637359619
+    },
+    "reps": [
+      {
+        "date": "10/07",
+        "time": "9h30",
+        "spot": 68,
+        "venue": "Place Sainte-Marie"
+      },
+      {
+        "date": "11/07",
+        "time": "9h30",
+        "spot": 68,
+        "venue": "Place Sainte-Marie"
+      },
+      {
+        "date": "12/07",
+        "time": "9h30",
+        "spot": 68,
+        "venue": "Place Sainte-Marie"
+      },
+      {
+        "date": "13/07",
+        "time": "9h30",
+        "spot": 68,
+        "venue": "Place Sainte-Marie"
+      }
+    ]
+  },
+  {
+    "id": "trop-pres-du-mur",
+    "title": "Trop près du mur",
+    "company": "Typhus Bronx",
+    "accent": "#FF4444",
+    "duration": "1h50",
+    "age": "Dès 10 ans",
+    "location": "Cour de la Maison de Quartier-centre",
+    "category": "Clown",
+    "programme": "OFF",
+    "summary": "À l’origine du spectacle, il y a Typhus qui parle à l’acteur de son désir d’enfant. Le clown voudrait un compagnon pour partager sa folitude, un être à chérir et protéger du mieux qu’il peut. Après bien des...",
+    "photo": {
+      "src": "assets/show-typhus.jpg",
+      "mode": "stretch",
+      "sx": 0.9025641083717346,
+      "sy": 0.31890228390693665,
+      "tx": 0.04871794953942299,
+      "ty": 0.21210795640945435
+    },
+    "reps": [
+      {
+        "date": "10/07",
+        "time": "9h30",
+        "spot": 56,
+        "venue": "Cour de la Maison de Quartier-centre"
+      },
+      {
+        "date": "11/07",
+        "time": "9h30",
+        "spot": 56,
+        "venue": "Cour de la Maison de Quartier-centre"
+      },
+      {
+        "date": "12/07",
+        "time": "9h30",
+        "spot": 56,
+        "venue": "Cour de la Maison de Quartier-centre"
+      },
+      {
+        "date": "13/07",
+        "time": "9h30",
+        "spot": 56,
+        "venue": "Cour de la Maison de Quartier-centre"
+      }
+    ]
+  },
+  {
+    "id": "feu-madame-singer",
+    "title": "FEU MADAME SINGER",
+    "company": "Grand colossal théâtre",
+    "accent": "orange",
+    "duration": "2h00",
+    "age": "Dès 12 ans",
+    "location": "Place de l’Hôtel de ville",
+    "category": "Théâtre de rue",
+    "programme": "IN",
+    "summary": "La série théâtrale La Chienlit retrace l’histoire d’une ville en proie à une grève des éboueurs. Nous suivons l’équipe municipale et les habitants d’un écoquartier…  Tous pris dans la tourmente du...",
+    "photo": {
+      "src": "assets/show-colossal.jpg",
+      "mode": "stretch",
+      "sx": 1.0002554655075073,
+      "sy": 0.4161299467086792,
+      "tx": -0.0012678287457674742,
+      "ty": 0.15902747213840485
+    },
+    "reps": [
+      {
+        "date": "10/07",
+        "time": "18h",
+        "spot": 68,
+        "venue": "Place Sainte-Marie"
+      },
+      {
+        "date": "11/07 -18h",
+        "spot": 68,
+        "venue": "Place Sainte-Marie"
+      },
+      {
+        "date": "12/07",
+        "time": "18h",
+        "spot": 68,
+        "venue": "Place Sainte-Marie"
+      },
+      {
+        "date": "13/07",
+        "time": "18h",
+        "spot": 68,
+        "venue": "Place Sainte-Marie"
+      }
+    ]
+  }
+]

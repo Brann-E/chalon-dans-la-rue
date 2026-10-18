@@ -10,7 +10,7 @@ const row = (item) =>
     h("span", { class: item.variant === "legal" ? "menu-row__label menu-row__label--legal" : "menu-row__label" }, item.label)
   );
 
-const rule = () => h("hr", { class: "menu-rule" });
+const rule = () => h("hr", { class: "rule" });
 
 const setting = (item, isLast) =>
   h(
@@ -33,5 +33,5 @@ export async function renderMenu() {
   for (const item of data.secondary) list.append(row(item), rule());
   list.append(h("p", { class: "menu-version" }, data.version));
 
-  return createScreen({ id: "menu", title: data.title, body: list });
+  return createScreen({ id: "menu", title: data.title, body: list, titleShifted: true });
 }

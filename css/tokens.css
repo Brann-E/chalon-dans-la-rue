@@ -61,6 +61,8 @@
   --color-accent-orange: #ff9f00;
   --color-accent-violet: #a267fc;
   --color-accent-indigo: #5b6bfa;
+  --color-accent-red: #ff4444;
+  --color-line-medium: rgb(0 0 0 / 20%);
 
   /* ---- Catégories (puces de la feuille de filtres) --------------------- */
   --color-cat-musical: #5b6bfa;
@@ -97,8 +99,9 @@
   --weight-bold: 700;
   --weight-black: 900;
 
-  --leading-xs: 14.5px;            /* 12px, interligne automatique Inter */
-  --leading-sm: 16.9px;            /* 14px, interligne automatique Inter */
+  /* Figma arrondit les hauteurs de ligne à l'entier : 12 px → 15 px, 14 px → 17 px. */
+  --leading-xs: 15px;
+  --leading-sm: 17px;
   --leading-tight: 16px;
 
   /* ---- Espacements ----------------------------------------------------- */
@@ -121,6 +124,8 @@
 
   /* ---- Ombres ---------------------------------------------------------- */
   --shadow-floating: 0 4px 4px rgb(0 0 0 / 30%), 0 8px 12px 6px rgb(0 0 0 / 15%);
+  --shadow-card: 0 2px 6px 2px rgb(0 0 0 / 15%), 0 1px 2px rgb(0 0 0 / 30%);
+  --shadow-chip: 0 1px 3px 1px rgb(0 0 0 / 15%), 0 1px 2px rgb(0 0 0 / 30%);
 
   /* ---- Gabarit de l'écran (maquette 414 × 896) ------------------------- */
   --screen-width: 414px;
@@ -147,6 +152,36 @@
   --menu-legal-spacing: 0.4px;
   --hairline: 1px;
   --hairline-half: -0.5px;
+
+  /* ---- Carte spectacle ------------------------------------------------- */
+  --card-width: 390px;
+  --card-gap: 12px;
+  --card-banner-height: 46px;
+  --card-photo-height: 113px;
+  --card-padding-bottom: 16px;
+  --card-inset: 8px;
+  --heart-size: 30px;
+  --meta-icon-size: 16px;
+  --pill-padding-y: 4px;
+  --rep-width: 166px;
+  --rep-height: 93px;
+  --rep-top-height: 30px;
+  --rep-spot-height: 20px;
+  --rep-button-height: 19px;
+  --badge-size: 20px;
+  --hairline-thin: 0.5px;
+  --clearance-cards: 134px;
+
+  /* ---- Découvrir : barre de recherche et pastilles --------------------- */
+  --filterbar-gap: 12px;
+  --search-height: 24px;
+  --chip-height: 34px;
+  --chip-padding: 8px;
+  --chips-end-space: 50px;
+  --filters-link-height: 19px;
+  --text-link: 16px;
+  --leading-link: 19px;
+  --cards-top-space: 11px;
 
   /* ---- Barre d'état ---------------------------------------------------- */
   --statusbar-time-left: 15px;

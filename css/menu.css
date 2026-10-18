@@ -33,21 +33,6 @@
   letter-spacing: var(--menu-legal-spacing);
 }
 
-/* Filet : occupe 0 px de hauteur, trait de 1 px centré sur sa position. */
-.menu-rule {
-  position: relative;
-  height: 0;
-  border: 0;
-}
-
-.menu-rule::before {
-  content: "";
-  position: absolute;
-  inset: var(--hairline-half) 0 auto;
-  height: var(--hairline);
-  background: var(--color-line);
-}
-
 /* Sous-menu des paramètres */
 .menu-setting {
   position: relative;

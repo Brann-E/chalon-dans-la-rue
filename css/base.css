@@ -60,6 +60,29 @@ img {
   inset: 0;
 }
 
+/* ---- Filet : occupe 0 px de hauteur, trait de 1 px centré sur sa position -- */
+.rule {
+  position: relative;
+  height: 0;
+  border: 0;
+}
+
+.rule::before {
+  content: "";
+  position: absolute;
+  inset: var(--hairline-half) 0 auto;
+  height: var(--hairline);
+  background: var(--rule-color, var(--color-line));
+}
+
+.rule--medium { --rule-color: var(--color-line-medium); }
+.rule--strong { --rule-color: var(--color-line-strong); }
+
+.rule--thin::before {
+  inset-block-start: calc(var(--hairline-thin) / -2);
+  height: var(--hairline-thin);
+}
+
 /* ---- Écran : en-tête jaune + corps défilant ------------------------------ */
 .screen {
   position: absolute;
@@ -88,11 +111,19 @@ img {
 .screen__title {
   position: absolute;
   inset: var(--header-title-top) 0 auto;
-  padding-left: var(--header-title-offset);
   text-align: center;
   font-size: var(--text-sm);
   font-weight: var(--weight-bold);
   line-height: var(--leading-sm);
+}
+
+/* Variantes mesurées dans Figma : titre décalé (Menu) et filet d'en-tête léger (Découvrir). */
+.screen__title--shifted {
+  padding-left: var(--header-title-offset);
+}
+
+.screen__header--soft::after {
+  background: var(--color-line);
 }
 
 .screen__body {
