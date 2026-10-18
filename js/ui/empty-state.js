@@ -7,14 +7,14 @@ const go = (el, to) => el.dispatchEvent(new CustomEvent("navigate", { bubbles: t
  * consigne et deux boutons d'orientation.
  * @param {{title: string, lead: string, art: string, hint: string}} content
  */
-export function createEmptyState({ title, lead, art, hint }) {
+export function createEmptyState({ title, lead, art, hint, shortHint = false }) {
   return h(
     "div",
     { class: "empty" },
     h("h2", { class: "empty__title" }, title),
     h("p", { class: "empty__lead" }, lead),
     img(art, { class: "empty__art" }),
-    h("p", { class: "empty__hint" }, hint),
+    h("p", { class: shortHint ? "empty__hint empty__hint--short" : "empty__hint" }, hint),
     h(
       "button",
       { class: "cta cta--centered", type: "button", onclick: (event) => go(event.currentTarget, "carte") },

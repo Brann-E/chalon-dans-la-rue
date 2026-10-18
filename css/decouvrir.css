@@ -68,6 +68,12 @@
   white-space: nowrap;
 }
 
+/* Pastille sélectionnée : rouge plein comme les boutons IN/OFF de la feuille de filtres. */
+.chip[aria-pressed="true"] {
+  background: var(--color-chip-selected);
+  color: var(--color-surface);
+}
+
 .filters-link {
   height: var(--filters-link-height);
   padding: 0 var(--card-inset);

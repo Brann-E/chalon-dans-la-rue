@@ -186,6 +186,9 @@
   --empty-art-size: 128px;
   --empty-hint-width: 284px;
   --empty-hint-leading: 19px;
+  /* Planning : valeurs estimées sur capture, à confirmer dans Figma. */
+  --empty-hint-height-short: 49px;
+  --empty-hint-width-wide: 358px;
   --cta-width: 213px;
   --cta-height: 40px;
   --cta-icon-large: 23px;
@@ -200,6 +203,13 @@
   --demo-width: 112.5px;
   --cards-top-space-lists: 12px;
   --clearance-lists: 144px;
+
+  /* ---- Planning : sélecteur de date et créneau ------------------------- */
+  --daybar-padding-top: 8px;
+  --daybar-label-leading: 19px;
+  --daybar-chips-height: 40px;
+  --change-slot-height: 15px;
+  --color-chip-selected: var(--color-cta);
 
   /* ---- Découvrir : barre de recherche et pastilles --------------------- */
   --filterbar-gap: 12px;

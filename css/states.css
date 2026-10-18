@@ -67,6 +67,11 @@
   text-align: center;
 }
 
+.empty__hint--short {
+  max-width: var(--empty-hint-width-wide);
+  min-height: var(--empty-hint-height-short);
+}
+
 .cta {
   display: flex;
   align-items: center;

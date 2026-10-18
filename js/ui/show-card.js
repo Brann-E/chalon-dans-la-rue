@@ -4,6 +4,8 @@ import * as store from "../store.js";
 /**
  * Carte spectacle (composant « Découvrir » de Figma) : bannière + photo recadrée,
  * informations, résumé, bouton « Lire plus » et défilé des représentations.
+ * Variantes : `compact` (« Carte favoris », sans représentations) et `plannedIndex`
+ * (« Carte planning » : créneau épinglé + lien « Changer le créneau » en tête).
  * Événements émis (bubbles) : open-show {id}, show-on-map {id, spot, venue}.
  */
 
@@ -22,10 +24,11 @@ function createPhoto(show) {
   return wrapper;
 }
 
-function createRep(show, rep, index) {
+/** Carte de représentation ; `slot` : version pleine largeur du planning. */
+export function createRep(rep, index, { slot = false } = {}) {
   return h(
     "div",
-    { class: "rep" },
+    { class: slot ? "rep rep--slot" : "rep", dataset: slot ? { slot: index } : {} },
     h(
       "div",
       { class: "rep__top" },
@@ -43,15 +46,18 @@ function createRep(show, rep, index) {
 
 /**
  * @param {object} show
- * @param {{compact?: boolean}} [options] `compact` : variante « Carte favoris », sans représentations.
+ * @param {{compact?: boolean, plannedIndex?: number}} [options]
  */
-export function createShowCard(show, { compact = false } = {}) {
+export function createShowCard(show, { compact = false, plannedIndex = null } = {}) {
+  const planned = plannedIndex !== null;
   const card = h(
     "article",
     { class: "show-card", dataset: { show: show.id, accent: show.accent } },
     h(
       "div",
       { class: "show-card__main" },
+      planned && createRep(show.reps[plannedIndex], plannedIndex, { slot: true }),
+      planned && h("button", { class: "change-slot", type: "button", dataset: { change: "" } }, "Changer le créneau"),
       h(
         "div",
         { class: "show-card__media" },
@@ -90,13 +96,14 @@ export function createShowCard(show, { compact = false } = {}) {
           h("p", { class: "show-card__summary" }, show.summary),
           h("button", { class: "pill", type: "button", dataset: { open: "" } }, "Lire plus")
         ),
-        !compact && h("hr", { class: "rule rule--medium rule--thin" }),
+        !compact && !planned && h("hr", { class: "rule rule--medium rule--thin" }),
         !compact &&
+          !planned &&
           h(
             "div",
             { class: "reps" },
             h("h4", { class: "reps__title" }, "Représentations"),
-            h("div", { class: "reps__row" }, show.reps.map((rep, index) => createRep(show, rep, index)))
+            h("div", { class: "reps__row" }, show.reps.map((rep, index) => createRep(rep, index)))
           )
       )
     )
@@ -107,28 +114,47 @@ export function createShowCard(show, { compact = false } = {}) {
     if (!target) return;
     if (target.classList.contains("like")) store.toggleFavorite(show.id);
     else if (target.classList.contains("pin")) store.togglePin(show.id, Number(target.dataset.pin));
-    else if (target.dataset.onMap !== undefined) {
+    else if (target.dataset.change !== undefined) {
+      const current = store.pinnedIndex(show.id) ?? plannedIndex ?? 0;
+      store.setPin(show.id, (current + 1) % show.reps.length);
+    } else if (target.dataset.onMap !== undefined) {
       const rep = show.reps[Number(target.dataset.onMap)];
       emit(card, "show-on-map", { id: show.id, spot: rep.spot, venue: rep.venue });
     } else if (target.dataset.open !== undefined || target.classList.contains("show-card__title")) emit(card, "open-show", { id: show.id });
   });
 
+  card.__show = show;
   syncCard(card);
   return card;
 }
 
-/** Met à jour cœur et épingles d'une carte à partir de l'état partagé. */
+/** Met à jour cœur, épingles et créneau d'une carte à partir de l'état partagé. */
 export function syncCard(card) {
+  const show = card.__show;
   const id = card.dataset.show;
   const like = card.querySelector(".like");
   const liked = store.isFavorite(id);
   like.setAttribute("aria-pressed", String(liked));
   like.firstElementChild.setAttribute("src", `assets/heart-${liked ? "on" : "off"}.png`);
+
   card.querySelectorAll(".pin").forEach((pin) => {
     const pinned = store.isPinned(id, Number(pin.dataset.pin));
     pin.setAttribute("aria-pressed", String(pinned));
     pin.firstElementChild.setAttribute("src", `assets/pin-${pinned ? "on" : "off"}.png`);
   });
+
+  // Carte planning : le créneau affiché suit l'épingle (« Changer le créneau »).
+  const slot = card.querySelector(".rep--slot");
+  const index = store.pinnedIndex(id);
+  if (slot && show && index !== null && Number(slot.dataset.slot) !== index) {
+    const rep = show.reps[index];
+    slot.dataset.slot = index;
+    slot.querySelector(".rep__date").textContent = `${rep.date} - ${rep.time}`;
+    slot.querySelector(".badge").textContent = rep.spot;
+    slot.querySelector(".rep__venue").textContent = rep.venue;
+    slot.querySelector(".pin").dataset.pin = index;
+    slot.querySelector(".button-outline").dataset.onMap = index;
+  }
 }
 
 // Un seul abonnement : toutes les cartes affichées se resynchronisent.

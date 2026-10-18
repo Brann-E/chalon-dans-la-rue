@@ -1,0 +1,136 @@
+import { h } from "../dom.js";
+import { loadJSON } from "../data.js";
+import * as store from "../store.js";
+import { createScreen } from "../ui/screen.js";
+import { createShowCard } from "../ui/show-card.js";
+import { createEmptyState, createDemoFill } from "../ui/empty-state.js";
+
+/** Créneaux ajoutés par le raccourci « Remplir la page » : [spectacle, index de représentation]. */
+const DEMO_PLANNING = [
+  ["hypothese", 2],
+  ["le-p-d", 2],
+  ["fidji", 3],
+  ["trop-pres-du-mur", 0],
+];
+
+const toMinutes = (time) => {
+  const [, hours, minutes] = /(\d+)h(\d*)/.exec(time) ?? [];
+  return Number(hours) * 60 + Number(minutes || 0);
+};
+
+const dayOf = (rep) => rep.date;
+const startOf = (rep) => toMinutes(rep.time);
+const durationOf = (show) => toMinutes(show.duration);
+
+/** Titre du premier autre spectacle épinglé dont le créneau chevauche celui-ci, sinon null. */
+function conflictFor(entry, entries) {
+  const rep = entry.show.reps[entry.index];
+  const start = startOf(rep);
+  const end = start + durationOf(entry.show);
+  const other = entries.find((o) => {
+    if (o === entry) return false;
+    const otherRep = o.show.reps[o.index];
+    const oStart = startOf(otherRep);
+    return dayOf(otherRep) === dayOf(rep) && start < oStart + durationOf(o.show) && oStart < end;
+  });
+  return other ? other.show.title : null;
+}
+
+const chronological = (a, b) => {
+  const repA = a.show.reps[a.index];
+  const repB = b.show.reps[b.index];
+  return dayOf(repA).localeCompare(dayOf(repB)) || startOf(repA) - startOf(repB);
+};
+
+export async function renderPlanning() {
+  const [shows, event] = await Promise.all([loadJSON("data/shows.json"), loadJSON("data/event.json")]);
+  const byId = new Map(shows.map((show) => [show.id, show]));
+  const planned = store.getPlanning().filter(({ showId }) => byId.has(showId));
+
+  if (planned.length === 0) {
+    const screen = createScreen({
+      id: "planning",
+      title: "Planning",
+      softLine: true,
+      bodyClass: "screen__body--empty",
+      body: createEmptyState({
+        title: "Ah !?",
+        lead: "Il semblerait que vous n’avez pas encore mis de spectacle de côté.",
+        art: "assets/chapeau.png",
+        hint: "Remplissez vite votre planning en cliquant sur l’icône “épingle” d’un spectacle.",
+        shortHint: true,
+      }),
+    });
+    screen.append(
+      createDemoFill(() => {
+        DEMO_PLANNING.forEach(([id, index]) => store.setPin(id, index));
+        screen.dispatchEvent(new CustomEvent("navigate", { bubbles: true, detail: { to: "planning" } }));
+      })
+    );
+    return screen;
+  }
+
+  const entries = planned.map(({ showId, index }) => ({ show: byId.get(showId), index })).sort(chronological);
+  const cards = entries.map((entry) => ({ entry, el: createShowCard(entry.show, { plannedIndex: entry.index }) }));
+  const list = h("div", { class: "cards" }, cards.map(({ el }) => el));
+  const empty = h("p", { class: "empty-results", hidden: true }, "Rien de prévu ce jour-là.");
+
+  // Avertissement de chevauchement, recalculé à chaque changement d'épingle.
+  const refreshConflicts = () => {
+    const live = entries.map((entry) => ({ ...entry, index: store.pinnedIndex(entry.show.id) ?? entry.index }));
+    cards.forEach(({ el }, i) => {
+      el.querySelector(".conflict")?.remove();
+      const title = conflictFor(live[i], live);
+      if (title) el.querySelector(".change-slot").after(h("p", { class: "conflict" }, `Chevauche « ${title} »`));
+    });
+  };
+  refreshConflicts();
+  const unsubscribe = store.subscribe(() => (list.isConnected ? refreshConflicts() : unsubscribe()));
+
+  const selected = new Set();
+  const applyFilter = () => {
+    let visible = 0;
+    cards.forEach(({ entry, el }) => {
+      const rep = entry.show.reps[store.pinnedIndex(entry.show.id) ?? entry.index];
+      el.hidden = selected.size > 0 && !selected.has(dayOf(rep));
+      if (!el.hidden) visible += 1;
+    });
+    empty.hidden = visible > 0;
+  };
+
+  const chips = event.days.map((day) =>
+    h(
+      "button",
+      {
+        class: "chip",
+        type: "button",
+        "aria-pressed": "false",
+        onclick: (clickEvent) => {
+          const chip = clickEvent.currentTarget;
+          const on = chip.getAttribute("aria-pressed") !== "true";
+          chip.setAttribute("aria-pressed", String(on));
+          if (on) selected.add(day.id);
+          else selected.delete(day.id);
+          applyFilter();
+        },
+      },
+      day.label
+    )
+  );
+
+  const daybar = h(
+    "div",
+    { class: "daybar" },
+    h("div", { class: "daybar__main" }, h("h2", { class: "daybar__label" }, "Date"), h("div", { class: "daybar__chips" }, chips)),
+    h("hr", { class: "rule" })
+  );
+
+  return createScreen({
+    id: "planning",
+    title: "Planning",
+    softLine: true,
+    above: daybar,
+    bodyClass: "screen__body--lists",
+    body: [list, empty],
+  });
+}

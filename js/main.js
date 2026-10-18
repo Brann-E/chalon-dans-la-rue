@@ -6,6 +6,7 @@ import { createTabbar } from "./ui/tabbar.js";
 import { renderMenu } from "./screens/menu.js";
 import { renderDecouvrir } from "./screens/decouvrir.js";
 import { renderFavoris } from "./screens/favoris.js";
+import { renderPlanning } from "./screens/planning.js";
 import { renderPlaceholder } from "./screens/placeholder.js";
 
 const app = document.getElementById("app");
@@ -23,6 +24,7 @@ for (const tab of tabs) {
 register("menu", { tab: "menu", render: renderMenu });
 register("decouvrir", { tab: "decouvrir", render: renderDecouvrir });
 register("favoris", { tab: "favoris", render: renderFavoris });
+register("planning", { tab: "planning", render: renderPlanning });
 
 // Événements émis par les composants ; les écrans de destination arrivent aux étapes suivantes.
 app.addEventListener("navigate", (event) => {
