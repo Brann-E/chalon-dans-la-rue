@@ -1,0 +1,7 @@
+[
+  { "id": "planning", "label": "Planning", "icon": "assets/pin.png" },
+  { "id": "favoris", "label": "Favoris", "icon": "assets/heart.png" },
+  { "id": "carte", "label": "Carte", "icon": "assets/binoculars.png" },
+  { "id": "decouvrir", "label": "Découvrir", "icon": "assets/megaphone.png" },
+  { "id": "menu", "label": "Menu", "icon": "assets/house.png" }
+]

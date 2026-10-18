@@ -1,0 +1,132 @@
+/* Coque de l'appli : barre d'état et barre du bas (mesures Figma, composant « Menu »). */
+
+/* ---- Barre d'état -------------------------------------------------------- */
+.statusbar {
+  position: absolute;
+  inset: 0 0 auto;
+  z-index: var(--z-statusbar);
+  height: var(--statusbar-height);
+  pointer-events: none;
+}
+
+.statusbar__time {
+  position: absolute;
+  top: var(--statusbar-time-top);
+  left: var(--statusbar-time-left);
+  width: var(--statusbar-time-width);
+  height: var(--statusbar-time-height);
+  display: grid;
+  place-items: center;
+  font-size: var(--text-lg);
+  font-weight: var(--weight-bold);
+  line-height: 22px;
+  color: var(--color-black);
+}
+
+.statusbar__notch {
+  position: absolute;
+  top: -1px;
+  left: 50%;
+  width: var(--statusbar-notch-width);
+  height: var(--statusbar-height);
+  transform: translateX(-50%);
+  background: var(--color-ink);
+  border-radius: 0 0 var(--statusbar-notch-radius) var(--statusbar-notch-radius);
+}
+
+.statusbar__icons {
+  position: absolute;
+  top: var(--statusbar-icons-top);
+  right: var(--statusbar-icons-right);
+  display: flex;
+  align-items: flex-start;
+  gap: var(--statusbar-icons-gap);
+}
+
+.statusbar__signal {
+  width: var(--statusbar-signal-width);
+  height: var(--statusbar-signal-height);
+}
+
+.statusbar__wifi {
+  width: var(--statusbar-signal-width);
+  height: var(--statusbar-wifi-height);
+}
+
+.statusbar__battery {
+  width: var(--statusbar-battery-width);
+  height: var(--statusbar-battery-height);
+}
+
+/* ---- Barre du bas -------------------------------------------------------- */
+.tabbar {
+  position: absolute;
+  inset: auto var(--tabbar-inset) var(--tabbar-bottom);
+  z-index: var(--z-tabbar);
+  height: var(--tabbar-height);
+  background: var(--color-yellow);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-floating);
+}
+
+.tabbar[data-active="planning"] { --active-center: var(--tabbar-center-planning); }
+.tabbar[data-active="favoris"] { --active-center: var(--tabbar-center-favoris); }
+.tabbar[data-active="carte"] { --active-center: var(--tabbar-center-carte); }
+.tabbar[data-active="decouvrir"] { --active-center: var(--tabbar-center-decouvrir); }
+.tabbar[data-active="menu"] { --active-center: var(--tabbar-center-menu); }
+
+/* La pastille active (86 px) est écrêtée par la barre. */
+.tabbar__clip {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  border-radius: var(--radius-sm);
+  pointer-events: none;
+}
+
+.tabbar__active {
+  position: absolute;
+  top: calc((var(--tabbar-height) - var(--tabbar-active-size)) / 2);
+  left: calc(50% + var(--active-center) - var(--tabbar-half-width) - var(--tabbar-active-size) / 2);
+  width: var(--tabbar-active-size);
+  height: var(--tabbar-active-size);
+  background: var(--color-active-tab);
+  border-radius: 50%;
+  transition: left var(--duration-move) var(--ease-move);
+}
+
+.tabbar__item {
+  position: absolute;
+  top: var(--tabbar-item-top);
+  left: calc(50% + var(--center) - var(--tabbar-half-width));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-0-5);
+  transform: translateX(-50%);
+}
+
+.tabbar__item[data-tab="planning"] { --center: var(--tabbar-center-planning); --icon-width: var(--tabbar-icon-width-planning); }
+.tabbar__item[data-tab="favoris"] { --center: var(--tabbar-center-favoris); --icon-width: var(--tabbar-icon-width-favoris); }
+.tabbar__item[data-tab="carte"] {
+  --center: var(--tabbar-center-carte);
+  --icon-width: var(--tabbar-icon-width-carte);
+  top: var(--tabbar-item-top-carte);
+  gap: var(--space-1);
+}
+.tabbar__item[data-tab="decouvrir"] { --center: var(--tabbar-center-decouvrir); --icon-width: var(--tabbar-icon-width-decouvrir); }
+.tabbar__item[data-tab="menu"] { --center: var(--tabbar-center-menu); --icon-width: var(--tabbar-icon-width-menu); }
+
+.tabbar__icon {
+  width: var(--icon-width);
+  height: var(--tabbar-icon-height);
+}
+
+.tabbar__label {
+  font-size: var(--text-xs);
+  font-weight: var(--weight-regular);
+  line-height: var(--leading-xs);
+  color: var(--color-black);
+  text-align: center;
+  white-space: nowrap;
+}

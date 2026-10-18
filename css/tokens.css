@@ -1,0 +1,199 @@
+/* ==========================================================================
+   Design tokens — Chalon dans la rue
+   Source de vérité : fichier Figma « Chalon dans la rue » (page App).
+   Toute valeur de design (couleur, espacement, rayon, typographie) vit ici ;
+   les autres feuilles de style ne contiennent aucune valeur en dur.
+   ========================================================================== */
+
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 300 900;
+  font-display: swap;
+  src: url("../assets/fonts/inter-latin-ext.woff2") format("woff2");
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 300 900;
+  font-display: swap;
+  src: url("../assets/fonts/inter-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+/* Remplace « Larken DEMO » (police des titres d'états vides), non disponible. */
+@font-face {
+  font-family: "DM Serif Display";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../assets/fonts/dm-serif-display-latin-ext.woff2") format("woff2");
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+@font-face {
+  font-family: "DM Serif Display";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../assets/fonts/dm-serif-display-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+:root {
+  /* ---- Couleurs de base ------------------------------------------------ */
+  --color-ink: #2a292b;            /* texte courant */
+  --color-black: #000000;
+  --color-white: #ffffff;
+  --color-surface: #fbfbfb;        /* blanc cassé : cartes, boutons, texte sur aplat */
+  --color-sky: #c7f3fe;            /* fond des écrans */
+  --color-yellow: #ffff99;         /* en-têtes, barre du bas, bannières */
+  --color-brand: #ed6361;          /* pastilles, boutons principaux */
+  --color-like: #eb3530;           /* cœur et épingle actifs */
+  --color-rose: #ffeeee;           /* cartes de représentation */
+  --color-line: rgb(0 0 0 / 10%);  /* filets de séparation */
+  --color-line-strong: rgb(0 0 0 / 30%);
+  --color-active-tab: rgb(237 99 97 / 80%);
+
+  /* ---- Accents de spectacle (bannière, « Lire plus », catégorie) ------- */
+  --color-accent-orange: #ff9f00;
+  --color-accent-violet: #a267fc;
+  --color-accent-indigo: #5b6bfa;
+
+  /* ---- Catégories (puces de la feuille de filtres) --------------------- */
+  --color-cat-musical: #5b6bfa;
+  --color-cat-clown: #ff4444;
+  --color-cat-danse: #e59cce;
+  --color-cat-enfants: #4cc9fe;
+  --color-cat-performance: #a267fc;
+  --color-cat-marionnette: #0d7c66;
+  --color-cat-cirque: #54c392;
+  --color-cat-deambulation: #fabc3f;
+  --color-cat-rue: #ff9f00;
+  --color-cat-cabaret: #ff1493;
+  --color-cat-concert: #708090;
+  --color-cat-lieux-festival: #654092;
+  --color-cat-lieux-convivialite: #00a7b6;
+
+  /* ---- Typographie ----------------------------------------------------- */
+  --font-sans: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-display: "DM Serif Display", "Larken", Georgia, serif;
+
+  --text-2xs: 10px;
+  --text-xs: 12px;
+  --text-sm: 14px;
+  --text-md: 16px;
+  --text-lg: 17px;
+  --text-xl: 18px;
+  --text-2xl: 20px;
+  --text-display: 36px;
+
+  --weight-light: 300;
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+  --weight-bold: 700;
+  --weight-black: 900;
+
+  --leading-xs: 14.5px;            /* 12px, interligne automatique Inter */
+  --leading-sm: 16.9px;            /* 14px, interligne automatique Inter */
+  --leading-tight: 16px;
+
+  /* ---- Espacements ----------------------------------------------------- */
+  --space-0-5: 2px;
+  --space-1: 4px;
+  --space-1-5: 6px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-4-5: 19px;
+  --space-5: 20px;
+  --space-8: 32px;
+
+  /* ---- Rayons ---------------------------------------------------------- */
+  --radius-xs: 4px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-pill: 999px;
+
+  /* ---- Ombres ---------------------------------------------------------- */
+  --shadow-floating: 0 4px 4px rgb(0 0 0 / 30%), 0 8px 12px 6px rgb(0 0 0 / 15%);
+
+  /* ---- Gabarit de l'écran (maquette 414 × 896) ------------------------- */
+  --screen-width: 414px;
+  --screen-height: 896px;
+  --screen-radius: var(--radius-lg);
+  --statusbar-height: 30px;
+  --header-height: 83px;
+  --content-inset: var(--space-3);
+  --content-width: 390px;
+  --clearance-tabbar: 112px;       /* marge basse du contenu défilant sous la barre */
+  --header-title-top: 54px;
+  --header-title-offset: 3px;      /* décale le centre du titre de 1,5 px, comme dans Figma */
+  --header-line-top: 82.5px;
+  --color-stage: #1c1c1e;          /* fond autour de l'appli sur ordinateur */
+
+  /* ---- Écran Menu ------------------------------------------------------ */
+  --menu-row-height: 32px;
+  --menu-setting-height: 36px;
+  --menu-setting-height-last: 23px;
+  --menu-setting-indent: 53px;
+  --menu-setting-line-top: 35.5px;
+  --menu-chevron-size: 12px;
+  --menu-chevron-top: 2.5px;
+  --menu-legal-spacing: 0.4px;
+  --hairline: 1px;
+  --hairline-half: -0.5px;
+
+  /* ---- Barre d'état ---------------------------------------------------- */
+  --statusbar-time-left: 15px;
+  --statusbar-time-width: 65px;
+  --statusbar-notch-width: 215px;
+  --statusbar-notch-radius: 20px;
+  --statusbar-icons-right: 14px;
+  --statusbar-icons-top: 16px;
+  --statusbar-icons-gap: 5px;
+  --statusbar-time-top: 11px;
+  --statusbar-time-height: 18px;
+  --statusbar-signal-width: 16px;
+  --statusbar-signal-height: 12.2px;
+  --statusbar-wifi-height: 12.3px;
+  --statusbar-battery-width: 24px;
+  --statusbar-battery-height: 13px;
+
+  /* ---- Barre du bas ---------------------------------------------------- */
+  --tabbar-height: 66px;
+  --tabbar-inset: var(--space-3);
+  --tabbar-bottom: 34px;
+  --tabbar-half-width: 195px;
+  --tabbar-active-size: 86px;
+  --tabbar-icon-height: 32px;
+  /* Centre de chaque onglet, mesuré dans la maquette (barre de 390 px). */
+  --tabbar-center-planning: 31.5px;
+  --tabbar-center-favoris: 113.5px;
+  --tabbar-center-carte: 195.5px;
+  --tabbar-center-decouvrir: 277.5px;
+  --tabbar-center-menu: 360px;
+  --tabbar-item-top: 12px;
+  --tabbar-item-top-carte: 10px;
+  --tabbar-icon-width-planning: 33px;
+  --tabbar-icon-width-favoris: 36.4px;
+  --tabbar-icon-width-carte: 33px;
+  --tabbar-icon-width-decouvrir: 32px;
+  --tabbar-icon-width-menu: 32px;
+
+  /* ---- Mouvement ------------------------------------------------------- */
+  --duration-move: 300ms;
+  --ease-move: cubic-bezier(0.22, 0.61, 0.36, 1);
+
+  /* ---- Couches --------------------------------------------------------- */
+  --z-screen: 1;
+  --z-tabbar: 20;
+  --z-backdrop: 30;
+  --z-sheet: 31;
+  --z-overlay: 32;
+  --z-statusbar: 40;
+}

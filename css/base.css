@@ -1,0 +1,107 @@
+/* Base : remise à zéro, gabarit de l'appli, structure commune des écrans. */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  display: grid;
+  place-items: center;
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  line-height: var(--leading-sm);
+  color: var(--color-ink);
+  background: var(--color-stage);
+  -webkit-font-smoothing: antialiased;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+
+img {
+  display: block;
+}
+
+/* ---- Gabarit : 414 × 896 sur ordinateur, plein écran sur téléphone ------- */
+.device {
+  position: relative;
+  width: min(100vw, var(--screen-width));
+  height: min(100dvh, var(--screen-height));
+  overflow: hidden;
+  isolation: isolate;
+  background: var(--color-sky);
+  border-radius: var(--screen-radius);
+}
+
+@media (max-width: 430px) {
+  .device {
+    width: 100vw;
+    height: 100dvh;
+    border-radius: 0;
+  }
+}
+
+.screens {
+  position: absolute;
+  inset: 0;
+}
+
+/* ---- Écran : en-tête jaune + corps défilant ------------------------------ */
+.screen {
+  position: absolute;
+  inset: 0;
+  z-index: var(--z-screen);
+  display: flex;
+  flex-direction: column;
+  background: var(--color-sky);
+}
+
+.screen__header {
+  position: relative;
+  flex: none;
+  height: var(--header-height);
+  background: var(--color-yellow);
+}
+
+.screen__header::after {
+  content: "";
+  position: absolute;
+  inset: var(--header-line-top) 0 auto;
+  height: 1px;
+  background: var(--color-line-strong);
+}
+
+.screen__title {
+  position: absolute;
+  inset: var(--header-title-top) 0 auto;
+  padding-left: var(--header-title-offset);
+  text-align: center;
+  font-size: var(--text-sm);
+  font-weight: var(--weight-bold);
+  line-height: var(--leading-sm);
+}
+
+.screen__body {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--space-4) var(--content-inset) var(--clearance-tabbar);
+  scrollbar-width: none;
+}
+
+.screen__body::-webkit-scrollbar {
+  display: none;
+}

@@ -1,0 +1,29 @@
+{
+  "title": "Menu",
+  "primary": [
+    { "icon": "assets/chapiteau.png", "label": "Découvrir les lieux du festival", "to": null },
+    { "icon": "assets/decoration.png", "label": "Découvrir les lieux de convivialité", "to": null },
+    { "icon": "assets/carte-icon.png", "label": "Découvrir les zones du festival", "to": null },
+    { "icon": "assets/pierre-rosette.png", "label": "Lire l’histoire du festival", "to": null },
+    { "icon": "assets/entente.png", "label": "Ils nous soutiennent", "to": null },
+    { "icon": "assets/internet.png", "label": "Visiter le site officiel", "to": null }
+  ],
+  "settings": {
+    "icon": "assets/parametres.png",
+    "label": "Paramètres",
+    "items": [
+      { "label": "Notifications", "to": null },
+      { "label": "Carte", "to": null },
+      { "label": "Accessibilité", "to": null },
+      { "label": "Préférences", "to": null },
+      { "label": "Changer d’avatar", "to": null }
+    ]
+  },
+  "secondary": [
+    { "icon": "assets/discuter.png", "label": "Aide", "to": null },
+    { "icon": "assets/conditions.png", "label": "Conditions générales d’utilisations", "to": null },
+    { "icon": "assets/doc-legal.png", "label": "Mentions légales", "to": null, "variant": "legal" },
+    { "icon": "assets/microphone.png", "label": "Envoyez vos commentaires", "to": null }
+  ],
+  "version": "Version 0.0.1-a383.564"
+}
