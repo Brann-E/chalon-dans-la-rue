@@ -9,6 +9,7 @@ import { renderDecouvrir } from "./screens/decouvrir.js";
 import { renderFavoris } from "./screens/favoris.js";
 import { renderPlanning } from "./screens/planning.js";
 import { renderCarte } from "./screens/carte.js";
+import { renderSpectacle } from "./screens/spectacle.js";
 import { renderPlaceholder } from "./screens/placeholder.js";
 import { createVenuePanel } from "./screens/venue.js";
 import { createFiltersPanel } from "./screens/filters.js";
@@ -31,15 +32,21 @@ initRouter(screensHost, ({ tab }) => tabbar.setActive(tab));
 for (const tab of tabs) {
   register(tab.id, { tab: tab.id, render: () => renderPlaceholder(tab.id, tab.label) });
 }
-register("menu", { tab: "menu", render: renderMenu });
+register("menu", { tab: "menu", render: renderMenu, transition: "slide-right" });
 register("decouvrir", { tab: "decouvrir", render: renderDecouvrir });
 register("favoris", { tab: "favoris", render: renderFavoris });
 register("planning", { tab: "planning", render: renderPlanning });
 register("carte", { tab: "carte", render: renderCarte });
+// La fiche spectacle garde allumé l'onglet d'où l'on vient.
+register("spectacle", { tab: (params) => params.from ?? "decouvrir", render: renderSpectacle });
 
 // Événements émis par les composants.
 app.addEventListener("navigate", (event) => {
   if (has(event.detail.to)) navigate(event.detail.to);
+});
+app.addEventListener("open-show", (event) => {
+  closeOverlay({ immediate: true });
+  navigate("spectacle", { id: event.detail.id, from: tabbar.el.dataset.active });
 });
 app.addEventListener("show-on-map", (event) => {
   closeOverlay({ immediate: true });

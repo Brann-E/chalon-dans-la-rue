@@ -18,6 +18,7 @@ const FOCUS_ZOOM = 17;
 
 let screen = null;
 let map = null;
+let building = null; // construction unique, même si l'écran est demandé plusieurs fois d'affilée
 let venues = [];
 let shows = [];
 let layerDefs = [];
@@ -204,7 +205,8 @@ async function build() {
 
 /** @param {{focus?: {spot: number}}} [params] */
 export async function renderCarte(params = {}) {
-  if (!screen) await build();
+  building ??= build();
+  await building;
   requestAnimationFrame(() => {
     map.resize();
     if (params.focus) focusVenue(params.focus.spot);

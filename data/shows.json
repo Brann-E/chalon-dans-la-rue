@@ -89,7 +89,37 @@
         "spot": 19,
         "venue": "Cour St-Georges"
       }
-    ]
+    ],
+    "detail": {
+      "photos": [
+        "assets/show-fidji-carousel1.jpg",
+        "assets/show-fidji-2.jpg",
+        "assets/show-fidji-3.jpg"
+      ],
+      "description": "Mordant, grinçant et drôle, un personnage décapant entre la comédie sociale anglaise et l’anti-héros de Marvel. Starsky cherche son chat, l’occasion pour lui de partager ses réflexions sur la vie, le monde et les félins . Entre deux exercices de musculation, Starsky tire le fil de ses raisonnements « félinosophiques » et nous plonge au cœur d’un monde absurde, à la frontière du stand up, du conte et du cirque dans lequel le vrai et le faux ne font désormais plus qu’un : le vraux.\n\nUn spectacle tiré au cordeau avec des punchlines percutantes et surtout l’idée assumée qu’on peut dire beaucoup grâce au rire.",
+      "links": {
+        "show": null,
+        "company": null
+      },
+      "sections": [
+        {
+          "title": "Distribution",
+          "text": "De et Avec : Antoine Nicaud\nRegards extérieurs : Jatta Borg, Marek Kastelnik, Dominique Bettenfeld, Stéphane Dutournier\nProduction, diffusion et administration : L’Envoleur - Adeline Morin et Guillaume Cornu"
+        },
+        {
+          "title": "Technique",
+          "text": "Espace de jeu : 8 mètres par 8 mètres\nDisposition : Frontal\nla Cie fournit un gradin de 100 places.\nJauge : la jauge maximale est de 250 personnes\nTemps de montage : 2 heures environ\nTemps de démontage : 1 heure environ"
+        },
+        {
+          "title": "Contact Diffusion",
+          "text": "De et Avec : Antoine Nicaud\nRegards extérieurs : Jatta Borg, Marek Kastelnik, Dominique Bettenfeld, Stéphane Dutournier\nProduction, diffusion et administration : L’Envoleur - Adeline Morin et Guillaume Cornu"
+        },
+        {
+          "title": "Soutiens",
+          "text": "La Cascade à Bourg Saint Andéol, Le Kiwi – Festival de Ramonville, La Commanderie à Vaour, Le Daki Ling à Marseille, Le Carroi à la Flèche, L’Interlude à Cholet, Furies à Chalon en Champagne, la Cie du Courcirkoui, L’Eau Vive en partenariat avec La Verrerie d’Alès, La Centrifugeuse à Pau, Les Quinconces L’Espal - scène nationale du Mans, Centre Culturel Bonnefoy à Toulouse.\n\nSoutiens institutionnels :\nLe préfet de région - Drac Pays de la Loire, la région des Pays de la Loire"
+        }
+      ]
+    }
   },
   {
     "id": "clap",

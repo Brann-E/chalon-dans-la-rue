@@ -292,6 +292,9 @@
   --color-confirm: #82ff9d;
   --color-checkbox-on: #ffff99;
 
+  /* ---- Fiche spectacle ------------------------------------------------- */
+  --carousel-height: 276px;
+
   /* ---- Planning : sélecteur de date et créneau ------------------------- */
   --daybar-padding-top: 8px;
   --daybar-label-leading: 19px;

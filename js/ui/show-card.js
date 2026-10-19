@@ -160,4 +160,4 @@ export function syncCard(card) {
 }
 
 // Un seul abonnement : toutes les cartes affichées se resynchronisent.
-store.subscribe(() => document.querySelectorAll(".show-card").forEach(syncCard));
+store.subscribe(() => document.querySelectorAll("[data-show]").forEach((el) => el.__show && syncCard(el)));

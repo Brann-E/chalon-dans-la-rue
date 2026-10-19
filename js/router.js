@@ -21,9 +21,17 @@ export async function navigate(id, params = {}) {
   const definition = screens.get(id);
   if (!definition) throw new Error(`Écran inconnu : ${id}`);
   const element = await definition.render(params);
+  const first = host.childElementCount === 0;
   host.replaceChildren(element);
+  // Transitions de la maquette : le Menu glisse depuis la droite, le reste se fond (« smart animate », « dissolve »).
+  const transition = definition.transition ?? "fade";
+  if (!first && transition !== "none") {
+    element.classList.add(`enter-${transition}`);
+    element.addEventListener("animationend", () => element.classList.remove(`enter-${transition}`), { once: true });
+  }
   currentId = id;
-  onChange({ id, tab: definition.tab ?? id });
+  const tab = typeof definition.tab === "function" ? definition.tab(params) : (definition.tab ?? id);
+  onChange({ id, tab });
 }
 
 export const current = () => currentId;

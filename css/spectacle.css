@@ -1,0 +1,125 @@
+/* Fiche spectacle : page pleine largeur (414 px) sous l'en-tête jaune. */
+
+.screen__body--bleed {
+  padding: 0 0 var(--clearance-lists);
+}
+
+.spectacle {
+  background: var(--color-white);
+}
+
+/* ---- Carrousel ----------------------------------------------------------------- */
+.carousel {
+  position: relative;
+  height: var(--carousel-height);
+  background: var(--color-black);
+}
+
+.carousel__track {
+  display: flex;
+  height: 100%;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+
+.carousel__track::-webkit-scrollbar {
+  display: none;
+}
+
+.carousel__slide {
+  flex: none;
+  width: 100%;
+  height: 100%;
+  scroll-snap-align: start;
+}
+
+.carousel__slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.carousel__counter {
+  position: absolute;
+  right: var(--space-3);
+  bottom: var(--space-3);
+  padding: var(--space-0-5) var(--space-2);
+  background: rgb(0 0 0 / 60%);
+  border-radius: var(--radius-xs);
+  font-size: var(--text-md);
+  line-height: var(--leading-link);
+  color: var(--color-white);
+  pointer-events: none;
+}
+
+/* ---- Bannière + contenu -------------------------------------------------------- */
+.spectacle__banner {
+  border-radius: 0 0 var(--radius-sm) var(--radius-sm);
+}
+
+.spectacle__content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding-top: var(--space-2);
+}
+
+.spectacle__info {
+  gap: var(--space-2);
+}
+
+.spectacle__text {
+  font-size: var(--text-xs);
+  font-weight: var(--weight-regular);
+  line-height: var(--leading-xs);
+  color: var(--color-ink);
+}
+
+.spectacle__text p + p,
+.spectacle__text br {
+  margin-top: 0;
+}
+
+.spectacle__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--card-inset) 0;
+}
+
+.pill--link,
+.pill--outline {
+  display: inline-block;
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-pill);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-bold);
+  line-height: var(--leading-sm);
+  text-decoration: none;
+}
+
+.pill--link {
+  background: var(--accent);
+  color: var(--color-surface);
+}
+
+.pill--outline {
+  background: var(--color-white);
+  border: var(--hairline) solid var(--accent);
+  color: var(--accent);
+}
+
+.spectacle__section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  padding: var(--space-2) var(--card-inset) 0;
+}
+
+.spectacle__section-title {
+  font-size: var(--text-sm);
+  font-weight: var(--weight-bold);
+  line-height: var(--leading-sm);
+  color: var(--color-ink);
+}

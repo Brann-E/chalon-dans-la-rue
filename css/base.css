@@ -117,6 +117,23 @@ img {
   line-height: var(--leading-sm);
 }
 
+/* Transitions d'entrée des écrans (durée = token --duration-move). */
+@keyframes enter-fade {
+  from { opacity: 0; }
+}
+
+@keyframes enter-slide-right {
+  from { transform: translateX(100%); }
+}
+
+.screen.enter-fade { animation: enter-fade var(--duration-move) var(--ease-move); }
+.screen.enter-slide-right { animation: enter-slide-right var(--duration-move) var(--ease-move); }
+
+@media (prefers-reduced-motion: reduce) {
+  .screen.enter-fade,
+  .screen.enter-slide-right { animation: none; }
+}
+
 /* Variantes mesurées dans Figma : titre décalé (Menu) et filet d'en-tête léger (Découvrir). */
 .screen__title--shifted {
   padding-left: var(--header-title-offset);
