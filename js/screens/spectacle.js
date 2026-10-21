@@ -42,8 +42,8 @@ export async function renderSpectacle({ id }) {
     ? h(
         "div",
         { class: "spectacle__links" },
-        h("a", { class: "pill pill--link", href: detail.links.show ?? "#", "aria-disabled": detail.links.show ? null : "true" }, "Site du spectacle"),
-        h("a", { class: "pill pill--outline", href: detail.links.company ?? "#", "aria-disabled": detail.links.company ? null : "true" }, "Site de la compagnie")
+        h("a", { class: "pill pill--bordered", href: detail.links.show ?? "#", "aria-disabled": detail.links.show ? null : "true" }, "Site du spectacle"),
+        h("a", { class: "pill pill--bordered pill--outline", href: detail.links.company ?? "#", "aria-disabled": detail.links.company ? null : "true" }, "Site de la compagnie")
       )
     : null;
 
@@ -85,7 +85,7 @@ export async function renderSpectacle({ id }) {
         h("div", { class: "reps__row" }, show.reps.map((rep, index) => createRep(rep, index)))
       ),
       links,
-      detail.sections && h("hr", { class: "rule rule--medium rule--thin" }),
+      detail.sections && h("hr", { class: "rule spectacle__rule" }),
       ...(detail.sections ?? []).map((section) =>
         h("section", { class: "spectacle__section" }, h("h3", { class: "spectacle__section-title" }, section.title), h("div", { class: "spectacle__text" }, paragraphs(section.text)))
       )

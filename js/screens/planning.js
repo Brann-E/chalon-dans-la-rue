@@ -58,8 +58,10 @@ export async function renderPlanning() {
         title: "Ah !?",
         lead: "Il semblerait que vous n’avez pas encore mis de spectacle de côté.",
         art: "assets/chapeau.png",
-        hint: "Remplissez vite votre planning en cliquant sur l’icône “épingle” d’un spectacle.",
+        // Retour à la ligne voulu par la maquette, après « en ».
+        hint: ["Remplissez vite votre planning en", h("br"), "cliquant sur l’icône “épingle” d’un spectacle."],
         shortHint: true,
+        narrowHighlight: true,
       }),
     });
     screen.append(

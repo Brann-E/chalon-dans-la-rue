@@ -44,6 +44,11 @@
   transform: translate(-50%, -50%) rotate(var(--highlight-rotation));
 }
 
+/* « Ah !? » : surlignage plus court, mesuré sur la maquette du Planning. */
+.empty__title[data-highlight="narrow"]::before {
+  width: var(--highlight-width-narrow);
+}
+
 .empty__lead {
   max-width: var(--empty-lead-width);
   font-size: var(--text-xl);

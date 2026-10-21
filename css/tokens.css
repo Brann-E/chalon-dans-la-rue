@@ -186,7 +186,7 @@
   --empty-art-size: 128px;
   --empty-hint-width: 284px;
   --empty-hint-leading: 19px;
-  /* Planning : valeurs estimées sur capture, à confirmer dans Figma. */
+  /* Planning : confirmé sur l'export 2× de la maquette (texte sur 2 lignes, boîte de 49 px). */
   --empty-hint-height-short: 49px;
   --empty-hint-width-wide: 358px;
   --cta-width: 213px;
@@ -194,6 +194,7 @@
   --cta-icon-large: 23px;
   --cta-icon-small: 16px;
   --highlight-width: 168.1px;
+  --highlight-width-narrow: 119.5px;
   --highlight-height: 40px;
   --highlight-rotation: -6.09deg;
   --highlight-offset-y: -1.8px;
@@ -319,6 +320,9 @@
 
   /* ---- Fiche spectacle ------------------------------------------------- */
   --carousel-height: 276px;
+  --rep-width-wide: 174px;
+  --rep-top-height-compact: 20px;
+  --pin-size-compact: 20px;
 
   /* ---- Planning : sélecteur de date et créneau ------------------------- */
   --daybar-padding-top: 8px;

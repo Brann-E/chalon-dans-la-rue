@@ -7,11 +7,11 @@ const go = (el, to) => el.dispatchEvent(new CustomEvent("navigate", { bubbles: t
  * consigne et deux boutons d'orientation.
  * @param {{title: string, lead: string, art: string, hint: string}} content
  */
-export function createEmptyState({ title, lead, art, hint, shortHint = false }) {
+export function createEmptyState({ title, lead, art, hint, shortHint = false, narrowHighlight = false }) {
   return h(
     "div",
     { class: "empty" },
-    h("h2", { class: "empty__title" }, title),
+    h("h2", { class: "empty__title", dataset: narrowHighlight ? { highlight: "narrow" } : {} }, title),
     h("p", { class: "empty__lead" }, lead),
     img(art, { class: "empty__art" }),
     h("p", { class: shortHint ? "empty__hint empty__hint--short" : "empty__hint" }, hint),
