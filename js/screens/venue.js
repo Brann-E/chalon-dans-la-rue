@@ -10,7 +10,13 @@ import { createShowCard } from "../ui/show-card.js";
 export async function createVenuePanel(spot) {
   const [venues, shows] = await Promise.all([loadJSON("data/venues.json"), loadShows()]);
   const venue = venues.find((v) => v.spot === Number(spot));
-  const here = shows.filter((show) => show.reps.some((rep) => rep.spot === venue.spot));
+  // Ordre de la maquette : par première représentation sur ce lieu (9h30, 15h, 18h…).
+  const minutes = (time) => {
+    const [hours, mins = 0] = time.split("h").map(Number);
+    return hours * 60 + mins;
+  };
+  const firstRep = (show) => Math.min(...show.reps.filter((rep) => rep.spot === venue.spot).map((rep) => minutes(rep.time)));
+  const here = shows.filter((show) => show.reps.some((rep) => rep.spot === venue.spot)).sort((a, b) => firstRep(a) - firstRep(b));
 
   const body = here.length
     ? here.map((show) => createShowCard(show, { onlySpot: venue.spot }))

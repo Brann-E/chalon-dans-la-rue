@@ -282,7 +282,8 @@
         "venue": "Place Sainte-Marie"
       },
       {
-        "date": "11/07 -18h",
+        "date": "11/07",
+        "time": "18h",
         "spot": 68,
         "venue": "Place Sainte-Marie"
       },

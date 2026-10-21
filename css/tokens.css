@@ -252,14 +252,22 @@
   --attribution-bottom: 104px;
 
   /* ---- Panneaux (fiche d'un lieu, fiche spectacle, filtres) ------------- */
-  /* Valeurs estimées sur les captures de la maquette, à confirmer dans Figma. */
-  --color-overlay: rgb(251 251 251 / 82%);
-  --overlay-blur: 2px;
   --overlay-travel: 100%;
-  --venue-header-height: 100px;
+  /* « Détail pastille » : mesuré dans Figma (nœud 58:244). */
+  --color-overlay: rgb(251 251 251 / 75%);
+  --venue-header-height: 102px;
+  --venue-header-padding-top: 8px;
+  --venue-header-padding-bottom: 20px;
+  --venue-header-gap: 10px;
+  --venue-title-leading: 22px;
+  --venue-body-top: 11px;
+  --shadow-panel-header: 0 2px 3px rgb(0 0 0 / 15%), 0 1px 1px rgb(0 0 0 / 30%);
   --badge-large: 24px;
+  --badge-large-text: 14px;
+  --venue-card-gap: 4px;
   --round-close-bottom: 20px;
-  --round-close-icon: 20px;
+  --round-close-icon: 32px;
+  /* Feuilles de filtres : valeurs encore estimées sur capture, à confirmer dans Figma. */
 
   /* ---- Feuille « Filtres » (valeurs estimées sur capture, à confirmer) -- */
   --filters-header-height: 109px;

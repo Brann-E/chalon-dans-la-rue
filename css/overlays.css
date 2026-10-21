@@ -28,7 +28,6 @@
   display: flex;
   flex-direction: column;
   background: var(--color-overlay);
-  backdrop-filter: blur(var(--overlay-blur));
 }
 
 .venue__header {
@@ -37,36 +36,49 @@
   display: flex;
   align-items: flex-end;
   justify-content: center;
-  gap: var(--space-2);
+  gap: var(--venue-header-gap);
   height: var(--venue-header-height);
-  padding-bottom: var(--space-3);
+  padding: var(--venue-header-padding-top) var(--space-3) var(--venue-header-padding-bottom);
   background: var(--color-yellow);
-  box-shadow: var(--shadow-float);
+  box-shadow: var(--shadow-panel-header);
 }
 
 .venue__title {
   font-size: var(--text-xl);
   font-weight: var(--weight-bold);
-  line-height: var(--leading-sm);
+  line-height: var(--venue-title-leading);
   color: var(--color-black);
 }
 
 .badge--large {
   width: var(--badge-large);
   height: var(--badge-large);
-  font-size: var(--text-sm);
-  line-height: var(--leading-sm);
+  font-size: var(--badge-large-text);
+  line-height: var(--leading-tight);
 }
 
 .venue__body {
   flex: 1;
   overflow-y: auto;
-  padding: var(--space-3) var(--content-inset) var(--clearance-lists);
+  padding: var(--venue-body-top) var(--content-inset) var(--clearance-lists);
   scrollbar-width: none;
 }
 
 .venue__body::-webkit-scrollbar {
   display: none;
+}
+
+/* Carte spectacle de la fiche lieu : sans lieu ni programmation, interlignes de 4 px, 8 px en bas. */
+.show-card--venue {
+  padding-bottom: var(--space-2);
+}
+
+.show-card--venue .show-card__info {
+  gap: var(--venue-card-gap);
+}
+
+.show-card--venue .show-card__genre {
+  height: auto;
 }
 
 .venue__empty {

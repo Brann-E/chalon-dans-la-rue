@@ -50,11 +50,12 @@ export function createRep(rep, index, { slot = false } = {}) {
  */
 export function createShowCard(show, { compact = false, plannedIndex = null, onlySpot = null } = {}) {
   const planned = plannedIndex !== null;
+  const venue = onlySpot !== null; // version « Détail pastille » : sans lieu ni programmation
   // `onlySpot` : n'affiche que les représentations d'un lieu (fiche d'un repère de la carte).
   const reps = show.reps.map((rep, index) => ({ rep, index })).filter(({ rep }) => onlySpot === null || rep.spot === onlySpot);
   const card = h(
     "article",
-    { class: "show-card", dataset: { show: show.id, accent: show.accent } },
+    { class: venue ? "show-card show-card--venue" : "show-card", dataset: { show: show.id, accent: show.accent } },
     h(
       "div",
       { class: "show-card__main" },
@@ -87,13 +88,13 @@ export function createShowCard(show, { compact = false, plannedIndex = null, onl
               h("span", { class: "meta-item" }, img("assets/icon-timer.png"), show.duration),
               h("span", { class: "meta-item" }, img("assets/age-user2.png"), show.age)
             ),
-            h("span", { class: "meta-item meta-item--place" }, img("assets/icon-location.png"), h("span", {}, show.location))
+            !venue && h("span", { class: "meta-item meta-item--place" }, img("assets/icon-location.png"), h("span", {}, show.location))
           ),
           h(
             "div",
             { class: "show-card__genre" },
             h("span", { class: "show-card__category" }, show.category),
-            h("span", { class: "meta-item meta-item--programme" }, img("assets/icon-programme.png"), `Programmation ${show.programme}`)
+            !venue && h("span", { class: "meta-item meta-item--programme" }, img("assets/icon-programme.png"), `Programmation ${show.programme}`)
           ),
           h("p", { class: "show-card__summary" }, show.summary),
           h("button", { class: "pill", type: "button", dataset: { open: "" } }, "Lire plus")
