@@ -10,9 +10,17 @@ import * as store from "../store.js";
 export async function createFiltersPanel({ section = "" } = {}) {
   const [config, event] = await Promise.all([loadJSON("data/filters.json"), loadJSON("data/event.json")]);
 
-  const toggleIn = (group, value) => {
+  // « IN » et « OFF » s'affichent tous deux enfoncés tant qu'aucun filtre n'est posé (état de la maquette).
+  const ALL_PROGRAMMES = config.programme;
+  const selected = (group) => {
     const current = store.getFilters()[group];
-    store.setFilters({ [group]: current.includes(value) ? current.filter((v) => v !== value) : [...current, value] });
+    return group === "programme" && current.length === 0 ? ALL_PROGRAMMES : current;
+  };
+  const toggleIn = (group, value) => {
+    const current = selected(group);
+    const next = current.includes(value) ? current.filter((v) => v !== value) : [...current, value];
+    const unfiltered = group === "programme" && (next.length === 0 || next.length === ALL_PROGRAMMES.length);
+    store.setFilters({ [group]: unfiltered ? [] : next });
   };
 
   const chip = (group, value, label, token = null) => {
@@ -43,19 +51,21 @@ export async function createFiltersPanel({ section = "" } = {}) {
   const emergingSwitch = h("button", { class: "switch", type: "button", role: "switch", "aria-checked": "false", "aria-label": "Compagnies émergentes" });
   emergingSwitch.addEventListener("click", () => store.setFilters({ emerging: !store.getFilters().emerging }));
 
+  const THIN_RULE = new Set(["categories", "zones"]);
   const section_ = (key, title, ...content) =>
-    h("section", { class: "filters__section", dataset: { section: key } }, h("h3", { class: "filters__section-title" }, title), ...content);
+    h(
+      "section",
+      { class: THIN_RULE.has(key) ? "filters__section filters__section--thin" : "filters__section", dataset: { section: key } },
+      h("h3", { class: "filters__section-title" }, title),
+      ...content
+    );
 
   const sections = [
     section_("hours", "Horaire", h("div", { class: "filters__hours" }, hourSelect("from"), "à", hourSelect("to"))),
     section_("days", "Date", chips("days", event.days.map((day) => ({ value: day.id, label: day.label })))),
     section_("programme", "Programmation IN/OFF", chips("programme", plain(config.programme))),
     section_("categories", "Catégorie", chips("categories", config.categories.map((c) => ({ value: c.label, label: c.label, token: c.token })))),
-    h(
-      "section",
-      { class: "filters__section", dataset: { section: "emerging" } },
-      h("div", { class: "filters__row" }, h("h3", { class: "filters__section-title" }, "Compagnies émergentes"), emergingSwitch)
-    ),
+    section_("emerging", "Compagnies émergentes", emergingSwitch),
     section_("zones", "Zone (autour de)", chips("zones", plain(config.zones)), h("button", { class: "filters__link", type: "button" }, "Découvrir les zones")),
     section_("regions", "Région (des compagnies)", chips("regions", plain(config.regions))),
   ];
@@ -96,7 +106,7 @@ export async function createFiltersPanel({ section = "" } = {}) {
   const sync = () => {
     const filters = store.getFilters();
     panel.querySelectorAll(".chip[data-group]").forEach((el) => {
-      el.setAttribute("aria-pressed", String(filters[el.dataset.group].includes(el.dataset.value)));
+      el.setAttribute("aria-pressed", String(selected(el.dataset.group).includes(el.dataset.value)));
     });
     panel.querySelectorAll("select[data-hour]").forEach((select) => {
       select.value = filters[select.dataset.hour];

@@ -80,11 +80,27 @@
   color: var(--color-black);
 }
 
+/* Ligne fine (0,5 px) sous « Catégorie » et « Zone », comme dans la maquette. */
+.filters__section--thin {
+  border-bottom: var(--hairline-thin) solid var(--color-line-medium);
+}
+
+.filters__section[data-section="hours"] { padding-bottom: var(--filters-section-pad-bottom-hours); }
+.filters__section[data-section="programme"] { padding-bottom: var(--filters-section-pad-bottom-programme); }
+
 .filters__chips {
   display: flex;
   flex-wrap: wrap;
   gap: var(--space-2);
 }
+
+[data-section="programme"] .filters__chips { gap: var(--filters-gap-programme); }
+[data-section="days"] .filters__chips { gap: var(--filters-gap-days); }
+[data-section="categories"] .filters__chips { column-gap: var(--filters-gap-categories); }
+[data-section="zones"] .filters__chips { column-gap: var(--filters-gap-zones); }
+[data-section="regions"] .filters__chips { gap: var(--filters-row-gap-regions) var(--filters-gap-regions); }
+
+[data-section="emerging"] .switch { margin-left: var(--filters-switch-offset); }
 
 .filters__chips .chip {
   display: inline-flex;
@@ -125,12 +141,6 @@
 
 .select--empty {
   color: var(--color-select-text);
-}
-
-.filters__row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
 }
 
 /* Interrupteur « Compagnies émergentes » */

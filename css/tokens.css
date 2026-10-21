@@ -273,23 +273,32 @@
   --round-close-icon: 32px;
   /* Feuilles de filtres : valeurs encore estimées sur capture, à confirmer dans Figma. */
 
-  /* ---- Feuille « Filtres » (valeurs estimées sur capture, à confirmer) -- */
+  /* ---- Feuille « Filtres » (mesurée sur l'export 2× : sections, écarts, interrupteur) -- */
   --filters-header-height: 109px;
   --filters-bar-height: 50px;
   --filters-close-size: 22px;
   --filters-divider-x: 65px;
   --filters-title-x: 80px;
-  --filters-footer-height: 98px;
+  --filters-footer-height: 99px;
   --filters-cta-width: 300px;
-  --filters-section-pad-top: 12px;
-  --filters-section-pad-bottom: 18px;
-  --filters-title-gap: 8px;
+  --filters-section-pad-top: 11px;
+  --filters-section-pad-bottom: 10px;
+  --filters-section-pad-bottom-hours: 17px;
+  --filters-section-pad-bottom-programme: 16px;
+  --filters-title-gap: 10px;
+  --filters-gap-programme: 4px;
+  --filters-gap-days: 5px;
+  --filters-gap-categories: 7px;
+  --filters-gap-zones: 5px;
+  --filters-gap-regions: 4px;
+  --filters-row-gap-regions: 14px;
+  --filters-switch-offset: 12px;
   --select-width: 60px;
   --select-height: 33px;
-  --switch-width: 42px;
+  --switch-width: 44px;
   --switch-height: 24px;
   --switch-knob: 20px;
-  --color-switch-off: #dce3ea;
+  --color-switch-off: #e2e8f0;
   --color-select-text: #cbd2d9;
   --chip-dot: 15px;
 
