@@ -19,14 +19,19 @@ export function createVenuePin(venue, onSelect) {
 }
 
 /** Repère de service (sanitaires, eau, parking…) : rond bleu avec son sigle. */
-const SERVICE_GLYPHS = { wc: "WC", "wc-pmr": "WC", water: "", shower: "", parking: "P", "parking-pmr": "P" };
+const SERVICE_GLYPHS = { wc: "WC", "wc-pmr": "WC", parking: "P", "parking-pmr": "P" };
+const SERVICE_ICONS = { water: "assets/service-water.svg", shower: "assets/service-shower.svg" };
+const PMR_TYPES = new Set(["wc-pmr", "parking-pmr"]);
 
 export function createServicePin(service) {
-  return h(
+  const pin = h(
     "span",
     { class: "map-service", role: "img", "aria-label": service.label, dataset: { type: service.type } },
-    SERVICE_GLYPHS[service.type] ?? ""
+    SERVICE_ICONS[service.type] ? img(SERVICE_ICONS[service.type], { class: "map-service__glyph" }) : (SERVICE_GLYPHS[service.type] ?? "")
   );
+  // Les repères accessibles portent un petit médaillon « fauteuil » en bas à droite.
+  if (PMR_TYPES.has(service.type)) pin.append(h("span", { class: "map-service__badge" }, img("assets/service-pmr.svg")));
+  return pin;
 }
 
 /** Marqueur « Ma position » : le clown de la maquette. */

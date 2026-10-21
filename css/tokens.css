@@ -228,6 +228,10 @@
   --color-pin-parking: #46bde7;
   --service-size: 20px;
   --service-text: 9px;
+  --service-glyph: 14px;
+  --service-badge: 12px;
+  --service-badge-border: 1.5px;
+  --service-badge-offset: -4px;
   --pulse-duration: 1.2s;
   --suggestions-gap: 8px;
   --suggestions-max-height: 280px;
@@ -289,16 +293,20 @@
   --color-select-text: #cbd2d9;
   --chip-dot: 15px;
 
-  /* ---- Feuille « Filtres carte » (valeurs estimées sur capture) --------- */
+  /* ---- Feuille « Filtres carte » (mesurée sur l'export 2× de la maquette) -- */
   --mapfilters-top: 164px;
-  --mapfilters-heading-height: 58px;
+  --mapfilters-inset: 12.5px;      /* carte de 389 px centrée dans l'écran de 414 px */
+  --mapfilters-heading-height: 58.5px;
   --mapfilters-row-pitch: 38px;
   --mapfilters-confirm-gap: 17px;
   --mapfilters-checkbox: 24px;
-  --mapfilters-icon: 24px;
+  --mapfilters-icon: 22px;
+  --mapfilters-clown: 32px;
   --mapfilters-label-gap: 12px;
+  --mapfilters-pad: 12.5px;
   --color-confirm: #82ff9d;
   --color-checkbox-on: #ffff99;
+  --color-heading-line: #e6e68a;
 
   /* ---- Fiche spectacle ------------------------------------------------- */
   --carousel-height: 276px;

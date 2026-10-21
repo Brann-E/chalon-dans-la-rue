@@ -203,10 +203,15 @@
   pointer-events: none;
 }
 
+/* Le bouton de validation prend la place du bouton filtre de la carte. */
+.device:has(.mapfilters) .map-filter {
+  visibility: hidden;
+}
+
 .mapfilters__stack {
   position: absolute;
   top: var(--mapfilters-top);
-  inset-inline: var(--content-inset);
+  inset-inline: var(--mapfilters-inset);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -227,6 +232,7 @@
   place-items: center;
   height: var(--mapfilters-heading-height);
   background: var(--color-yellow);
+  border-bottom: var(--hairline) solid var(--color-heading-line);
   font-size: var(--text-md);
   font-weight: var(--weight-bold);
   line-height: var(--leading-link);
@@ -235,7 +241,7 @@
 
 .mapfilters__list {
   list-style: none;
-  padding: var(--space-3) var(--content-inset);
+  padding: var(--mapfilters-pad) var(--mapfilters-pad) var(--mapfilters-pad) var(--space-5);
 }
 
 .mapfilters__row {
@@ -285,6 +291,7 @@
 }
 
 .mapfilters__icon {
+  position: relative;
   flex: none;
   display: grid;
   place-items: center;
@@ -292,9 +299,12 @@
   height: var(--mapfilters-icon);
 }
 
-.mapfilters__icon img {
-  width: 100%;
-  height: 100%;
+.mapfilters__icon > img {
+  flex: none;
+  width: var(--mapfilters-clown);
+  height: var(--mapfilters-clown);
+  /* L'image (32 px) déborde de la case (22 px) de façon symétrique. */
+  margin: calc((var(--mapfilters-icon) - var(--mapfilters-clown)) / 2);
 }
 
 .mapfilters__icon .map-service {
@@ -303,8 +313,8 @@
 }
 
 .mapfilters__dot {
-  width: var(--chip-dot);
-  height: var(--chip-dot);
+  width: 100%;
+  height: 100%;
   background: var(--dot);
   border-radius: 50%;
 }
