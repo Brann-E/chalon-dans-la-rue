@@ -4,7 +4,7 @@ import * as store from "../store.js";
 import { createScreen } from "../ui/screen.js";
 import { createRep, createRepsRow, syncCard } from "../ui/show-card.js";
 import { enableDragScroll } from "../ui/drag-scroll.js";
-import { toggleFavorite, togglePin } from "../ui/actions.js";
+import { toggleFavorite, togglePin, handleRepAction } from "../ui/actions.js";
 
 /**
  * Fiche d'un spectacle (« Spectacle complet ») : carrousel de photos, bannière avec cœur,
@@ -112,10 +112,7 @@ export async function renderSpectacle({ id, from }) {
     if (!target) return;
     if (target.classList.contains("like")) toggleFavorite(show, target);
     else if (target.classList.contains("pin")) togglePin(show, Number(target.dataset.pin), target);
-    else if (target.dataset.onMap !== undefined) {
-      const rep = show.reps[Number(target.dataset.onMap)];
-      body.dispatchEvent(new CustomEvent("show-on-map", { bubbles: true, detail: { id: show.id, spot: rep.spot, venue: rep.venue } }));
-    }
+    else handleRepAction(target, show, body);
   });
   syncCard(body);
 

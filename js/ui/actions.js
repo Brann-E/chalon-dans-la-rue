@@ -2,6 +2,7 @@ import * as store from "../store.js";
 import { loadShows } from "../shows.js";
 import { findConflict } from "../planning-rules.js";
 import { showToast } from "./toast.js";
+import { shareRep } from "./share.js";
 
 /**
  * Actions de l'utilisateur sur un spectacle (cœur, épingle) avec leur retour visuel :
@@ -12,6 +13,19 @@ const pop = (trigger) => {
   trigger.classList.add("is-pop");
   trigger.addEventListener("animationend", () => trigger.classList.remove("is-pop"), { once: true });
 };
+
+/**
+ * Pastilles d'une carte de représentation (Voir sur la carte, Itinéraire, Partager).
+ * Renvoie true si le bouton cliqué en fait partie. `host` : élément d'où l'événement part vers l'appli.
+ */
+export function handleRepAction(button, show, host) {
+  const action = button.dataset.action;
+  if (!action) return false;
+  const rep = show.reps[Number(button.dataset.rep)];
+  if (action === "share") shareRep(show, rep);
+  else host.dispatchEvent(new CustomEvent(action === "map" ? "show-on-map" : "route-to", { bubbles: true, detail: { id: show.id, spot: rep.spot, venue: rep.venue } }));
+  return true;
+}
 
 export function toggleFavorite(show, trigger) {
   const added = !store.isFavorite(show.id);

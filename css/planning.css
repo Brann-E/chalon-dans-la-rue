@@ -39,6 +39,7 @@
 /* Créneau épinglé : carte de représentation pleine largeur en tête de carte. */
 .rep--slot {
   width: 100%;
+  min-height: 0; /* les trois pastilles tiennent sur une ligne : pas de hauteur minimale des blocs en deux lignes */
   border-radius: 0;
 }
 

@@ -160,8 +160,10 @@
   --heart-size: 30px;
   --meta-icon-size: 16px;
   --pill-padding-y: 4px;
-  --rep-width: 166px;
-  --rep-height: 108px;
+  --rep-width: 180px;             /* 166 px dans la maquette : élargi pour loger les trois pastilles */
+  --rep-height: 138px;
+  --rep-action-height: 30px;
+  --rep-action-icon: 14px;
   --rep-top-height: 30px;
   --rep-spot-height: 20px;
   --rep-button-height: 34px;      /* était 19 px dans la maquette : trop étroit */
@@ -239,6 +241,8 @@
   --pin-size: 22px;
   --pin-border: 1px;
   --pin-hover-ring: 3px;
+  --route-width: 5px;               /* tracé de l'itinéraire : trait jaune cerné de noir */
+  --route-casing-width: 9px;
   --pin-ping-spread: 18px;          /* l'onde jaune qui part du repère au clic */
   --pin-ping-duration: 600ms;
   --pin-text: 12px;
@@ -339,7 +343,7 @@
   /* ---- Fiche spectacle ------------------------------------------------- */
   --carousel-height: 276px;
   --carousel-nav-size: 36px;
-  --rep-width-wide: 174px;
+  --rep-width-wide: 188px;
   --rep-top-height-compact: 20px;
   --pin-size-compact: 20px;
 

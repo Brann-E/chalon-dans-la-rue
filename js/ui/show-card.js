@@ -1,7 +1,7 @@
 import { h, img } from "../dom.js";
 import * as store from "../store.js";
 import { enableDragScroll } from "./drag-scroll.js";
-import { toggleFavorite, togglePin } from "./actions.js";
+import { toggleFavorite, togglePin, handleRepAction } from "./actions.js";
 
 /**
  * Carte spectacle (composant « Découvrir » de Figma) : bannière + photo recadrée,
@@ -49,8 +49,20 @@ export function createRep(rep, index, { slot = false } = {}) {
       )
     ),
     h("div", { class: "rep__spot" }, h("span", { class: "badge" }, rep.spot), h("span", { class: "rep__venue" }, rep.venue)),
-    h("button", { class: "button-outline", type: "button", dataset: { onMap: index } }, "Voir sur la carte")
+    // Actions sur ce créneau et ce lieu : voir le lieu sur la carte, s'y rendre, partager.
+    h(
+      "div",
+      { class: "rep__actions" },
+      repAction("map", index, "Voir sur la carte", "assets/action-carte.svg", `Voir ${rep.venue} sur la carte`),
+      repAction("route", index, "Itinéraire", "assets/action-itineraire.svg", `Itinéraire à pied vers ${rep.venue}`),
+      repAction("share", index, "Partager", "assets/action-partager.svg", `Partager la représentation du ${rep.date} à ${rep.time}`)
+    )
   );
+}
+
+/** Pastille d'action d'un créneau (icône + libellé). `label` accessible : plus précis que le texte affiché. */
+function repAction(action, index, text, icon, label) {
+  return h("button", { class: `rep-action rep-action--${action}`, type: "button", "aria-label": label, dataset: { action, rep: index } }, img(icon), h("span", {}, text));
 }
 
 /**
@@ -116,7 +128,10 @@ export function createShowCard(show, { compact = false, plannedIndex = null, onl
             { class: "reps" },
             h("h4", { class: "reps__title" }, "Représentations"),
             createRepsRow(reps.map(({ rep, index }) => createRep(rep, index)))
-          )
+          ),
+        // Favoris : la prochaine représentation, avec son épingle et ses pastilles (voir le lieu, y aller, partager).
+        compact &&
+          h("div", { class: "reps" }, h("h4", { class: "reps__title" }, "Prochaine représentation"), h("div", { class: "reps__single" }, createRep(show.reps[0], 0, { slot: true })))
       )
     )
   );
@@ -127,10 +142,8 @@ export function createShowCard(show, { compact = false, plannedIndex = null, onl
     if (target.classList.contains("like")) toggleFavorite(show, target);
     else if (target.classList.contains("pin")) togglePin(show, Number(target.dataset.pin), target);
     else if (target.dataset.change !== undefined) emit(card, "change-slot", { id: show.id, fallbackIndex: plannedIndex ?? 0 });
-    else if (target.dataset.onMap !== undefined) {
-      const rep = show.reps[Number(target.dataset.onMap)];
-      emit(card, "show-on-map", { id: show.id, spot: rep.spot, venue: rep.venue });
-    } else if (target.dataset.open !== undefined || target.classList.contains("show-card__title")) emit(card, "open-show", { id: show.id });
+    else if (handleRepAction(target, show, card)) return;
+    else if (target.dataset.open !== undefined || target.classList.contains("show-card__title")) emit(card, "open-show", { id: show.id });
   });
 
   card.__show = show;
@@ -163,7 +176,7 @@ export function syncCard(card) {
     slot.querySelector(".badge").textContent = rep.spot;
     slot.querySelector(".rep__venue").textContent = rep.venue;
     slot.querySelector(".pin").dataset.pin = index;
-    slot.querySelector(".button-outline").dataset.onMap = index;
+    slot.querySelectorAll(".rep-action").forEach((action) => (action.dataset.rep = index));
   }
 }
 

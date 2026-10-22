@@ -107,6 +107,61 @@
   height: var(--filter-button-icon);
 }
 
+/* ---- Bandeau d'itinéraire : durée, distance, destination, et croix pour effacer le tracé ------- */
+.route-banner {
+  position: absolute;
+  z-index: 2;
+  inset: var(--bell-floating-top) calc(var(--map-search-inset) + var(--touch-target) + var(--space-2)) auto var(--map-search-inset);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+  min-height: var(--touch-target);
+  padding: var(--space-1) var(--space-1) var(--space-1) var(--space-3);
+  background: var(--color-yellow);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-float);
+}
+
+.route-banner[hidden] {
+  display: none;
+}
+
+.route-banner__text {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.route-banner__time {
+  font-size: var(--text-sm);
+  font-weight: var(--weight-bold);
+  line-height: var(--leading-sm);
+  color: var(--color-black);
+}
+
+.route-banner__dest {
+  overflow: hidden;
+  font-size: var(--text-xs);
+  line-height: var(--leading-xs);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  color: var(--color-black);
+}
+
+.route-banner__close {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: var(--touch-target);
+  height: var(--touch-target);
+}
+
+.route-banner__close img {
+  width: var(--filters-close-size);
+  height: var(--filters-close-size);
+}
+
 /* ---- Repères ------------------------------------------------------------------ */
 /* Spécificité renforcée : les repères définissent leur propre « display ». */
 :is(.map-pin, .map-service, .map-user).is-hidden {

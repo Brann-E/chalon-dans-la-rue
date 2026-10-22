@@ -6,6 +6,7 @@ import { buildStyle } from "../map/style.js";
 import { loadMapLibre } from "../map/loader.js";
 import { createVenuePin, createServicePin, createUserMarker } from "../map/markers.js";
 import { createNewsButton } from "../ui/news-button.js";
+import { fetchWalkingRoute, straightRoute, formatDuration, formatDistance } from "../map/route.js";
 
 /**
  * Écran Carte (Accueil) : vraie carte interactive MapLibre centrée sur le centre-ville de
@@ -46,6 +47,67 @@ function focusVenue(spot) {
 
 function selectVenue(venue) {
   emit("open-venue", { spot: venue.spot });
+}
+
+// ---- Itinéraire à pied : de la position (le clown) jusqu'à un lieu ---------------------------
+const ROUTE_SOURCE = "route";
+const EMPTY_ROUTE = { type: "FeatureCollection", features: [] };
+const FIT_PADDING = { top: 180, bottom: 220, left: 48, right: 48 }; // laisse voir le tracé entre le bandeau et la barre du bas
+let userMarker = null;
+let routeBanner = null;
+let routeToken = 0; // pour ignorer un calcul devenu obsolète (nouvel itinéraire demandé, ou tracé effacé)
+
+const cssToken = (name) => getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+
+function ensureRouteLayers() {
+  if (map.getSource(ROUTE_SOURCE)) return;
+  map.addSource(ROUTE_SOURCE, { type: "geojson", data: EMPTY_ROUTE });
+  const layout = { "line-cap": "round", "line-join": "round" };
+  map.addLayer({ id: "route-casing", type: "line", source: ROUTE_SOURCE, layout, paint: { "line-color": cssToken("--color-ink"), "line-width": parseFloat(cssToken("--route-casing-width")) } });
+  map.addLayer({ id: "route-line", type: "line", source: ROUTE_SOURCE, layout, paint: { "line-color": cssToken("--color-yellow"), "line-width": parseFloat(cssToken("--route-width")) } });
+}
+
+function setRouteBanner({ headline, destination }) {
+  routeBanner.querySelector(".route-banner__time").textContent = headline;
+  routeBanner.querySelector(".route-banner__dest").textContent = destination;
+  routeBanner.hidden = false;
+}
+
+function clearRoute() {
+  routeToken += 1;
+  if (map?.getSource(ROUTE_SOURCE)) map.getSource(ROUTE_SOURCE).setData(EMPTY_ROUTE);
+  if (routeBanner) routeBanner.hidden = true;
+}
+
+async function routeTo(spot) {
+  const entry = venuePins.get(Number(spot));
+  if (!entry) return;
+  const token = ++routeToken;
+  const destination = `À pied vers ${entry.venue.name}`;
+  setRouteBanner({ headline: "Calcul de l’itinéraire…", destination });
+
+  if (!map.loaded()) await new Promise((resolve) => map.once("idle", resolve));
+  ensureRouteLayers();
+
+  const from = userMarker.getLngLat().toArray();
+  const to = [entry.venue.lng, entry.venue.lat];
+  let route;
+  try {
+    route = await fetchWalkingRoute(from, to);
+  } catch {
+    route = straightRoute(from, to); // service indisponible : ligne droite et durée estimée
+  }
+  if (token !== routeToken) return;
+
+  map.getSource(ROUTE_SOURCE).setData({ type: "Feature", properties: {}, geometry: { type: "LineString", coordinates: route.coordinates } });
+  map.setPaintProperty("route-line", "line-dasharray", route.estimated ? [2, 2] : [1]);
+  setRouteBanner({ headline: `${formatDuration(route.duration)} · ${formatDistance(route.distance)}${route.estimated ? " (estimé)" : ""}`, destination });
+
+  const lngs = route.coordinates.map(([lng]) => lng);
+  const lats = route.coordinates.map(([, lat]) => lat);
+  map.fitBounds([[Math.min(...lngs), Math.min(...lats)], [Math.max(...lngs), Math.max(...lats)]], { padding: FIT_PADDING, maxZoom: FOCUS_ZOOM, duration: 800 });
+  entry.el.classList.add("is-focus");
+  setTimeout(() => entry.el.classList.remove("is-focus"), 2600);
 }
 
 /** Suggestions : lieux par nom ou adresse, spectacles par titre / compagnie / catégorie. */
@@ -164,7 +226,13 @@ async function build() {
     },
     img("assets/sliders.png")
   );
-  screen = h("section", { class: "screen screen--map", dataset: { screen: "carte" } }, canvas, ...createSearch(), filterButton, createNewsButton({ floating: true }));
+  routeBanner = h(
+    "div",
+    { class: "route-banner", role: "status", hidden: true },
+    h("div", { class: "route-banner__text" }, h("span", { class: "route-banner__time" }), h("span", { class: "route-banner__dest" })),
+    h("button", { class: "route-banner__close", type: "button", "aria-label": "Effacer l’itinéraire", onclick: clearRoute }, img("assets/fermer.png"))
+  );
+  screen = h("section", { class: "screen screen--map", dataset: { screen: "carte" } }, canvas, ...createSearch(), filterButton, createNewsButton({ floating: true }), routeBanner);
 
   const maplibregl = await loadMapLibre();
   map = new maplibregl.Map({
@@ -195,7 +263,7 @@ async function build() {
   }
 
   const userEl = createUserMarker(() => locateUser(userMarker));
-  const userMarker = new maplibregl.Marker({ element: userEl, anchor: "center" }).setLngLat(USER_FALLBACK).addTo(map);
+  userMarker = new maplibregl.Marker({ element: userEl, anchor: "center" }).setLngLat(USER_FALLBACK).addTo(map);
   layered.push({ layer: "position", el: userEl });
 
   // L'avatar choisi dans le Menu remplace le clown sur la carte.
@@ -209,13 +277,14 @@ async function build() {
   });
 }
 
-/** @param {{focus?: {spot: number}}} [params] */
+/** @param {{focus?: {spot: number}, route?: {spot: number}}} [params] focus : centrer sur un lieu ; route : tracer l'itinéraire à pied jusqu'à un lieu */
 export async function renderCarte(params = {}) {
   building ??= build();
   await building;
   requestAnimationFrame(() => {
     map.resize();
-    if (params.focus) focusVenue(params.focus.spot);
+    if (params.route) routeTo(params.route.spot);
+    else if (params.focus) focusVenue(params.focus.spot);
   });
   return screen;
 }

@@ -96,6 +96,10 @@ app.addEventListener("show-on-map", (event) => {
   closeOverlay({ immediate: true });
   navigate("carte", { focus: event.detail });
 });
+app.addEventListener("route-to", (event) => {
+  closeOverlay({ immediate: true });
+  navigate("carte", { route: event.detail });
+});
 app.addEventListener("open-venue", async (event) => {
   openOverlay(await createVenuePanel(event.detail.spot), { kind: "fade" });
 });
