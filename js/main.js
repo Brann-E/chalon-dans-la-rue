@@ -14,6 +14,8 @@ import { renderPlaceholder } from "./screens/placeholder.js";
 import { createVenuePanel } from "./screens/venue.js";
 import { createFiltersPanel } from "./screens/filters.js";
 import { createMapFiltersPanel } from "./screens/map-filters.js";
+import { renderPage } from "./screens/pages.js";
+import * as store from "./store.js";
 
 const app = document.getElementById("app");
 const tabs = await loadJSON("data/tabs.json");
@@ -33,6 +35,8 @@ for (const tab of tabs) {
   register(tab.id, { tab: tab.id, render: () => renderPlaceholder(tab.id, tab.label) });
 }
 register("menu", { tab: "menu", render: renderMenu, transition: "slide-right" });
+// Sous-pages du Menu : l'onglet Menu reste allumé.
+register("page", { tab: "menu", render: renderPage, transition: "slide-right" });
 register("decouvrir", { tab: "decouvrir", render: renderDecouvrir });
 register("favoris", { tab: "favoris", render: renderFavoris });
 register("planning", { tab: "planning", render: renderPlanning });
@@ -42,7 +46,8 @@ register("spectacle", { tab: (params) => params.from ?? "decouvrir", render: ren
 
 // Événements émis par les composants.
 app.addEventListener("navigate", (event) => {
-  if (has(event.detail.to)) navigate(event.detail.to);
+  const { to, params, options } = event.detail;
+  if (has(to)) navigate(to, params, options);
 });
 app.addEventListener("open-show", (event) => {
   closeOverlay({ immediate: true });
@@ -67,4 +72,13 @@ app.addEventListener("apply-filters", () => {
 });
 app.addEventListener("close-overlay", () => closeOverlay());
 
-await navigate("carte");
+// Réglages d'accessibilité (classes sur l'appli) et préférences de démarrage.
+const applySettings = () => {
+  app.classList.toggle("reduce-motion", store.getSetting("reduceMotion", false));
+  app.classList.toggle("high-contrast", store.getSetting("highContrast", false));
+};
+applySettings();
+store.subscribe(applySettings);
+if (!store.getSetting("keepFilters", true)) store.resetFilters();
+
+await navigate(store.getSetting("startOnMap", true) ? "carte" : "decouvrir");

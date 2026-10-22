@@ -14,7 +14,7 @@ export function h(tag, props = {}, ...children) {
     else if (key.startsWith("on") && typeof value === "function") el.addEventListener(key.slice(2).toLowerCase(), value);
     else el.setAttribute(key, value === true ? "" : String(value));
   }
-  for (const child of children.flat()) {
+  for (const child of children.flat(Infinity)) {
     if (child == null || child === false) continue;
     el.append(child instanceof Node ? child : document.createTextNode(child));
   }

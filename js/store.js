@@ -20,6 +20,7 @@ const defaults = () => ({
   planning: {}, // idSpectacle -> index de la représentation épinglée
   layers: {}, // clé de calque -> visible ; absent = valeur par défaut de data/layers.json
   filters: defaultFilters(), // filtres de la liste Découvrir
+  settings: {}, // réglages du Menu (clé -> valeur) ; absent = valeur par défaut passée à getSetting
 });
 
 function read() {
@@ -87,6 +88,13 @@ export function setLayer(key, visible) {
 
 export function resetLayers() {
   commit({ ...state, layers: {} });
+}
+
+/** Réglage du Menu (notifications, accessibilité, préférences, avatar…) ; `fallback` : valeur par défaut. */
+export const getSetting = (key, fallback) => (key in state.settings ? state.settings[key] : fallback);
+
+export function setSetting(key, value) {
+  commit({ ...state, settings: { ...state.settings, [key]: value } });
 }
 
 export const getFilters = () => ({ ...defaultFilters(), ...state.filters });

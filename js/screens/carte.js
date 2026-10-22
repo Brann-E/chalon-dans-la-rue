@@ -14,6 +14,7 @@ import { createVenuePin, createServicePin, createUserMarker, createHintBubble } 
  */
 const DEMO_HINT_SPOT = 7; // repère portant la bulle « CLICK HERE » (le plus proche du centre de l'écran)
 const USER_FALLBACK = [4.8545, 46.7809]; // position de démonstration du clown
+const DEFAULT_AVATAR = "assets/pitre.png";
 const FOCUS_ZOOM = 17;
 
 let screen = null;
@@ -199,8 +200,15 @@ async function build() {
   const userMarker = new maplibregl.Marker({ element: userEl, anchor: "center" }).setLngLat(USER_FALLBACK).addTo(map);
   layered.push({ layer: "position", el: userEl });
 
+  // L'avatar choisi dans le Menu remplace le clown sur la carte.
+  const syncAvatar = () => userEl.querySelector("img").setAttribute("src", store.getSetting("avatar", DEFAULT_AVATAR));
+  syncAvatar();
+
   applyLayers();
-  store.subscribe(applyLayers);
+  store.subscribe(() => {
+    applyLayers();
+    syncAvatar();
+  });
 }
 
 /** @param {{focus?: {spot: number}}} [params] */

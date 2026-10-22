@@ -1,29 +1,36 @@
 {
   "title": "Menu",
   "primary": [
-    { "icon": "assets/chapiteau.png", "label": "Découvrir les lieux du festival", "to": null },
-    { "icon": "assets/decoration.png", "label": "Découvrir les lieux de convivialité", "to": null },
-    { "icon": "assets/carte-icon.png", "label": "Découvrir les zones du festival", "to": null },
-    { "icon": "assets/pierre-rosette.png", "label": "Lire l’histoire du festival", "to": null },
-    { "icon": "assets/entente.png", "label": "Ils nous soutiennent", "to": null },
-    { "icon": "assets/internet.png", "label": "Visiter le site officiel", "to": null }
+    { "icon": "assets/chapiteau.png", "label": "Découvrir les lieux du festival", "page": "lieux" },
+    { "icon": "assets/decoration.png", "label": "Découvrir les lieux de convivialité", "page": "convivialite" },
+    { "icon": "assets/carte-icon.png", "label": "Découvrir les zones du festival", "page": "zones" },
+    { "icon": "assets/pierre-rosette.png", "label": "Lire l’histoire du festival", "page": "histoire" },
+    { "icon": "assets/entente.png", "label": "Ils nous soutiennent", "page": "soutiens" },
+    { "icon": "assets/internet.png", "label": "Visiter le site officiel", "href": "https://www.chalondanslarue.com/" }
   ],
   "settings": {
     "icon": "assets/parametres.png",
     "label": "Paramètres",
     "items": [
-      { "label": "Notifications", "to": null },
-      { "label": "Carte", "to": null },
-      { "label": "Accessibilité", "to": null },
-      { "label": "Préférences", "to": null },
-      { "label": "Changer d’avatar", "to": null }
+      { "label": "Notifications", "page": "notifications" },
+      { "label": "Carte", "page": "reglages-carte" },
+      { "label": "Accessibilité", "page": "accessibilite" },
+      { "label": "Préférences", "page": "preferences" },
+      { "label": "Changer d’avatar", "page": "avatar" }
     ]
   },
   "secondary": [
-    { "icon": "assets/discuter.png", "label": "Aide", "to": null },
-    { "icon": "assets/conditions.png", "label": "Conditions générales d’utilisations", "to": null },
-    { "icon": "assets/doc-legal.png", "label": "Mentions légales", "to": null, "variant": "legal" },
-    { "icon": "assets/microphone.png", "label": "Envoyez vos commentaires", "to": null }
+    { "icon": "assets/discuter.png", "label": "Aide", "page": "aide" },
+    { "icon": "assets/conditions.png", "label": "Conditions générales d’utilisations", "page": "cgu" },
+    { "icon": "assets/doc-legal.png", "label": "Mentions légales", "page": "mentions", "variant": "legal" },
+    { "icon": "assets/microphone.png", "label": "Envoyez vos commentaires", "page": "commentaires" }
+  ],
+  "avatars": [
+    { "id": "pitre", "label": "Le clown", "src": "assets/pitre.png" },
+    { "id": "chapeau", "label": "Le chapeau", "src": "assets/chapeau.png" },
+    { "id": "coeur", "label": "Le cœur", "src": "assets/coeur-brise.png" },
+    { "id": "jumelles", "label": "Les jumelles", "src": "assets/binoculars.png" },
+    { "id": "megaphone", "label": "Le mégaphone", "src": "assets/megaphone.png" }
   ],
   "version": "Version 0.0.1-a383.564"
 }

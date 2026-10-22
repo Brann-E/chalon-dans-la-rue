@@ -117,6 +117,17 @@ img {
   line-height: var(--leading-sm);
 }
 
+/* Réglages d'accessibilité du Menu : animations coupées, contraste des textes et filets renforcé. */
+.device.reduce-motion {
+  --duration-move: 0ms;
+}
+
+.device.high-contrast {
+  --color-ink: var(--color-black);
+  --color-line: rgb(0 0 0 / 40%);
+  --color-line-medium: rgb(0 0 0 / 50%);
+}
+
 /* Transitions d'entrée des écrans (durée = token --duration-move). */
 @keyframes enter-fade {
   from { opacity: 0; }

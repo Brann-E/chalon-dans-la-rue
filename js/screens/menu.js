@@ -2,10 +2,16 @@ import { h, img } from "../dom.js";
 import { loadJSON } from "../data.js";
 import { createScreen } from "../ui/screen.js";
 
+/** Une rubrique ouvre une sous-page (`page`), un site externe (`href`) ou rien. */
+const open = (item) => (event) => {
+  if (item.href) window.open(item.href, "_blank", "noopener");
+  else if (item.page) event.currentTarget.dispatchEvent(new CustomEvent("navigate", { bubbles: true, detail: { to: "page", params: { id: item.page } } }));
+};
+
 const row = (item) =>
   h(
     "button",
-    { class: "menu-row", type: "button", dataset: { to: item.to ?? "" } },
+    { class: "menu-row", type: "button", onclick: open(item) },
     img(item.icon, { class: "menu-row__icon" }),
     h("span", { class: item.variant === "legal" ? "menu-row__label menu-row__label--legal" : "menu-row__label" }, item.label)
   );
@@ -15,7 +21,7 @@ const rule = () => h("hr", { class: "rule" });
 const setting = (item, isLast) =>
   h(
     "button",
-    { class: isLast ? "menu-setting menu-setting--last" : "menu-setting", type: "button", dataset: { to: item.to ?? "" } },
+    { class: isLast ? "menu-setting menu-setting--last" : "menu-setting", type: "button", onclick: open(item) },
     h("span", { class: "menu-setting__label" }, item.label),
     img("assets/chevron.png", { class: "menu-setting__chevron" })
   );

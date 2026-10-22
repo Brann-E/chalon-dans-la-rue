@@ -17,14 +17,15 @@ export function register(id, definition) {
   screens.set(id, definition);
 }
 
-export async function navigate(id, params = {}) {
+/** @param {{transition?: "fade"|"slide-right"|"none"}} [options] force la transition d'entrée (ex. au retour d'une sous-page) */
+export async function navigate(id, params = {}, options = {}) {
   const definition = screens.get(id);
   if (!definition) throw new Error(`Écran inconnu : ${id}`);
-  const element = await definition.render(params);
+  const element = await definition.render(params ?? {});
   const first = host.childElementCount === 0;
   host.replaceChildren(element);
   // Transitions de la maquette : le Menu glisse depuis la droite, le reste se fond (« smart animate », « dissolve »).
-  const transition = definition.transition ?? "fade";
+  const transition = options?.transition ?? definition.transition ?? "fade";
   if (!first && transition !== "none") {
     element.classList.add(`enter-${transition}`);
     element.addEventListener("animationend", () => element.classList.remove(`enter-${transition}`), { once: true });

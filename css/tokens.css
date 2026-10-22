@@ -167,6 +167,11 @@
   --hairline-thin: 0.5px;
   --clearance-cards: 134px;
 
+  /* ---- Sous-pages du Menu ---------------------------------------------- */
+  --setting-row-height: 40px;
+  --avatar-size: 72px;
+  --avatar-ring: 3px;
+
   /* ---- États vides (Favoris, Planning) --------------------------------- */
   --color-cta: #eb6460;
   --color-border-soft: #f5f5f5;

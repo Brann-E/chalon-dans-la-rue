@@ -3,6 +3,15 @@ const norm = (text) => text.normalize("NFD").replace(/\p{Diacritic}/gu, "").toLo
 
 const hourOf = (time) => Number(/(\d+)h/.exec(time)?.[1] ?? NaN);
 
+/** Le spectacle joue-t-il « autour de » cette zone (nom de zone contenu dans le nom d'un de ses lieux) ? */
+export function inZone(show, zone) {
+  const z = norm(zone).replace(/^place g\. de gaulle$/, "place general de gaulle");
+  return show.reps.some((rep) => {
+    const venue = norm(rep.venue);
+    return venue.includes(z) || z.includes(venue);
+  });
+}
+
 /** Les groupes sont combinés en « et » ; plusieurs valeurs d'un même groupe, en « ou ». */
 export function matchesFilters(show, filters) {
   const { from, to, days, programme, categories, emerging, zones, regions } = filters;
@@ -21,13 +30,6 @@ export function matchesFilters(show, filters) {
   if (emerging && show.emerging !== true) return false;
   if (regions.length && !regions.includes(show.region)) return false;
 
-  if (zones.length) {
-    const venues = show.reps.map((rep) => norm(rep.venue));
-    const hit = zones.some((zone) => {
-      const z = norm(zone).replace(/^place g\. de gaulle$/, "place general de gaulle");
-      return venues.some((venue) => venue.includes(z) || z.includes(venue));
-    });
-    if (!hit) return false;
-  }
+  if (zones.length && !zones.some((zone) => inZone(show, zone))) return false;
   return true;
 }

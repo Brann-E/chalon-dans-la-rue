@@ -1,0 +1,14 @@
+{
+  "aide": [
+    { "q": "Comment ajouter un spectacle à mon planning ?", "a": "Touchez l’icône épingle d’une représentation. Le Planning classe vos choix par jour et signale les créneaux qui se chevauchent." },
+    { "q": "Comment garder un spectacle de côté ?", "a": "Touchez le petit cœur de la carte ou de la page du spectacle : il apparaît dans Favoris." },
+    { "q": "Comment retrouver un lieu sur la carte ?", "a": "Utilisez « Voir sur la carte » sous une représentation, la recherche en haut de la carte, ou la liste des lieux du Menu. Touchez une pastille pour voir les spectacles qui s’y jouent." },
+    { "q": "Que signifient IN et OFF ?", "a": "Les projets artistiques sont soit sélectionnés par le festival (Sélection In), soit programmés (Sélection Off). Le filtre IN/OFF de la liste Découvrir permet de choisir l’un ou l’autre." },
+    { "q": "Mes favoris et mon planning sont-ils conservés ?", "a": "Oui, mais uniquement sur cet appareil et dans ce navigateur. Vider les données du navigateur les efface." }
+  ],
+  "cgu": [
+    "Cette application est un prototype de démonstration réalisé dans le cadre d’un projet de portfolio.",
+    "Les spectacles, horaires, lieux et textes proviennent du site officiel du festival Chalon dans la rue. Ils appartiennent au festival et aux compagnies concernées.",
+    "Aucune donnée personnelle n’est envoyée : vos favoris, votre planning et vos réglages restent enregistrés sur votre appareil."
+  ]
+}
