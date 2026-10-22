@@ -104,13 +104,6 @@
   border-bottom: var(--hairline-thin) solid var(--color-line-medium);
 }
 
-.filters__hint {
-  font-size: var(--text-xs);
-  font-weight: var(--weight-regular);
-  line-height: var(--leading-xs);
-  color: var(--color-black);
-}
-
 .filters__chips {
   display: flex;
   flex-wrap: wrap;
@@ -135,25 +128,92 @@
   border-radius: 50%;
 }
 
-/* Programmation : IN et OFF sur deux lignes, chacun avec son explication. */
+/* Programmation : trois boutons radio (Tous / IN / OFF). Un vrai <input type="radio"> : flèches du clavier,
+   un seul choix à la fois, annonce « 1 sur 3 » par les lecteurs d'écran. Seul son dessin est personnalisé. */
 .filters__programme {
   display: flex;
   flex-direction: column;
-  gap: var(--space-2);
 }
 
-.filters__programme-row {
+.radio {
+  position: relative;
   display: flex;
   align-items: center;
   gap: var(--space-3);
+  min-height: var(--touch-target);
+  cursor: pointer;
 }
 
-.filters__programme-row .chip {
-  min-width: var(--programme-chip-width);
+/* L'entrée reste dans la page (focus, clavier) mais invisible : c'est la pastille ronde qui est dessinée. */
+.radio__input {
+  position: absolute;
+  opacity: 0;
+  width: var(--radio-size);
+  height: var(--radio-size);
+  margin: 0;
 }
 
-.chip[aria-disabled="true"] {
-  cursor: default;
+.radio__mark {
+  position: relative;
+  flex: none;
+  width: var(--radio-size);
+  height: var(--radio-size);
+  background: var(--color-surface);
+  border: var(--radio-border) solid var(--color-ink);
+  border-radius: 50%;
+  transition: background-color var(--duration-fast) var(--ease-move);
+}
+
+/* Le point central apparaît en grossissant quand l'option est choisie. */
+.radio__mark::after {
+  content: "";
+  position: absolute;
+  inset: 50% auto auto 50%;
+  width: var(--radio-dot);
+  height: var(--radio-dot);
+  margin: calc(var(--radio-dot) / -2) 0 0 calc(var(--radio-dot) / -2);
+  background: var(--color-ink);
+  border-radius: 50%;
+  scale: 0;
+  transition: scale var(--duration-fast) var(--ease-spring);
+}
+
+.radio__input:checked + .radio__mark {
+  background: var(--color-yellow);
+}
+
+.radio__input:checked + .radio__mark::after {
+  scale: 1;
+}
+
+.radio__input:focus-visible + .radio__mark {
+  outline: var(--focus-ring) solid var(--color-ink);
+  outline-offset: var(--space-0-5);
+}
+
+@media (hover: hover) {
+  .radio:hover .radio__input:not(:checked) + .radio__mark {
+    background: var(--color-hover-tint);
+  }
+}
+
+.radio__text {
+  display: flex;
+  flex-direction: column;
+}
+
+.radio__label {
+  font-size: var(--text-sm);
+  font-weight: var(--weight-bold);
+  line-height: var(--leading-sm);
+  color: var(--color-black);
+}
+
+.radio__note {
+  font-size: var(--text-xs);
+  font-weight: var(--weight-regular);
+  line-height: var(--leading-xs);
+  color: var(--color-black);
 }
 
 /* Horaire : curseur à deux poignées (début et fin), de 9 h à 22 h. */

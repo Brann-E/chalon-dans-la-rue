@@ -300,7 +300,10 @@
   --filters-gap-days: 5px;
   --filters-gap-categories: 7px;
   --filters-gap-zones: 5px;
-  --programme-chip-width: 56px;
+  /* Boutons radio (Programmation : Tous / IN / OFF) */
+  --radio-size: 24px;
+  --radio-dot: 10px;
+  --radio-border: 2px;
   /* Curseur d'horaire : ligne épaisse de 10 px, poignées de 26 px centrées sur la ligne. */
   --range-height: 36px;
   --range-track: 10px;

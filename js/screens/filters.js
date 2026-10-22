@@ -28,34 +28,35 @@ export async function createFiltersPanel({ section = "", only = false } = {}) {
   };
   const chips = (group, items) => h("div", { class: "filters__chips" }, items.map((item) => chip(group, item.value, item.label, item.token)));
 
-  // ---- Programmation IN / OFF -----------------------------------------------------------------
-  // Les deux peuvent être choisis ensemble (état de départ) mais jamais aucun : le dernier choix restant ne se décoche pas.
+  // ---- Programmation : Tous / IN / OFF (boutons radio) --------------------------------------
+  // Un seul choix à la fois, toujours un d'actif : « Tous » est l'option qui regroupe les deux. Dans la mémoire de l'appli,
+  // « Tous » = aucun filtre de programmation (liste vide), IN et OFF = filtre sur cette valeur.
   const PROGRAMMES = [
-    { value: "IN", note: "Projets sélectionnés par le festival" },
-    { value: "OFF", note: "Projets programmés" },
+    { key: "all", programme: [], label: "Tous", note: "Tous les spectacles" },
+    { key: "IN", programme: ["IN"], label: "IN", note: "Projets sélectionnés par le festival" },
+    { key: "OFF", programme: ["OFF"], label: "OFF", note: "Projets accueillis par le festival" },
   ];
-  const selectedProgrammes = () => {
+  const currentProgrammeKey = () => {
     const current = store.getFilters().programme;
-    return current.length === 0 ? PROGRAMMES.map((p) => p.value) : current;
+    return current.length === 1 ? current[0] : "all";
   };
-  const toggleProgramme = (value) => {
-    const current = selectedProgrammes();
-    if (current.includes(value)) {
-      if (current.length === 1) return; // dernier choix : on le garde
-      store.setFilters({ programme: current.filter((v) => v !== value) });
-    } else {
-      store.setFilters({ programme: [] }); // les deux choisis = pas de filtre
-    }
-  };
+  const PROGRAMME_TITLE_ID = "filters-programme-title";
   const programmeRows = h(
     "div",
-    { class: "filters__programme" },
+    { class: "filters__programme", role: "radiogroup", "aria-labelledby": PROGRAMME_TITLE_ID },
     PROGRAMMES.map((p) =>
       h(
-        "div",
-        { class: "filters__programme-row" },
-        h("button", { class: "chip", type: "button", "aria-pressed": "false", dataset: { group: "programme", value: p.value }, onclick: () => toggleProgramme(p.value) }, p.value),
-        h("span", { class: "filters__hint" }, p.note)
+        "label",
+        { class: "radio" },
+        h("input", {
+          class: "radio__input",
+          type: "radio",
+          name: "programme",
+          value: p.key,
+          onchange: () => store.setFilters({ programme: p.programme }),
+        }),
+        h("span", { class: "radio__mark", "aria-hidden": "true" }),
+        h("span", { class: "radio__text" }, h("span", { class: "radio__label" }, p.label), h("span", { class: "radio__note" }, p.note))
       )
     )
   );
@@ -110,7 +111,7 @@ export async function createFiltersPanel({ section = "", only = false } = {}) {
     h(
       "section",
       { class: THIN_RULE.has(key) ? "filters__section filters__section--thin" : "filters__section", dataset: { section: key } },
-      h("h3", { class: "filters__section-title" }, title),
+      h("h3", { class: "filters__section-title", id: key === "programme" ? PROGRAMME_TITLE_ID : null }, title),
       ...content
     );
 
@@ -168,17 +169,13 @@ export async function createFiltersPanel({ section = "", only = false } = {}) {
   const sync = () => {
     const filters = store.getFilters();
 
-    panel.querySelectorAll('.chip[data-group]:not([data-group="programme"])').forEach((el) => {
+    panel.querySelectorAll(".chip[data-group]").forEach((el) => {
       el.setAttribute("aria-pressed", String(filters[el.dataset.group].includes(el.dataset.value)));
     });
 
-    const programmes = selectedProgrammes();
-    panel.querySelectorAll('.chip[data-group="programme"]').forEach((el) => {
-      const on = programmes.includes(el.dataset.value);
-      el.setAttribute("aria-pressed", String(on));
-      // Dernier choix restant : on ne peut pas le décocher.
-      if (on && programmes.length === 1) el.setAttribute("aria-disabled", "true");
-      else el.removeAttribute("aria-disabled");
+    const programmeKey = currentProgrammeKey();
+    panel.querySelectorAll('.radio__input[name="programme"]').forEach((input) => {
+      input.checked = input.value === programmeKey;
     });
 
     const from = toHour(filters.from) ?? MIN_HOUR;
