@@ -42,6 +42,36 @@
   object-fit: cover;
 }
 
+/* Chevrons précédent / suivant : ronds blancs au milieu des bords de la photo. */
+.carousel__nav {
+  position: absolute;
+  top: 50%;
+  display: grid;
+  place-items: center;
+  width: var(--carousel-nav-size);
+  height: var(--carousel-nav-size);
+  transform: translateY(-50%);
+  background: var(--color-surface);
+  border-radius: 50%;
+  box-shadow: var(--shadow-chip);
+}
+
+.carousel__nav[hidden] {
+  display: none;
+}
+
+.carousel__nav--previous { left: var(--space-2); }
+.carousel__nav--next { right: var(--space-2); }
+
+.carousel__nav img {
+  width: var(--menu-chevron-size);
+  height: var(--menu-chevron-size);
+}
+
+.carousel__nav--previous img {
+  transform: rotate(180deg);
+}
+
 .carousel__counter {
   position: absolute;
   right: var(--space-3);

@@ -186,8 +186,9 @@
   /* ---- États vides (Favoris, Planning) --------------------------------- */
   --color-cta: #f3a2a0; /* éclairci, était #eb6460 */
   --color-border-soft: #f5f5f5;
-  --shadow-cta: 0 1px 3px rgb(0 0 0 / 30%), 0 4px 8px 3px rgb(0 0 0 / 15%);
-  --shadow-demo: 0 2px 3px rgb(0 0 0 / 30%), 0 6px 10px 4px rgb(0 0 0 / 15%);
+  /* Ombres des boutons des pages vides : adoucies (la maquette les avait plus marquées). */
+  --shadow-cta: 0 1px 2px rgb(0 0 0 / 20%), 0 2px 5px 1px rgb(0 0 0 / 10%);
+  --shadow-demo: 0 1px 2px rgb(0 0 0 / 20%), 0 3px 6px 1px rgb(0 0 0 / 10%);
   --space-6: 24px;
   --empty-padding-top: 120px;
   --empty-title-height: 48px;
@@ -328,6 +329,7 @@
 
   /* ---- Fiche spectacle ------------------------------------------------- */
   --carousel-height: 276px;
+  --carousel-nav-size: 36px;
   --rep-width-wide: 174px;
   --rep-top-height-compact: 20px;
   --pin-size-compact: 20px;
@@ -370,15 +372,15 @@
   --tabbar-height: 72px;
   --tabbar-inset: var(--space-3);
   --tabbar-bottom: 34px;
-  --tabbar-half-width: 195px;
-  --tabbar-active-size: 86px;
+  --tabbar-active-size: 88px;      /* 86 px dans la maquette : 2 px de plus pour couvrir les coins de la barre (Planning, Menu) */
   --tabbar-icon-size: 38px;
-  /* Centre de chaque onglet, mesuré dans la maquette (barre de 390 px). */
-  --tabbar-center-planning: 31.5px;
-  --tabbar-center-favoris: 113.5px;
-  --tabbar-center-carte: 195.5px;
-  --tabbar-center-decouvrir: 277.5px;
-  --tabbar-center-menu: 360px;
+  /* Centre de chaque onglet, mesuré dans la maquette (barre de 390 px) et exprimé en proportion de la barre,
+     pour que les onglets restent bien répartis quand l'écran est plus étroit. */
+  --tabbar-center-planning: 8.077%;    /* 31,5 / 390 */
+  --tabbar-center-favoris: 29.103%;    /* 113,5 / 390 */
+  --tabbar-center-carte: 50.128%;      /* 195,5 / 390 */
+  --tabbar-center-decouvrir: 71.154%;  /* 277,5 / 390 */
+  --tabbar-center-menu: 92.308%;       /* 360 / 390 */
   --tabbar-item-top: 8px;
 
   /* ---- Mouvement ------------------------------------------------------- */
@@ -391,7 +393,8 @@
   --hover-scale-round: 1.06;
   --focus-ring: 2px;
   --color-hover-tint: color-mix(in srgb, var(--color-yellow) 45%, var(--color-surface));
-  --color-hover-pale: color-mix(in srgb, var(--color-surface) 60%, transparent);   /* sur fond jaune (barre du bas) */
+  --color-cta-hover: color-mix(in srgb, var(--color-yellow) 45%, var(--color-white));          /* bouton jaune, plus pâle */
+  --color-filters-cta-hover: color-mix(in srgb, var(--color-cta) 60%, var(--color-white));    /* bouton « Afficher N résultats », plus pâle */
   --loader-size: 40px;
   --loader-thickness: 4px;
   --toast-bottom: 120px;            /* au-dessus de la barre du bas */

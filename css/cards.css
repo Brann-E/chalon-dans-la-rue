@@ -14,7 +14,8 @@
 [data-accent="concert"] { --accent: var(--color-cat-concert); }
 
 .show-card {
-  width: var(--card-width);
+  width: 100%;
+  max-width: var(--card-width); /* 390 px au plus, moins si l'écran est plus étroit */
   padding-bottom: var(--card-padding-bottom);
   overflow: hidden;
   background: var(--color-white);

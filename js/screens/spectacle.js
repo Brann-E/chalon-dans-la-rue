@@ -17,11 +17,20 @@ function createCarousel(show, photos) {
   const wrapper = h("div", { class: "carousel" }, track);
   if (photos.length > 1) {
     const counter = h("span", { class: "carousel__counter", "aria-live": "polite" }, `1 / ${photos.length}`);
-    track.addEventListener("scroll", () => {
-      const index = Math.round(track.scrollLeft / track.clientWidth);
-      counter.textContent = `${Math.min(index, photos.length - 1) + 1} / ${photos.length}`;
-    });
-    wrapper.append(counter);
+    // Chevrons à gauche et à droite : on peut aussi changer de photo sans glisser.
+    const goTo = (step) => track.scrollBy({ left: step * track.clientWidth, behavior: "smooth" });
+    const previous = h("button", { class: "carousel__nav carousel__nav--previous", type: "button", "aria-label": "Photo précédente", onclick: () => goTo(-1) }, img("assets/chevron.png"));
+    const next = h("button", { class: "carousel__nav carousel__nav--next", type: "button", "aria-label": "Photo suivante", onclick: () => goTo(1) }, img("assets/chevron.png"));
+    const update = () => {
+      const width = track.clientWidth || 1; // avant l'affichage, la largeur est nulle : on reste sur la première photo
+      const index = Math.min(Math.round(track.scrollLeft / width), photos.length - 1);
+      counter.textContent = `${index + 1} / ${photos.length}`;
+      previous.hidden = index === 0; // pas de chevron là où il n'y a plus de photo
+      next.hidden = index === photos.length - 1;
+    };
+    track.addEventListener("scroll", update);
+    update();
+    wrapper.append(previous, next, counter);
   }
   return wrapper;
 }

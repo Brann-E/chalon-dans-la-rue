@@ -83,19 +83,24 @@ button:active:not(:disabled):not([aria-disabled="true"]):not(.maplibregl-marker)
     border-radius: var(--radius-sm);
   }
 
-  /* Barre du bas : fond clair derrière l'onglet survolé */
-  .tabbar__item:hover {
-    background-color: var(--color-hover-pale);
-    box-shadow: 0 0 0 var(--space-0-5) var(--color-hover-pale);
-    border-radius: var(--radius-sm);
-  }
-
   .chip[aria-pressed="true"]:hover {
     filter: brightness(0.97);
   }
 
-  /* Boutons d'action : un peu plus lumineux */
-  :is(.cta, .filters__cta, .demo-fill, .pill):hover:not(:disabled) {
+  /* Boutons d'action : même couleur en plus pâle */
+  .cta:hover {
+    background-color: var(--color-cta-hover);
+  }
+
+  .demo-fill:hover {
+    background-color: var(--color-hover-tint);
+  }
+
+  .filters__cta:hover:not(:disabled) {
+    background-color: var(--color-filters-cta-hover);
+  }
+
+  .pill:hover:not(:disabled) {
     filter: brightness(1.04);
   }
 
