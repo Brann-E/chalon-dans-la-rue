@@ -193,15 +193,16 @@
   left: calc(var(--range-thumb) / 2 + (100% - var(--range-thumb)) * var(--from));
   width: calc((100% - var(--range-thumb)) * (var(--to) - var(--from)));
   background: var(--color-yellow);
-  box-shadow: inset 0 0 0 var(--hairline) var(--color-ink);
   border-radius: var(--radius-pill);
 }
 
+/* L'entrée a la hauteur d'une poignée et est centrée sur la ligne : les poignées sont donc centrées sur elle. */
 .range__input {
   position: absolute;
-  inset: 0;
+  inset: 50% 0 auto;
   width: 100%;
-  height: 100%;
+  height: var(--range-thumb);
+  transform: translateY(-50%);
   margin: 0;
   background: transparent;
   appearance: none;
@@ -250,12 +251,26 @@
   outline-offset: var(--space-0-5);
 }
 
+/* Bornes « 9h » et « 22h » : plus grosses, tout près de la ligne, et cliquables (elles ramènent la poignée à la borne). */
 .range__ends {
   display: flex;
   justify-content: space-between;
-  font-size: var(--text-xs);
-  line-height: var(--leading-xs);
+}
+
+.range__end {
+  padding: var(--space-0-5) var(--space-2);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-semibold);
+  line-height: var(--leading-sm);
   color: var(--color-black);
+}
+
+.range__end:first-child {
+  margin-left: calc(var(--space-2) * -1);
+}
+
+.range__end:last-child {
+  margin-right: calc(var(--space-2) * -1);
 }
 
 /* Interrupteur (réglages du Menu) */

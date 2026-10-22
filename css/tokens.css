@@ -297,10 +297,10 @@
   --filters-gap-categories: 7px;
   --filters-gap-zones: 5px;
   --programme-chip-width: 56px;
-  /* Curseur d'horaire : poignées de 28 px, zone de 44 px de haut pour le toucher. */
-  --range-height: 44px;
-  --range-track: 6px;
-  --range-thumb: 28px;
+  /* Curseur d'horaire : ligne épaisse de 10 px, poignées de 26 px centrées sur la ligne. */
+  --range-height: 36px;
+  --range-track: 10px;
+  --range-thumb: 26px;
   --range-thumb-border: 2px;
   --switch-width: 44px;
   --switch-height: 24px;
@@ -308,7 +308,6 @@
   --color-switch-off: #e2e8f0;
   --color-switch-on: var(--color-cat-cirque);
   --chip-dot: 15px;
-  --chip-selected-ring: 2px;       /* pastille choisie : fond jaune, contour noir */
 
   /* ---- Feuille « Filtres carte » (mesurée sur l'export 2× de la maquette) -- */
   --mapfilters-top: 164px;

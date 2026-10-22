@@ -95,7 +95,13 @@ export async function createFiltersPanel({ section = "", only = false } = {}) {
     { class: "filters__hours" },
     rangeReadout,
     range,
-    h("div", { class: "range__ends" }, h("span", {}, `${MIN_HOUR}h`), h("span", {}, `${MAX_HOUR}h`))
+    h(
+      "div",
+      { class: "range__ends" },
+      // Cliquer sur une borne y ramène la poignée correspondante.
+      h("button", { class: "range__end", type: "button", "aria-label": `Début à ${MIN_HOUR}h`, onclick: () => { fromInput.value = MIN_HOUR; onRangeInput("from"); } }, `${MIN_HOUR}h`),
+      h("button", { class: "range__end", type: "button", "aria-label": `Fin à ${MAX_HOUR}h`, onclick: () => { toInput.value = MAX_HOUR; onRangeInput("to"); } }, `${MAX_HOUR}h`)
+    )
   );
 
   // ---- Sections ----------------------------------------------------------------------------
