@@ -1,9 +1,11 @@
 import { h } from "./dom.js";
 import { loadJSON } from "./data.js";
-import { initRouter, register, navigate, has } from "./router.js";
+import { initRouter, register, navigate, has, current } from "./router.js";
 import { createStatusbar } from "./ui/statusbar.js";
 import { createTabbar } from "./ui/tabbar.js";
 import { initOverlay, openOverlay, closeOverlay } from "./ui/overlay.js";
+import { initToast } from "./ui/toast.js";
+import { createScreen } from "./ui/screen.js";
 import { renderMenu } from "./screens/menu.js";
 import { renderDecouvrir } from "./screens/decouvrir.js";
 import { renderFavoris } from "./screens/favoris.js";
@@ -19,18 +21,53 @@ import { createSlotPicker } from "./screens/slot-picker.js";
 import * as store from "./store.js";
 
 const app = document.getElementById("app");
-const tabs = await loadJSON("data/tabs.json");
+
+// L'indicateur de chargement est posé avant tout, pour qu'on ne voie jamais un écran vide sans explication.
+const loader = h("div", { class: "loader", role: "status", "aria-label": "Chargement" }, h("span", { class: "loader__spinner" }));
+app.append(loader);
+
+/** Écran affiché quand un contenu n'a pas pu être chargé : on peut réessayer. */
+const renderError = (error, retry) => {
+  console.error(error);
+  return createScreen({
+    id: "erreur",
+    title: "Oups",
+    softLine: true,
+    bodyClass: "screen__body--empty",
+    body: h(
+      "div",
+      { class: "empty" },
+      h("p", { class: "empty__lead" }, "Le contenu n’a pas pu se charger. Vérifiez votre connexion puis réessayez."),
+      h("button", { class: "cta cta--centered", type: "button", onclick: retry }, "Réessayer")
+    ),
+  });
+};
+
+let tabs;
+try {
+  tabs = await loadJSON("data/tabs.json");
+} catch (error) {
+  loader.hidden = true;
+  app.append(renderError(error, () => location.reload()));
+  throw error;
+}
 
 const screensHost = h("main", { class: "screens" });
 const tabbar = createTabbar(tabs, (id) => {
   closeOverlay({ immediate: true });
+  // Un nouvel appui sur l'onglet déjà affiché remonte en haut de la page.
+  if (id === tabbar.el.dataset.active && current() === id) {
+    document.querySelector(".screens > .screen:not(.is-leaving) .screen__body")?.scrollTo({ top: 0, behavior: "smooth" });
+    return;
+  }
   navigate(id);
 });
 
 app.append(screensHost, tabbar.el);
 initOverlay(app);
+initToast(app);
 app.append(createStatusbar());
-initRouter(screensHost, ({ tab }) => tabbar.setActive(tab));
+initRouter(screensHost, ({ tab }) => tabbar.setActive(tab), { loader, onError: renderError });
 
 for (const tab of tabs) {
   register(tab.id, { tab: tab.id, render: () => renderPlaceholder(tab.id, tab.label) });
@@ -77,7 +114,7 @@ app.addEventListener("open-map-filters", async () => {
 });
 app.addEventListener("apply-filters", () => {
   closeOverlay();
-  navigate("decouvrir");
+  navigate("decouvrir", {}, { restore: false }); // nouveaux filtres : la liste repart du haut
 });
 app.addEventListener("close-overlay", () => closeOverlay());
 

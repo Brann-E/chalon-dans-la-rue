@@ -58,6 +58,41 @@
   height: var(--statusbar-battery-height);
 }
 
+/* ---- Indicateur de chargement : affiché si un écran met du temps à venir ------- */
+.loader {
+  position: absolute;
+  inset: 0;
+  z-index: calc(var(--z-screen) + 1); /* au-dessus des écrans, sous la barre du bas */
+  display: grid;
+  place-items: center;
+  background: color-mix(in srgb, var(--color-sky) 70%, transparent);
+}
+
+.loader[hidden] {
+  display: none;
+}
+
+.loader__spinner {
+  width: var(--loader-size);
+  height: var(--loader-size);
+  border: var(--loader-thickness) solid var(--color-line-medium);
+  border-top-color: var(--color-ink);
+  border-radius: 50%;
+  animation: loader-spin 800ms linear infinite;
+}
+
+@keyframes loader-spin {
+  to { rotate: 360deg; }
+}
+
+.device.reduce-motion .loader__spinner {
+  animation: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .loader__spinner { animation: none; }
+}
+
 /* ---- Barre du bas -------------------------------------------------------- */
 .tabbar {
   position: absolute;

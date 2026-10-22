@@ -5,6 +5,7 @@ import * as store from "../store.js";
 import { createScreen } from "../ui/screen.js";
 import { createShowCard } from "../ui/show-card.js";
 import { createEmptyState, createDemoFill } from "../ui/empty-state.js";
+import { dayOf, startOf, conflictFor } from "../planning-rules.js";
 
 /** Créneaux ajoutés par le raccourci « Remplir la page » : [spectacle, index de représentation]. */
 // Les deux premiers se chevauchent (vendredi 24/07, 20h20) : de quoi voir l'avertissement.
@@ -14,29 +15,6 @@ const DEMO_PLANNING = [
   ["madame", 0],
   ["les-romanesques-edmond-rostand", 0],
 ];
-
-const toMinutes = (time) => {
-  const [, hours, minutes] = /(\d+)h(\d*)/.exec(time) ?? [];
-  return Number(hours ?? 0) * 60 + Number(minutes || 0);
-};
-
-const dayOf = (rep) => rep.date;
-const startOf = (rep) => toMinutes(rep.time);
-const durationOf = (show) => toMinutes(show.duration);
-
-/** Titre du premier autre spectacle épinglé dont le créneau chevauche celui-ci, sinon null. */
-function conflictFor(entry, entries) {
-  const rep = entry.show.reps[entry.index];
-  const start = startOf(rep);
-  const end = start + durationOf(entry.show);
-  const other = entries.find((o) => {
-    if (o === entry) return false;
-    const otherRep = o.show.reps[o.index];
-    const oStart = startOf(otherRep);
-    return dayOf(otherRep) === dayOf(rep) && start < oStart + durationOf(o.show) && oStart < end;
-  });
-  return other ? other.show.title : null;
-}
 
 const chronological = (a, b) => {
   const repA = a.show.reps[a.index];

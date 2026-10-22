@@ -36,6 +36,77 @@ img {
   display: block;
 }
 
+/* ---- Interactions : survol, appui, focus ------------------------------------------------
+   Tout élément cliquable réagit : léger soulèvement ou teinte au survol, légère réduction quand on appuie,
+   anneau net au focus clavier. On utilise les propriétés `scale` et `translate` (indépendantes de `transform`)
+   pour ne pas gêner les éléments déjà positionnés avec `transform`. */
+button,
+a,
+summary {
+  transition:
+    scale var(--duration-fast) var(--ease-move),
+    translate var(--duration-fast) var(--ease-move),
+    background-color var(--duration-fast) var(--ease-move),
+    box-shadow var(--duration-fast) var(--ease-move),
+    filter var(--duration-fast) var(--ease-move),
+    opacity var(--duration-fast) var(--ease-move);
+}
+
+button img {
+  transition: scale var(--duration-fast) var(--ease-move);
+}
+
+:focus-visible {
+  outline: var(--focus-ring) solid var(--color-ink);
+  outline-offset: var(--space-0-5);
+}
+
+button:active:not(:disabled):not([aria-disabled="true"]) {
+  scale: var(--press-scale);
+}
+
+@media (hover: hover) {
+  /* Boutons de contenu : soulèvement + teinte jaune */
+  :is(.chip, .list-row, .button-outline, .avatar, .pill):hover:not(:disabled):not([aria-disabled="true"]) {
+    translate: 0 var(--hover-lift);
+  }
+
+  .chip:not([aria-pressed="true"]):hover,
+  .list-row:hover,
+  .button-outline:hover {
+    background-color: var(--color-hover-tint);
+  }
+
+  .chip[aria-pressed="true"]:hover {
+    filter: brightness(0.97);
+  }
+
+  /* Boutons d'action : un peu plus lumineux */
+  :is(.cta, .filters__cta, .demo-fill, .pill):hover:not(:disabled) {
+    translate: 0 var(--hover-lift);
+    filter: brightness(1.04);
+  }
+
+  /* Icônes : léger grossissement */
+  :is(.like, .pin, .tabbar__item, .menu-row):hover :is(img, .tabbar__icon, .menu-row__icon) {
+    scale: var(--hover-scale-icon);
+  }
+
+  /* Boutons ronds */
+  :is(.map-filter, .round-close, .mapfilters__confirm, .slot-picker__close, .filters__close):hover {
+    scale: var(--hover-scale-round);
+  }
+
+  .map-pin:hover {
+    scale: var(--hover-scale-icon);
+    z-index: 1;
+  }
+
+  :is(.filters__reset, .filters-link, .filters__link, .range__end, .screen__back):hover {
+    opacity: 0.7;
+  }
+}
+
 /* ---- Gabarit : 414 × 896 sur ordinateur, plein écran sur téléphone ------- */
 .device {
   position: relative;
@@ -126,6 +197,14 @@ img {
 /* Réglages d'accessibilité du Menu : animations coupées, contraste des textes et filets renforcé. */
 .device.reduce-motion {
   --duration-move: 0ms;
+  --duration-fast: 0ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --duration-move: 0ms;
+    --duration-fast: 0ms;
+  }
 }
 
 .device.high-contrast {
@@ -145,6 +224,11 @@ img {
 
 .screen.enter-fade { animation: enter-fade var(--duration-move) var(--ease-move); }
 .screen.enter-slide-right { animation: enter-slide-right var(--duration-move) var(--ease-move); }
+
+/* L'écran quitté reste sous le nouveau le temps de la transition, sans réagir au toucher. */
+.screen.is-leaving {
+  pointer-events: none;
+}
 
 @media (prefers-reduced-motion: reduce) {
   .screen.enter-fade,

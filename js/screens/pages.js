@@ -147,7 +147,7 @@ async function renderZones() {
       onClick: (event) => {
         store.resetFilters();
         store.setFilters({ zones: [zone] });
-        emit(event.currentTarget, "navigate", { to: "decouvrir" });
+        emit(event.currentTarget, "navigate", { to: "decouvrir", options: { restore: false } });
       },
     });
   });

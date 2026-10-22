@@ -1,6 +1,7 @@
 import { h, img } from "../dom.js";
 import * as store from "../store.js";
 import { enableDragScroll } from "./drag-scroll.js";
+import { toggleFavorite, togglePin } from "./actions.js";
 
 /**
  * Carte spectacle (composant « Découvrir » de Figma) : bannière + photo recadrée,
@@ -123,8 +124,8 @@ export function createShowCard(show, { compact = false, plannedIndex = null, onl
   card.addEventListener("click", (event) => {
     const target = event.target.closest("button, .show-card__title");
     if (!target) return;
-    if (target.classList.contains("like")) store.toggleFavorite(show.id);
-    else if (target.classList.contains("pin")) store.togglePin(show.id, Number(target.dataset.pin));
+    if (target.classList.contains("like")) toggleFavorite(show, target);
+    else if (target.classList.contains("pin")) togglePin(show, Number(target.dataset.pin), target);
     else if (target.dataset.change !== undefined) emit(card, "change-slot", { id: show.id, fallbackIndex: plannedIndex ?? 0 });
     else if (target.dataset.onMap !== undefined) {
       const rep = show.reps[Number(target.dataset.onMap)];

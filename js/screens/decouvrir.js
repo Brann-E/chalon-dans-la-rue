@@ -23,8 +23,13 @@ const LOAD_MARGIN = "800px";
 
 const normalize = (text) => text.normalize("NFD").replace(/\p{Diacritic}/gu, "").toLowerCase();
 
+// Mémoire de la liste : combien de cartes avaient été affichées pour telle recherche/tels filtres.
+// Au retour (ex. depuis une fiche), on les recrée pour que le défilement mémorisé par le routeur retombe au bon endroit.
+const remembered = { signature: "", shown: 0, query: "" };
+
 export async function renderDecouvrir() {
   const [shows, event] = await Promise.all([loadShows(), loadJSON("data/event.json")]);
+  const previous = { ...remembered };
   const today = event.today;
   const cards = h("div", { class: "cards" });
   const empty = h("p", { class: "empty-results", hidden: true }, "Aucun spectacle ne correspond à votre recherche.");
@@ -46,6 +51,8 @@ export async function renderDecouvrir() {
     cards.append(...next.map(cardFor));
     shown += next.length;
     sentinel.hidden = shown >= matches.length;
+    remembered.signature = signature;
+    remembered.shown = shown;
   };
 
   const observer = new IntersectionObserver(
@@ -89,6 +96,7 @@ export async function renderDecouvrir() {
   const apply = () => {
     const filters = store.getFilters();
     const query = normalize(input.value.trim());
+    remembered.query = input.value;
     CHIPS.forEach((chip, i) => chipEls[i].setAttribute("aria-pressed", String(chip.active(filters, today))));
 
     const next = JSON.stringify([filters, query]);
@@ -107,8 +115,11 @@ export async function renderDecouvrir() {
     observer.observe(sentinel);
   };
 
+  input.value = previous.query; // le texte cherché est retrouvé au retour
   input.addEventListener("input", apply);
   apply();
+  // Même recherche/mêmes filtres qu'avant de partir : on retrouve autant de cartes qu'on en avait vu.
+  if (previous.signature === signature) while (shown < previous.shown && shown < matches.length) showMore();
   const unsubscribe = store.subscribe(() => {
     if (cards.isConnected) apply();
     else {

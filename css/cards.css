@@ -69,6 +69,18 @@
   filter: drop-shadow(0 0 0.5px var(--color-ink)) drop-shadow(0 0 0.5px var(--color-ink));
 }
 
+/* Rebond de l'icône quand on aime ou qu'on épingle (la classe est posée au clic, puis retirée). */
+@keyframes icon-pop {
+  0% { scale: 1; }
+  40% { scale: 1.4; }
+  100% { scale: 1; }
+}
+
+.like.is-pop img,
+.pin.is-pop img {
+  animation: icon-pop var(--duration-move) var(--ease-spring);
+}
+
 /* Zone de toucher de 44 px autour des petites icônes, sans changer leur dessin. */
 .like::after,
 .pin::after,

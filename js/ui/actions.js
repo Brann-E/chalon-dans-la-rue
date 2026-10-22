@@ -1,0 +1,44 @@
+import * as store from "../store.js";
+import { loadShows } from "../shows.js";
+import { findConflict } from "../planning-rules.js";
+import { showToast } from "./toast.js";
+
+/**
+ * Actions de l'utilisateur sur un spectacle (cœur, épingle) avec leur retour visuel :
+ * petit rebond de l'icône, puis confirmation en bas avec « Annuler » (le chevauchement est signalé dès l'épingle).
+ */
+const pop = (trigger) => {
+  if (!trigger) return;
+  trigger.classList.add("is-pop");
+  trigger.addEventListener("animationend", () => trigger.classList.remove("is-pop"), { once: true });
+};
+
+export function toggleFavorite(show, trigger) {
+  const added = !store.isFavorite(show.id);
+  store.toggleFavorite(show.id);
+  pop(trigger);
+  showToast({
+    message: added ? `« ${show.title} » ajouté aux favoris` : `« ${show.title} » retiré des favoris`,
+    actionLabel: "Annuler",
+    onAction: () => store.toggleFavorite(show.id),
+  });
+}
+
+export async function togglePin(show, index, trigger) {
+  const removing = store.isPinned(show.id, index);
+  const previous = store.pinnedIndex(show.id);
+  store.togglePin(show.id, index);
+  pop(trigger);
+
+  if (removing) {
+    showToast({ message: `« ${show.title} » retiré du planning`, actionLabel: "Annuler", onAction: () => store.setPin(show.id, index) });
+    return;
+  }
+  const rep = show.reps[index];
+  const clash = findConflict(await loadShows(), store.getPlanning(), show.id);
+  showToast({
+    message: `Ajouté au planning : ${rep.date} - ${rep.time}${clash ? ` · chevauche « ${clash} »` : ""}`,
+    actionLabel: "Annuler",
+    onAction: () => (previous === null ? store.togglePin(show.id, index) : store.setPin(show.id, previous)),
+  });
+}
