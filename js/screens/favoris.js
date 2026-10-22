@@ -5,8 +5,8 @@ import { createScreen } from "../ui/screen.js";
 import { createShowCard } from "../ui/show-card.js";
 import { createEmptyState, createDemoFill } from "../ui/empty-state.js";
 
-/** Spectacles ajoutés par le raccourci « Remplir la page » (ordre de la maquette). */
-const DEMO_FAVORITES = ["fidji", "clap", "le-p-d", "hypothese"];
+/** Spectacles ajoutés par le raccourci « Remplir la page ». */
+const DEMO_FAVORITES = ["we-want-you", "ce-sera-pire-apres", "madame", "les-romanesques-edmond-rostand"];
 
 /**
  * Favoris : liste des spectacles aimés, ou état vide.

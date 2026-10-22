@@ -42,8 +42,9 @@ export async function renderSpectacle({ id }) {
     ? h(
         "div",
         { class: "spectacle__links" },
-        h("a", { class: "pill pill--bordered", href: detail.links.show ?? "#", "aria-disabled": detail.links.show ? null : "true" }, "Site du spectacle"),
-        h("a", { class: "pill pill--bordered pill--outline", href: detail.links.company ?? "#", "aria-disabled": detail.links.company ? null : "true" }, "Site de la compagnie")
+        h("a", { class: "pill pill--bordered", href: detail.links.show ?? "#", target: "_blank", rel: "noopener", "aria-disabled": detail.links.show ? null : "true" }, "Site du spectacle"),
+        detail.links.company &&
+          h("a", { class: "pill pill--bordered pill--outline", href: detail.links.company, target: "_blank", rel: "noopener" }, "Site de la compagnie")
       )
     : null;
 

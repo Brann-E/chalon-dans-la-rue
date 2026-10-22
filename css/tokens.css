@@ -57,14 +57,9 @@
   --color-line-strong: rgb(0 0 0 / 30%);
   --color-active-tab: rgb(237 99 97 / 80%);
 
-  /* ---- Accents de spectacle (bannière, « Lire plus », catégorie) ------- */
-  --color-accent-orange: #ff9f00;
-  --color-accent-violet: #a267fc;
-  --color-accent-indigo: #5b6bfa;
-  --color-accent-red: #ff4444;
   --color-line-medium: rgb(0 0 0 / 20%);
 
-  /* ---- Catégories (puces de la feuille de filtres) --------------------- */
+  /* ---- Catégories (pastilles de « Filtres », accent des cartes spectacle) -- */
   --color-cat-musical: #5b6bfa;
   --color-cat-clown: #ff4444;
   --color-cat-danse: #e59cce;

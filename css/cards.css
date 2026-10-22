@@ -1,9 +1,17 @@
 /* Carte spectacle et cartes de représentation — mesures Figma (composant « Découvrir »). */
 
-[data-accent="orange"] { --accent: var(--color-accent-orange); }
-[data-accent="violet"] { --accent: var(--color-accent-violet); }
-[data-accent="indigo"] { --accent: var(--color-accent-indigo); }
-[data-accent="red"] { --accent: var(--color-accent-red); }
+/* Couleur d'accent d'une carte = couleur de sa catégorie (mêmes teintes que les pastilles de « Filtres »). */
+[data-accent="musical"] { --accent: var(--color-cat-musical); }
+[data-accent="clown"] { --accent: var(--color-cat-clown); }
+[data-accent="danse"] { --accent: var(--color-cat-danse); }
+[data-accent="enfants"] { --accent: var(--color-cat-enfants); }
+[data-accent="performance"] { --accent: var(--color-cat-performance); }
+[data-accent="marionnette"] { --accent: var(--color-cat-marionnette); }
+[data-accent="cirque"] { --accent: var(--color-cat-cirque); }
+[data-accent="deambulation"] { --accent: var(--color-cat-deambulation); }
+[data-accent="rue"] { --accent: var(--color-cat-rue); }
+[data-accent="cabaret"] { --accent: var(--color-cat-cabaret); }
+[data-accent="concert"] { --accent: var(--color-cat-concert); }
 
 .show-card {
   width: var(--card-width);
@@ -36,6 +44,11 @@
   line-height: 24.2px;
   color: var(--color-surface);
   text-align: left;
+  /* Un titre trop long reste sur une ligne, comme la bannière de la maquette. */
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .like {

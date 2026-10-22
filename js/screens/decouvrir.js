@@ -3,7 +3,7 @@ import { loadShows } from "../shows.js";
 import * as store from "../store.js";
 import { matchesFilters } from "../filtering.js";
 import { createScreen } from "../ui/screen.js";
-import { createShowCard } from "../ui/show-card.js";
+import { createShowCard, syncCard } from "../ui/show-card.js";
 
 /** Pastilles du haut : chacune ouvre la feuille « Filtres » sur sa section et s'allume si elle est active. */
 const CHIPS = [
@@ -15,14 +15,46 @@ const CHIPS = [
   { label: "Zone", section: "zones", active: (f) => f.zones.length > 0 },
 ];
 
+/** Nombre de cartes ajoutées à chaque fois que la fin de la liste approche (la programmation en compte 147). */
+const PAGE_SIZE = 12;
+const LOAD_MARGIN = "800px";
+
 const normalize = (text) => text.normalize("NFD").replace(/\p{Diacritic}/gu, "").toLowerCase();
 
 export async function renderDecouvrir() {
   const shows = await loadShows();
   const cards = h("div", { class: "cards" });
   const empty = h("p", { class: "empty-results", hidden: true }, "Aucun spectacle ne correspond à votre recherche.");
-  const entries = shows.map((show) => ({ show, el: createShowCard(show) }));
-  entries.forEach(({ el }) => cards.append(el));
+  const sentinel = h("div", { class: "cards__end", "aria-hidden": "true", hidden: true });
+
+  // Les cartes ne sont construites que lorsqu'on s'en approche, puis gardées pour la suite.
+  const built = new Map();
+  const cardFor = (show) => {
+    if (!built.has(show.id)) built.set(show.id, createShowCard(show));
+    const el = built.get(show.id);
+    syncCard(el);
+    return el;
+  };
+
+  let matches = [];
+  let shown = 0;
+  const showMore = () => {
+    const next = matches.slice(shown, shown + PAGE_SIZE);
+    cards.append(...next.map(cardFor));
+    shown += next.length;
+    sentinel.hidden = shown >= matches.length;
+  };
+
+  const observer = new IntersectionObserver(
+    ([entry]) => {
+      if (!entry.isIntersecting || sentinel.hidden) return;
+      showMore();
+      // Si la fin est toujours en vue, on relance l'observation pour charger la suite.
+      observer.unobserve(sentinel);
+      observer.observe(sentinel);
+    },
+    { rootMargin: `0px 0px ${LOAD_MARGIN} 0px` }
+  );
 
   const input = h("input", {
     class: "search__input",
@@ -45,23 +77,38 @@ export async function renderDecouvrir() {
     )
   );
 
+  // La liste n'est reconstruite que si la recherche ou les filtres changent (pas à chaque cœur ou épingle).
+  let signature = "";
   const apply = () => {
     const filters = store.getFilters();
     const query = normalize(input.value.trim());
-    let visible = 0;
-    for (const { show, el } of entries) {
-      const haystack = normalize([show.title, show.company, show.category, show.location].join(" "));
-      const match = (!query || haystack.includes(query)) && matchesFilters(show, filters);
-      el.hidden = !match;
-      if (match) visible += 1;
-    }
-    empty.hidden = visible > 0;
     CHIPS.forEach((chip, i) => chipEls[i].setAttribute("aria-pressed", String(chip.active(filters))));
+
+    const next = JSON.stringify([filters, query]);
+    if (next === signature) return;
+    signature = next;
+
+    matches = shows.filter((show) => {
+      const haystack = normalize([show.title, show.company, show.category, show.location, show.tagline ?? ""].join(" "));
+      return (!query || haystack.includes(query)) && matchesFilters(show, filters);
+    });
+    cards.replaceChildren();
+    shown = 0;
+    showMore();
+    empty.hidden = matches.length > 0;
+    observer.unobserve(sentinel);
+    observer.observe(sentinel);
   };
 
   input.addEventListener("input", apply);
   apply();
-  const unsubscribe = store.subscribe(() => (cards.isConnected ? apply() : unsubscribe()));
+  const unsubscribe = store.subscribe(() => {
+    if (cards.isConnected) apply();
+    else {
+      observer.disconnect();
+      unsubscribe();
+    }
+  });
 
   const filterbar = h(
     "div",
@@ -85,7 +132,7 @@ export async function renderDecouvrir() {
     id: "decouvrir",
     title: "Découvrir",
     above: filterbar,
-    body: [cards, empty],
+    body: [cards, sentinel, empty],
     bodyClass: "screen__body--cards",
     softLine: true,
   });

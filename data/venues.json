@@ -1,822 +1,542 @@
 [
   {
     "spot": 1,
-    "name": "2 avenue Mathias",
-    "address": "2 avenue Mathias",
-    "grid": "I6",
+    "name": "17 rue Georges Maugey",
+    "address": "17 rue Georges Maugey",
     "kind": "spectacle",
-    "lat": 46.785417,
-    "lng": 4.85856,
-    "source": "adresse"
-  },
-  {
-    "spot": 2,
-    "name": "4 rue Emiland Ménand",
-    "address": "4 rue Emiland Ménand",
-    "grid": "F5",
-    "kind": "spectacle",
-    "lat": 46.785011,
-    "lng": 4.853056,
-    "source": "adresse"
+    "lat": 46.775705,
+    "lng": 4.845172,
+    "source": "geocodage"
   },
   {
     "spot": 3,
-    "name": "7 avenue Mathias",
-    "address": "7 avenue Mathias",
-    "grid": "I4",
+    "name": "7 place Mathias",
+    "address": "place Mathias",
     "kind": "spectacle",
-    "lat": 46.785417,
-    "lng": 4.85856,
-    "source": "adresse"
+    "lat": 46.786597,
+    "lng": 4.85989,
+    "source": "plan"
   },
   {
     "spot": 4,
-    "name": "11 rue Ludwig van Beethoven",
-    "address": "11 rue Ludwig van Beethoven",
-    "grid": "L1",
-    "kind": "spectacle",
-    "lat": 46.7901,
-    "lng": 4.865345,
-    "source": "grille"
-  },
-  {
-    "spot": 5,
-    "name": "25 Rempart Saint-Pierre",
-    "address": "25 Rempart Saint-Pierre",
-    "grid": "D4",
-    "kind": "spectacle",
-    "lat": 46.785903,
-    "lng": 4.850154,
-    "source": "adresse"
-  },
-  {
-    "spot": 6,
-    "name": "72 rue aux Fèvres",
-    "address": "72 rue aux Fèvres",
-    "grid": "G6",
-    "kind": "spectacle",
-    "lat": 46.782905,
-    "lng": 4.857649,
-    "source": "adresse"
-  },
-  {
-    "spot": 7,
-    "name": "L’Abattoir",
-    "address": "52 quai Saint-Cosme",
-    "grid": "B12",
-    "kind": "convivialite",
-    "lat": 46.774719,
-    "lng": 4.845387,
-    "source": "adresse"
-  },
-  {
-    "spot": 8,
-    "name": "Allée de la Sucrerie",
-    "address": "6 allée de la Sucrerie",
-    "grid": "C11",
-    "kind": "spectacle",
-    "lat": 46.776932,
-    "lng": 4.847182,
-    "source": "adresse"
-  },
-  {
-    "spot": 9,
-    "name": "Bastion Bas",
-    "address": "2 rue d’Amsterdam",
-    "grid": "L5",
-    "kind": "convivialite",
-    "lat": 46.784763,
-    "lng": 4.864793,
-    "source": "adresse"
-  },
-  {
-    "spot": 10,
-    "name": "Bastion Haut",
-    "address": "5 avenue Léon Blum",
-    "grid": "L6",
-    "kind": "convivialite",
-    "lat": 46.783804,
-    "lng": 4.865125,
-    "source": "grille"
-  },
-  {
-    "spot": 11,
-    "name": "Berge du Cercle Nautique",
-    "address": "40 rue d’Amsterdam",
-    "grid": "M5",
-    "kind": "spectacle",
-    "lat": 46.785673,
-    "lng": 4.866029,
-    "source": "adresse"
-  },
-  {
-    "spot": 12,
-    "name": "Clos Bourguignon",
-    "address": "12 avenue Monnot",
-    "grid": "J1",
-    "kind": "spectacle",
-    "lat": 46.790107,
-    "lng": 4.861676,
-    "source": "adresse"
-  },
-  {
-    "spot": 13,
-    "name": "Cour de la Gare",
-    "address": "Cour de la Gare",
-    "grid": "A8",
-    "kind": "spectacle",
-    "lat": 46.78074,
-    "lng": 4.84438,
-    "source": "grille"
-  },
-  {
-    "spot": 14,
-    "name": "Cour de la Maison de Quartier Centre",
-    "address": "entrée par le Parking Soubrane",
-    "grid": "I10",
-    "kind": "spectacle",
-    "lat": 46.778618,
-    "lng": 4.859316,
-    "source": "grille"
-  },
-  {
-    "spot": 15,
-    "name": "Cour de l’Ancienne Prison",
-    "address": "impasse de l’Ancienne Prison",
-    "grid": "G8",
-    "kind": "spectacle",
-    "lat": 46.780721,
-    "lng": 4.855766,
-    "source": "adresse"
-  },
-  {
-    "spot": 16,
-    "name": "Cour de la Maison de Justice",
-    "address": "place de l’Obélisque",
-    "grid": "F6",
-    "kind": "spectacle",
-    "lat": 46.784199,
-    "lng": 4.853016,
-    "source": "adresse"
-  },
-  {
-    "spot": 17,
-    "name": "Cour des Pompes Élévatoires",
-    "address": "13 place Thévenin",
-    "grid": "K8",
-    "kind": "spectacle",
-    "lat": 46.780201,
-    "lng": 4.86249,
-    "source": "adresse"
-  },
-  {
-    "spot": 18,
-    "name": "Cour du Musée Nicéphore Niépce",
-    "address": "28 quai des Messageries",
-    "grid": "G8",
-    "kind": "spectacle",
-    "lat": 46.780122,
-    "lng": 4.855887,
-    "source": "adresse"
-  },
-  {
-    "spot": 19,
-    "name": "Cour Saint-Georges",
-    "address": "30 rue Saint-Georges",
-    "grid": "G7",
-    "kind": "spectacle",
-    "lat": 46.782272,
-    "lng": 4.855108,
-    "source": "adresse"
-  },
-  {
-    "spot": 20,
-    "name": "Cour UIMM",
-    "address": "75 Grande Rue Saint-Cosme",
-    "grid": "B11",
-    "kind": "spectacle",
-    "lat": 46.777266,
-    "lng": 4.846308,
-    "source": "adresse"
-  },
-  {
-    "spot": 21,
-    "name": "Cour Vivant Denon",
-    "address": "8 rue Philibert Léon Couturier",
-    "grid": "E8",
-    "kind": "festival",
-    "lat": 46.780566,
-    "lng": 4.851331,
-    "source": "adresse"
-  },
-  {
-    "spot": 22,
-    "name": "École maternelle Louis Lechère",
-    "address": "entrée par Place Abbé Moreau",
-    "grid": "B8",
-    "kind": "spectacle",
-    "lat": 46.781417,
-    "lng": 4.846527,
-    "source": "adresse"
-  },
-  {
-    "spot": 23,
-    "name": "École Média Art",
-    "address": "1 rue Leschenault de la Tour",
-    "grid": "D2",
-    "kind": "spectacle",
-    "lat": 46.788325,
-    "lng": 4.849299,
-    "source": "adresse"
-  },
-  {
-    "spot": 24,
-    "name": "École primaire Citadelle",
-    "address": "10 rue Garibaldi",
-    "grid": "C2",
-    "kind": "spectacle",
-    "lat": 46.788449,
-    "lng": 4.848396,
-    "source": "adresse"
-  },
-  {
-    "spot": 25,
-    "name": "École primaire de l’Est",
-    "address": "17 rue de la Motte",
-    "grid": "G6",
-    "kind": "convivialite",
-    "lat": 46.783856,
-    "lng": 4.858764,
-    "source": "adresse"
-  },
-  {
-    "spot": 26,
-    "name": "École primaire Louis Lechère",
-    "address": "entrée par Place Abbé Moreau",
-    "grid": "B8",
-    "kind": "spectacle",
-    "lat": 46.780888,
-    "lng": 4.846792,
-    "source": "adresse"
-  },
-  {
-    "spot": 27,
-    "name": "École Rives de Saône",
-    "address": "65 rue de Strasbourg",
-    "grid": "L9",
-    "kind": "spectacle",
-    "lat": 46.779334,
-    "lng": 4.864985,
-    "source": "adresse"
-  },
-  {
-    "spot": 28,
-    "name": "Espace des Arts - patio",
-    "address": "50 avenue Nicéphore Niépce",
-    "grid": "D3",
-    "kind": "spectacle",
-    "lat": 46.787185,
-    "lng": 4.850233,
-    "source": "grille"
-  },
-  {
-    "spot": 29,
-    "name": "Esplanade de l’Espace Nautique",
-    "address": "40 rue d’Amsterdam",
-    "grid": "L5",
-    "kind": "spectacle",
-    "lat": 46.785673,
-    "lng": 4.866029,
-    "source": "adresse"
-  },
-  {
-    "spot": 30,
-    "name": "Esplanade Michel Allez",
-    "address": "Grande Rue Saint-Cosme",
-    "grid": "B10",
-    "kind": "spectacle",
-    "lat": 46.778772,
-    "lng": 4.849061,
-    "source": "adresse"
-  },
-  {
-    "spot": 31,
-    "name": "Ferme Papillot",
-    "address": "1 allée des Granges forestières",
-    "grid": "G11",
-    "kind": "spectacle",
-    "lat": 46.77726,
-    "lng": 4.855516,
-    "source": "grille"
-  },
-  {
-    "spot": 32,
-    "name": "Galerie du Châtelet",
-    "address": "1 rue du Châtelet",
-    "grid": "H8",
-    "kind": "spectacle",
-    "lat": 46.78154,
-    "lng": 4.857627,
-    "source": "adresse"
-  },
-  {
-    "spot": 33,
-    "name": "Gare routière - départ navette",
-    "address": "33 avenue Georges Pompidou",
-    "grid": "A8",
-    "kind": "spectacle",
-    "lat": 46.778582,
-    "lng": 4.845629,
-    "source": "adresse"
-  },
-  {
-    "spot": 34,
-    "name": "Granges forestières",
-    "address": "1 allée des Granges forestières",
-    "grid": "G11",
-    "kind": "spectacle",
-    "lat": 46.77726,
-    "lng": 4.855516,
-    "source": "grille"
-  },
-  {
-    "spot": 35,
-    "name": "Jardin Botanique",
-    "address": "entrée par le Parc Georges Nouelle",
-    "grid": "J5",
-    "kind": "spectacle",
-    "lat": 46.785667,
-    "lng": 4.861239,
-    "source": "adresse"
-  },
-  {
-    "spot": 36,
-    "name": "Jardin de l’ancienne Banque de France",
-    "address": "en face du 34 rue Fructidor",
-    "grid": "E6",
-    "kind": "spectacle",
-    "lat": 46.783457,
-    "lng": 4.85198,
-    "source": "grille"
-  },
-  {
-    "spot": 37,
-    "name": "Jardin de l’Arquebuse",
-    "address": "rue Gauthey",
-    "grid": "E5",
-    "kind": "spectacle",
-    "lat": 46.785514,
-    "lng": 4.850427,
-    "source": "adresse"
-  },
-  {
-    "spot": 38,
-    "name": "La Saône",
-    "address": "",
-    "grid": "K9",
-    "kind": "spectacle",
-    "lat": 46.779977,
-    "lng": 4.863116,
-    "source": "grille"
-  },
-  {
-    "spot": 39,
-    "name": "Le Purgatoire",
-    "address": "12 rue Porte de Lyon",
-    "grid": "E9",
-    "kind": "spectacle",
-    "lat": 46.779296,
-    "lng": 4.850654,
-    "source": "adresse"
-  },
-  {
-    "spot": 40,
-    "name": "Maison des Syndicats",
-    "address": "entrée par la Place Mathias",
-    "grid": "I3",
-    "kind": "spectacle",
-    "lat": 46.786847,
-    "lng": 4.858994,
-    "source": "adresse"
-  },
-  {
-    "spot": 41,
-    "name": "Office de Tourisme",
-    "address": "4 place du Port Villiers",
-    "grid": "G9",
-    "kind": "spectacle",
-    "lat": 46.780141,
-    "lng": 4.854974,
-    "source": "adresse"
-  },
-  {
-    "spot": 42,
-    "name": "on-situ",
-    "address": "34 quai Saint-Cosme",
-    "grid": "B12",
-    "kind": "spectacle",
-    "lat": 46.775753,
-    "lng": 4.846083,
-    "source": "grille"
-  },
-  {
-    "spot": 43,
-    "name": "Parc Georges Nouelle - Place des Publics",
-    "address": "avenue Mathias",
-    "grid": "I5",
-    "kind": "festival",
-    "lat": 46.784431,
-    "lng": 4.859607,
-    "source": "adresse"
-  },
-  {
-    "spot": 44,
-    "name": "Parc Georges Nouelle - Nord Est",
-    "address": "avenue Mathias",
-    "grid": "I4",
-    "kind": "convivialite",
-    "lat": 46.784431,
-    "lng": 4.859607,
-    "source": "adresse"
-  },
-  {
-    "spot": 45,
-    "name": "Parc Georges Nouelle - Sud Est",
-    "address": "avenue Mathias",
-    "grid": "I5",
-    "kind": "spectacle",
-    "lat": 46.784431,
-    "lng": 4.859607,
-    "source": "adresse"
-  },
-  {
-    "spot": 46,
-    "name": "Parking de l’Alma",
-    "address": "5 rue de l’Alma",
-    "grid": "C11",
+    "name": "9 rue de l’Alma",
+    "address": "9 rue de l’Alma",
     "kind": "spectacle",
     "lat": 46.777461,
     "lng": 4.847673,
-    "source": "adresse"
+    "source": "geocodage"
   },
   {
-    "spot": 47,
-    "name": "Parking de la Maison des Sports",
-    "address": "rue du 11 novembre",
-    "grid": "C10",
+    "spot": 5,
+    "name": "L’Abattoir",
+    "address": "52 quai Saint-Cosme",
     "kind": "spectacle",
-    "lat": 46.779674,
-    "lng": 4.848579,
-    "source": "adresse"
+    "lat": 46.774719,
+    "lng": 4.845387,
+    "source": "plan"
   },
   {
-    "spot": 48,
-    "name": "Parking du Théâtre du Port-Nord",
-    "address": "23 rue Denis Papin",
-    "grid": "O3",
+    "spot": 6,
+    "name": "Ancien Hôpital",
+    "address": "Ancien Hôpital",
     "kind": "spectacle",
-    "lat": 46.788249,
-    "lng": 4.87392,
-    "source": "adresse"
+    "lat": 46.77943,
+    "lng": 4.857866,
+    "source": "geocodage"
   },
   {
-    "spot": 49,
-    "name": "Parking Edmé Vadot",
-    "address": "rue Edmé Vadot",
-    "grid": "I9",
+    "spot": 7,
+    "name": "Bar Le Majorelle",
+    "address": "Bar Le Majorelle",
     "kind": "spectacle",
-    "lat": 46.779216,
-    "lng": 4.859658,
-    "source": "adresse"
+    "lat": 46.781931,
+    "lng": 4.858186,
+    "source": "geocodage"
   },
   {
-    "spot": 50,
-    "name": "Parking Lapruy",
-    "address": "19A Rempart Sainte-Marie",
-    "grid": "J9",
+    "spot": 8,
+    "name": "Bastion Bas",
+    "address": "2 rue d’Amsterdam",
+    "kind": "convivialite",
+    "lat": 46.784763,
+    "lng": 4.864793,
+    "source": "plan"
+  },
+  {
+    "spot": 9,
+    "name": "Bastion Haut",
+    "address": "5 avenue Léon Blum",
     "kind": "spectacle",
-    "lat": 46.779927,
-    "lng": 4.861238,
-    "source": "grille"
+    "lat": 46.783804,
+    "lng": 4.865125,
+    "source": "plan"
   },
   {
-    "spot": 51,
-    "name": "Parking Salle Marcel Sembat",
-    "address": "place Mathias",
-    "grid": "I3",
+    "spot": 10,
+    "name": "Cour de l’Ancienne Cure",
+    "address": "Cour de l’Ancienne Cure",
     "kind": "spectacle",
-    "lat": 46.786597,
-    "lng": 4.85989,
-    "source": "adresse"
+    "lat": 46.776968,
+    "lng": 4.841424,
+    "source": "repli"
   },
   {
-    "spot": 52,
-    "name": "Parking Soubrane",
-    "address": "quai Chambion",
-    "grid": "H10",
+    "spot": 11,
+    "name": "Cour de l’Ancienne Prison",
+    "address": "impasse de l’Ancienne Prison",
     "kind": "spectacle",
-    "lat": 46.777767,
-    "lng": 4.860151,
-    "source": "adresse"
+    "lat": 46.780721,
+    "lng": 4.855766,
+    "source": "plan"
   },
   {
-    "spot": 53,
-    "name": "Parvis de l’Espace des Arts",
+    "spot": 12,
+    "name": "Cour des Pompes Élévatoires",
+    "address": "13 place Thévenin",
+    "kind": "spectacle",
+    "lat": 46.780201,
+    "lng": 4.86249,
+    "source": "plan"
+  },
+  {
+    "spot": 13,
+    "name": "Cour du festival - École Vivant Denon",
+    "address": "8 rue Philibert Léon Couturier",
+    "kind": "festival",
+    "lat": 46.780566,
+    "lng": 4.851331,
+    "source": "plan"
+  },
+  {
+    "spot": 14,
+    "name": "Cour du Musée Nicéphore Niépce",
+    "address": "28 quai des Messageries",
+    "kind": "spectacle",
+    "lat": 46.780122,
+    "lng": 4.855887,
+    "source": "plan"
+  },
+  {
+    "spot": 15,
+    "name": "Cour Saint-Georges",
+    "address": "30 rue Saint-Georges",
+    "kind": "spectacle",
+    "lat": 46.782272,
+    "lng": 4.855108,
+    "source": "plan"
+  },
+  {
+    "spot": 16,
+    "name": "Cour UIMM",
+    "address": "75 Grande Rue Saint-Cosme",
+    "kind": "spectacle",
+    "lat": 46.777266,
+    "lng": 4.846308,
+    "source": "plan"
+  },
+  {
+    "spot": 17,
+    "name": "École Média Art",
+    "address": "1 rue Leschenault de la Tour",
+    "kind": "spectacle",
+    "lat": 46.788325,
+    "lng": 4.849299,
+    "source": "plan"
+  },
+  {
+    "spot": 18,
+    "name": "École Primaire Citadelle",
+    "address": "10 rue Garibaldi",
+    "kind": "spectacle",
+    "lat": 46.788449,
+    "lng": 4.848396,
+    "source": "plan"
+  },
+  {
+    "spot": 19,
+    "name": "École primaire de l’Est",
+    "address": "17 rue de la Motte",
+    "kind": "convivialite",
+    "lat": 46.783856,
+    "lng": 4.858764,
+    "source": "plan"
+  },
+  {
+    "spot": 20,
+    "name": "École primaire Louis Lechère",
+    "address": "entrée par Place Abbé Moreau",
+    "kind": "convivialite",
+    "lat": 46.780888,
+    "lng": 4.846792,
+    "source": "plan"
+  },
+  {
+    "spot": 21,
+    "name": "École Rives de Saône",
+    "address": "65 rue de Strasbourg",
+    "kind": "spectacle",
+    "lat": 46.779334,
+    "lng": 4.864985,
+    "source": "plan"
+  },
+  {
+    "spot": 22,
+    "name": "Espace des Arts",
     "address": "50 avenue Nicéphore Niépce",
-    "grid": "D3",
     "kind": "spectacle",
     "lat": 46.787185,
     "lng": 4.850233,
-    "source": "grille"
+    "source": "plan"
   },
   {
-    "spot": 54,
+    "spot": 23,
+    "name": "Esplanade Michel Allex",
+    "address": "Esplanade Michel Allex",
+    "kind": "spectacle",
+    "lat": 46.778528,
+    "lng": 4.846408,
+    "source": "geocodage"
+  },
+  {
+    "spot": 25,
+    "name": "Granges Forestier",
+    "address": "1 allée des Granges forestières",
+    "kind": "spectacle",
+    "lat": 46.77726,
+    "lng": 4.855516,
+    "source": "plan"
+  },
+  {
+    "spot": 26,
+    "name": "Granges Forestier - bord de Saône",
+    "address": "1 allée des Granges forestières",
+    "kind": "spectacle",
+    "lat": 46.77726,
+    "lng": 4.855516,
+    "source": "plan"
+  },
+  {
+    "spot": 27,
+    "name": "Jardin Botanique - entrée côté Parc Georges Nouelle",
+    "address": "entrée par le Parc Georges Nouelle",
+    "kind": "spectacle",
+    "lat": 46.785667,
+    "lng": 4.861239,
+    "source": "plan"
+  },
+  {
+    "spot": 28,
+    "name": "Jardin de l’ancienne Banque de France",
+    "address": "en face du 34 rue Fructidor",
+    "kind": "spectacle",
+    "lat": 46.783457,
+    "lng": 4.85198,
+    "source": "plan"
+  },
+  {
+    "spot": 29,
+    "name": "Jardin de l’Arquebuse",
+    "address": "rue Gauthey",
+    "kind": "spectacle",
+    "lat": 46.785514,
+    "lng": 4.850427,
+    "source": "plan"
+  },
+  {
+    "spot": 30,
+    "name": "Maison de Quartier des Aubépins",
+    "address": "Maison de Quartier des Aubépins",
+    "kind": "spectacle",
+    "lat": 46.794648,
+    "lng": 4.844628,
+    "source": "geocodage"
+  },
+  {
+    "spot": 32,
+    "name": "Parc Freyssinet",
+    "address": "Parc Freyssinet",
+    "kind": "spectacle",
+    "lat": 46.770252,
+    "lng": 4.843502,
+    "source": "geocodage"
+  },
+  {
+    "spot": 33,
+    "name": "Parc Georges Nouelle - Nord Est",
+    "address": "avenue Mathias",
+    "kind": "spectacle",
+    "lat": 46.784431,
+    "lng": 4.859607,
+    "source": "plan"
+  },
+  {
+    "spot": 34,
+    "name": "Parc Georges Nouelle - Sud Est",
+    "address": "avenue Mathias",
+    "kind": "spectacle",
+    "lat": 46.784431,
+    "lng": 4.859607,
+    "source": "plan"
+  },
+  {
+    "spot": 35,
+    "name": "Parking Edmé Vadot",
+    "address": "rue Edmé Vadot",
+    "kind": "spectacle",
+    "lat": 46.779216,
+    "lng": 4.859658,
+    "source": "plan"
+  },
+  {
+    "spot": 36,
+    "name": "Parking IUT",
+    "address": "Parking IUT",
+    "kind": "spectacle",
+    "lat": 46.777087,
+    "lng": 4.854796,
+    "source": "geocodage"
+  },
+  {
+    "spot": 37,
+    "name": "Parking Lapray",
+    "address": "Parking Lapray",
+    "kind": "spectacle",
+    "lat": 46.783451,
+    "lng": 4.859436,
+    "source": "geocodage"
+  },
+  {
+    "spot": 38,
+    "name": "Parking Soubrane",
+    "address": "quai Chambion",
+    "kind": "spectacle",
+    "lat": 46.777767,
+    "lng": 4.860151,
+    "source": "plan"
+  },
+  {
+    "spot": 39,
     "name": "Parvis du Conservatoire",
     "address": "rue Olivier Messiaen",
-    "grid": "B9",
     "kind": "spectacle",
     "lat": 46.77948,
     "lng": 4.846569,
-    "source": "adresse"
+    "source": "plan"
   },
   {
-    "spot": 55,
-    "name": "Place Abbé Moreau",
-    "address": "Place Abbé Moreau",
-    "grid": "C8",
-    "kind": "spectacle",
-    "lat": 46.781211,
-    "lng": 4.846868,
-    "source": "adresse"
-  },
-  {
-    "spot": 56,
-    "name": "Place Carrée",
-    "address": "Place Carrée",
-    "grid": "D5",
-    "kind": "spectacle",
-    "lat": 46.785109,
-    "lng": 4.850727,
-    "source": "adresse"
-  },
-  {
-    "spot": 57,
+    "spot": 40,
     "name": "Place de l’Hôtel de Ville",
     "address": "Place de l’Hôtel de Ville",
-    "grid": "F8",
     "kind": "spectacle",
     "lat": 46.780787,
     "lng": 4.852727,
-    "source": "adresse"
+    "source": "plan"
   },
   {
-    "spot": 58,
-    "name": "Place de la Gare",
-    "address": "Place Sémard",
-    "grid": "A8",
+    "spot": 41,
+    "name": "Place des Publics - Parc Georges Nouelle",
+    "address": "avenue Mathias",
     "kind": "spectacle",
-    "lat": 46.781814,
-    "lng": 4.844346,
-    "source": "adresse"
+    "lat": 46.784431,
+    "lng": 4.859607,
+    "source": "plan"
   },
   {
-    "spot": 59,
+    "spot": 42,
     "name": "Place du Châtelet",
     "address": "Place du Châtelet",
-    "grid": "G8",
     "kind": "spectacle",
     "lat": 46.781061,
     "lng": 4.855785,
-    "source": "adresse"
+    "source": "plan"
   },
   {
-    "spot": 60,
+    "spot": 43,
     "name": "Place du Collège",
     "address": "Place du Collège",
-    "grid": "H5",
     "kind": "spectacle",
     "lat": 46.785072,
     "lng": 4.857837,
-    "source": "adresse"
+    "source": "plan"
   },
   {
-    "spot": 61,
+    "spot": 44,
     "name": "Place du Théâtre",
     "address": "Place du Théâtre",
-    "grid": "H6",
     "kind": "spectacle",
     "lat": 46.783254,
     "lng": 4.856712,
-    "source": "adresse"
+    "source": "plan"
   },
   {
-    "spot": 62,
+    "spot": 45,
     "name": "Place Général de Gaulle",
     "address": "Place Général de Gaulle",
-    "grid": "F6",
     "kind": "spectacle",
     "lat": 46.783788,
     "lng": 4.853169,
-    "source": "adresse"
+    "source": "plan"
   },
   {
-    "spot": 63,
+    "spot": 46,
+    "name": "Place Louis Armand Calliat",
+    "address": "Place Louis Armand Calliat",
+    "kind": "spectacle",
+    "lat": 46.781509,
+    "lng": 4.859153,
+    "source": "geocodage"
+  },
+  {
+    "spot": 47,
     "name": "Place Mathias",
-    "address": "Place Mathias",
-    "grid": "I4",
+    "address": "place Mathias",
     "kind": "spectacle",
     "lat": 46.786597,
     "lng": 4.85989,
-    "source": "adresse"
+    "source": "plan"
   },
   {
-    "spot": 64,
-    "name": "Place Mathias - départ navette",
-    "address": "Place Mathias",
-    "grid": "I4",
+    "spot": 48,
+    "name": "Place Mathias (arrêt de bus) - départ navette",
+    "address": "place Mathias",
     "kind": "spectacle",
     "lat": 46.786597,
     "lng": 4.85989,
-    "source": "adresse"
+    "source": "plan"
   },
   {
-    "spot": 65,
+    "spot": 49,
     "name": "Place Pierre Chenu",
     "address": "Place Pierre Chenu",
-    "grid": "F4",
     "kind": "spectacle",
     "lat": 46.786025,
     "lng": 4.853945,
-    "source": "grille"
+    "source": "plan"
   },
   {
-    "spot": 66,
-    "name": "Place Ronde",
-    "address": "Place Ronde",
-    "grid": "D7",
-    "kind": "spectacle",
-    "lat": 46.782148,
-    "lng": 4.850058,
-    "source": "grille"
-  },
-  {
-    "spot": 67,
+    "spot": 50,
     "name": "Place Saint-Vincent",
     "address": "Place Saint-Vincent",
-    "grid": "I7",
     "kind": "spectacle",
     "lat": 46.782085,
     "lng": 4.858504,
-    "source": "adresse"
+    "source": "plan"
   },
   {
-    "spot": 68,
+    "spot": 51,
     "name": "Place Sainte-Marie",
     "address": "Place Sainte-Marie",
-    "grid": "J7",
     "kind": "spectacle",
     "lat": 46.782008,
     "lng": 4.860863,
-    "source": "adresse"
+    "source": "plan"
   },
   {
-    "spot": 69,
+    "spot": 52,
     "name": "Place Thévenin",
     "address": "Place Thévenin",
-    "grid": "K8",
     "kind": "spectacle",
     "lat": 46.779349,
     "lng": 4.862596,
-    "source": "adresse"
+    "source": "plan"
   },
   {
-    "spot": 70,
-    "name": "Port-Nord - Rue Denis Papin",
-    "address": "derrière les silos",
-    "grid": "O3",
-    "kind": "spectacle",
-    "lat": 46.78773,
-    "lng": 4.870891,
-    "source": "grille"
-  },
-  {
-    "spot": 71,
-    "name": "Presqu’île des Chavannes",
+    "spot": 53,
+    "name": "Presqu’Île des Chavannes",
     "address": "",
-    "grid": "L8",
     "kind": "spectacle",
     "lat": 46.781285,
     "lng": 4.865038,
-    "source": "grille"
+    "source": "plan"
   },
   {
-    "spot": 72,
-    "name": "Quai de la Monnaie",
-    "address": "Quai de la Monnaie",
-    "grid": "I8",
+    "spot": 54,
+    "name": "République-Colombière (arrêt de bus) - départ navette",
+    "address": "République-Colombière (arrêt de bus) - départ navette",
     "kind": "spectacle",
-    "lat": 46.780089,
-    "lng": 4.859231,
-    "source": "adresse"
+    "lat": 46.778336,
+    "lng": 4.83552,
+    "source": "repli"
   },
   {
-    "spot": 73,
+    "spot": 55,
     "name": "Rue d’Uxelles",
     "address": "9 rue d’Uxelles",
-    "grid": "J9",
     "kind": "spectacle",
     "lat": 46.779343,
     "lng": 4.861004,
-    "source": "adresse"
+    "source": "plan"
   },
   {
-    "spot": 74,
+    "spot": 56,
     "name": "Rue de l’Ancien Carmel",
     "address": "Rue de l’Ancien Carmel",
-    "grid": "I9",
     "kind": "spectacle",
     "lat": 46.779878,
     "lng": 4.85936,
-    "source": "grille"
+    "source": "plan"
   },
   {
-    "spot": 75,
-    "name": "Rue Olivier Messiaen",
-    "address": "6 rue Olivier Messiaen",
-    "grid": "B9",
+    "spot": 57,
+    "name": "Rue de l’Ancien Collège",
+    "address": "Rue de l’Ancien Collège",
     "kind": "spectacle",
-    "lat": 46.779592,
-    "lng": 4.846352,
-    "source": "adresse"
+    "lat": 46.783344,
+    "lng": 4.857603,
+    "source": "geocodage"
   },
   {
-    "spot": 76,
+    "spot": 58,
+    "name": "Rue des places",
+    "address": "Rue des places",
+    "kind": "spectacle",
+    "lat": 46.786281,
+    "lng": 4.854162,
+    "source": "geocodage"
+  },
+  {
+    "spot": 59,
+    "name": "Rue Georges Derrien",
+    "address": "Rue Georges Derrien",
+    "kind": "spectacle",
+    "lat": 46.790242,
+    "lng": 4.872297,
+    "source": "geocodage"
+  },
+  {
+    "spot": 60,
     "name": "Square Chabas",
     "address": "Parc de la Colombière",
-    "grid": "C7",
-    "kind": "convivialite",
+    "kind": "spectacle",
     "lat": 46.782702,
     "lng": 4.84849,
-    "source": "adresse"
+    "source": "plan"
   },
   {
-    "spot": 77,
+    "spot": 61,
     "name": "Square des Anciens Combattants",
     "address": "à côté du 25 Rempart Saint-Pierre",
-    "grid": "D4",
     "kind": "spectacle",
     "lat": 46.785709,
     "lng": 4.8498,
-    "source": "adresse"
+    "source": "plan"
   },
   {
-    "spot": 78,
-    "name": "Square du Palais de Justice",
-    "address": "Rue Emiland Ménand",
-    "grid": "F5",
-    "kind": "spectacle",
-    "lat": 46.784592,
-    "lng": 4.853614,
-    "source": "adresse"
-  },
-  {
-    "spot": 79,
+    "spot": 62,
     "name": "Square Soubrane",
     "address": "Croisement Rue d’Uxelles / Rempart Saint-Laurent",
-    "grid": "J10",
     "kind": "spectacle",
     "lat": 46.779285,
     "lng": 4.860894,
-    "source": "adresse"
+    "source": "plan"
   },
   {
-    "spot": 80,
-    "name": "Stade Garibaldi",
-    "address": "39 rue de Garibaldi",
-    "grid": "B2",
-    "kind": "spectacle",
-    "lat": 46.788345,
-    "lng": 4.846521,
-    "source": "grille"
-  },
-  {
-    "spot": 81,
+    "spot": 63,
     "name": "Terrain Vannier",
     "address": "2 promenade Sainte-Marie",
-    "grid": "I5",
     "kind": "convivialite",
     "lat": 46.784331,
     "lng": 4.862498,
-    "source": "adresse"
-  },
-  {
-    "spot": 82,
-    "name": "Théâtre le Piccolo",
-    "address": "34 rue aux Fèvres",
-    "grid": "H6",
-    "kind": "spectacle",
-    "lat": 46.783257,
-    "lng": 4.857105,
-    "source": "adresse"
+    "source": "plan"
   }
 ]

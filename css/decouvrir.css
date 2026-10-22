@@ -92,6 +92,11 @@
   gap: var(--card-gap);
 }
 
+/* Repère de fin de liste : sert à charger les cartes suivantes quand on s'en approche. */
+.cards__end {
+  height: var(--hairline);
+}
+
 .screen__body--cards {
   padding-top: var(--cards-top-space);
   padding-bottom: var(--clearance-cards);

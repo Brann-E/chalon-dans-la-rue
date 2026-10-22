@@ -7,16 +7,17 @@ import { createShowCard } from "../ui/show-card.js";
 import { createEmptyState, createDemoFill } from "../ui/empty-state.js";
 
 /** Créneaux ajoutés par le raccourci « Remplir la page » : [spectacle, index de représentation]. */
+// Les deux premiers se chevauchent (vendredi 24/07, 20h20) : de quoi voir l'avertissement.
 const DEMO_PLANNING = [
-  ["hypothese", 2],
-  ["le-p-d", 2],
-  ["fidji", 3],
-  ["trop-pres-du-mur", 0],
+  ["we-want-you", 1],
+  ["ce-sera-pire-apres", 1],
+  ["madame", 0],
+  ["les-romanesques-edmond-rostand", 0],
 ];
 
 const toMinutes = (time) => {
   const [, hours, minutes] = /(\d+)h(\d*)/.exec(time) ?? [];
-  return Number(hours) * 60 + Number(minutes || 0);
+  return Number(hours ?? 0) * 60 + Number(minutes || 0);
 };
 
 const dayOf = (rep) => rep.date;

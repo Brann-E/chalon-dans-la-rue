@@ -12,7 +12,7 @@ import { createVenuePin, createServicePin, createUserMarker, createHintBubble } 
  * une recherche à suggestions et le bouton filtre. Les calques se règlent dans « Filtres carte ».
  * L'écran est un singleton : le fond de carte garde sa vue quand on change d'onglet.
  */
-const DEMO_HINT_SPOT = 68; // repère portant la bulle « CLICK HERE » de la maquette
+const DEMO_HINT_SPOT = 7; // repère portant la bulle « CLICK HERE » (le plus proche du centre de l'écran)
 const USER_FALLBACK = [4.8545, 46.7809]; // position de démonstration du clown
 const FOCUS_ZOOM = 17;
 

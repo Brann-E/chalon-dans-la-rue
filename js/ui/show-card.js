@@ -20,7 +20,7 @@ function createPhoto(show) {
     wrapper.style.setProperty("--crop-x", photo.tx);
     wrapper.style.setProperty("--crop-y", photo.ty);
   }
-  wrapper.append(img(photo.src, { class: photo.mode === "cover" ? "photo__img photo__img--cover" : "photo__img", alt: title }));
+  wrapper.append(img(photo.src, { class: photo.mode === "cover" ? "photo__img photo__img--cover" : "photo__img", alt: title, loading: "lazy", decoding: "async" }));
   return wrapper;
 }
 
