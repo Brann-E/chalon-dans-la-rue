@@ -231,6 +231,7 @@
   /* ---- Carte : repères, recherche et bouton filtre ---------------------- */
   --pin-size: 22px;
   --pin-border: 1px;
+  --pin-hover-ring: 2px;
   --pin-text: 12px;
   --pin-leading: 14px;
   --color-pin-festival: #aa96c3; /* éclairci, était #654092 */
