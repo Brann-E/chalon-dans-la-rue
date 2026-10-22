@@ -438,6 +438,8 @@
     --attribution-bottom: 86px;
     --toast-bottom: 102px;
 
+    --mapfilters-top: 120px;        /* sous la barre de recherche, qui a remonté */
+
     --empty-padding-top: 48px;
     --empty-gap: var(--space-4);
     --empty-art-size: 88px;

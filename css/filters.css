@@ -420,17 +420,24 @@
   visibility: hidden;
 }
 
+/* La pile va du haut de la carte jusqu'à la place du bouton filtre : le bouton reste toujours au même endroit, visible, et seule la liste défile. */
 .mapfilters__stack {
   position: absolute;
   top: var(--mapfilters-top);
+  bottom: var(--filter-button-bottom);
   inset-inline: var(--mapfilters-inset);
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: space-between;
   gap: var(--mapfilters-confirm-gap);
 }
 
 .mapfilters__card {
+  display: flex;
+  flex-direction: column;
+  flex: 0 1 auto;
+  min-height: 0;
   width: 100%;
   overflow: hidden;
   background: var(--color-sky);
@@ -448,6 +455,7 @@
 }
 
 .mapfilters__heading {
+  flex: none;
   display: grid;
   place-items: center;
   height: var(--mapfilters-heading-height);
@@ -460,8 +468,17 @@
 }
 
 .mapfilters__list {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: none;
   list-style: none;
   padding: var(--mapfilters-pad) var(--mapfilters-pad) var(--mapfilters-pad) var(--space-5);
+}
+
+.mapfilters__list::-webkit-scrollbar {
+  display: none;
 }
 
 .mapfilters__row {
