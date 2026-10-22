@@ -241,9 +241,9 @@
   --pin-size: 22px;
   --pin-border: 1px;
   --pin-hover-ring: 3px;
-  --route-width: 7px;               /* tracé de l'itinéraire : points jaunes et bleus en alternance, cernés d'un liseré noir */
-  --route-casing-width: 9px;
-  --route-dot-spacing: 8px;         /* écart entre deux points voisins (un jaune, un bleu, un jaune…) */
+  --route-dot-size: 10px;           /* tracé de l'itinéraire : une suite de vrais ronds, jaune et bleu en alternance, cernés de noir */
+  --route-dot-outline: 2px;
+  --route-dot-spacing: 20px;        /* écart centre à centre, constant à l'écran quel que soit le zoom */
   --route-estimated-opacity: .6;    /* tracé estimé (service indisponible) : plus discret */
   --pin-ping-spread: 18px;          /* l'onde jaune qui part du repère au clic */
   --pin-ping-duration: 600ms;

@@ -22,8 +22,13 @@ export function handleRepAction(button, show, host) {
   const action = button.dataset.action;
   if (!action) return false;
   const rep = show.reps[Number(button.dataset.rep)];
-  if (action === "share") shareRep(show, rep);
-  else host.dispatchEvent(new CustomEvent(action === "map" ? "show-on-map" : "route-to", { bubbles: true, detail: { id: show.id, spot: rep.spot, venue: rep.venue } }));
+  // Le clic part au relâchement du doigt ; on attend la fin du ressort du bouton pour qu'on voie l'animation avant de changer d'écran.
+  const run = () => {
+    if (action === "share") shareRep(show, rep);
+    else host.dispatchEvent(new CustomEvent(action === "map" ? "show-on-map" : "route-to", { bubbles: true, detail: { id: show.id, spot: rep.spot, venue: rep.venue } }));
+  };
+  const delay = parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--duration-fast")) || 0;
+  setTimeout(run, delay);
   return true;
 }
 

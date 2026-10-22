@@ -59,20 +59,65 @@ let routeToken = 0; // pour ignorer un calcul devenu obsolète (nouvel itinérai
 
 const cssToken = (name) => getComputedStyle(document.documentElement).getPropertyValue(name).trim();
 
+// Le tracé est une suite de vrais ronds (calque « circle » : toujours ronds, quel que soit le zoom). Leur écart à l'écran
+// doit rester constant : on les replace le long du trajet à chaque changement de zoom.
+let routePath = null; // { coordinates, estimated }
+
 function ensureRouteLayers() {
   if (map.getSource(ROUTE_SOURCE)) return;
   map.addSource(ROUTE_SOURCE, { type: "geojson", data: EMPTY_ROUTE });
-  const layout = { "line-cap": "round", "line-join": "round" };
-  const dotWidth = parseFloat(cssToken("--route-width"));
-  const casingWidth = parseFloat(cssToken("--route-casing-width"));
+  const outline = parseFloat(cssToken("--route-dot-outline"));
+  map.addLayer({
+    id: "route-dots",
+    type: "circle",
+    source: ROUTE_SOURCE,
+    paint: {
+      "circle-radius": parseFloat(cssToken("--route-dot-size")) / 2,
+      "circle-color": ["get", "color"],
+      "circle-stroke-width": outline,
+      "circle-stroke-color": cssToken("--color-black"),
+    },
+  });
+  map.on("zoom", drawRouteDots);
+}
+
+/** Points régulièrement espacés (en pixels d'écran) le long du trajet, jaune et bleu en alternance. */
+function routeDots(coordinates) {
   const spacing = parseFloat(cssToken("--route-dot-spacing"));
-  // Une longueur de tirets nulle + bout rond = une suite de points. Les écarts se comptent en largeurs de trait.
-  // Trois couches : liseré noir (tous les points), points bleus (tous), points jaunes (un sur deux, par-dessus).
-  const dots = (id, color, width, every) =>
-    map.addLayer({ id, type: "line", source: ROUTE_SOURCE, layout, paint: { "line-color": color, "line-width": width, "line-dasharray": [0, (spacing * every) / width] } });
-  dots("route-casing", cssToken("--color-black"), casingWidth, 1);
-  dots("route-blue", cssToken("--color-sky"), dotWidth, 1);
-  dots("route-line", cssToken("--color-yellow"), dotWidth, 2);
+  const meters = (a, b) => {
+    const k = 111320;
+    const dx = (b[0] - a[0]) * k * Math.cos((a[1] * Math.PI) / 180);
+    const dy = (b[1] - a[1]) * k;
+    return Math.hypot(dx, dy);
+  };
+  const step = spacing * ((78271.517 * Math.cos((coordinates[0][1] * Math.PI) / 180)) / 2 ** map.getZoom());
+  const colors = [cssToken("--color-yellow"), cssToken("--color-sky")];
+  const features = [];
+  let next = step; // distance (en mètres) du prochain point
+  let walked = 0;
+  for (let i = 1; i < coordinates.length; i += 1) {
+    const from = coordinates[i - 1];
+    const to = coordinates[i];
+    const length = meters(from, to);
+    while (length > 0 && walked + length >= next) {
+      const t = (next - walked) / length;
+      features.push({
+        type: "Feature",
+        properties: { color: colors[features.length % 2] },
+        geometry: { type: "Point", coordinates: [from[0] + (to[0] - from[0]) * t, from[1] + (to[1] - from[1]) * t] },
+      });
+      next += step;
+    }
+    walked += length;
+  }
+  // Pas de point collé à l'arrivée : le repère du lieu prend le relais.
+  if (features.length > 0 && walked - (next - step) < step / 2) features.pop();
+  return { type: "FeatureCollection", features };
+}
+
+function drawRouteDots() {
+  if (!routePath || !map.getSource(ROUTE_SOURCE)) return;
+  map.getSource(ROUTE_SOURCE).setData(routeDots(routePath.coordinates));
 }
 
 function setRouteBanner({ headline, destination }) {
@@ -83,6 +128,7 @@ function setRouteBanner({ headline, destination }) {
 
 function clearRoute() {
   routeToken += 1;
+  routePath = null;
   if (map?.getSource(ROUTE_SOURCE)) map.getSource(ROUTE_SOURCE).setData(EMPTY_ROUTE);
   if (routeBanner) routeBanner.hidden = true;
 }
@@ -107,9 +153,10 @@ async function routeTo(spot) {
   }
   if (token !== routeToken) return;
 
-  map.getSource(ROUTE_SOURCE).setData({ type: "Feature", properties: {}, geometry: { type: "LineString", coordinates: route.coordinates } });
-  const opacity = route.estimated ? parseFloat(cssToken("--route-estimated-opacity")) : 1;
-  for (const id of ["route-casing", "route-blue", "route-line"]) map.setPaintProperty(id, "line-opacity", opacity);
+  routePath = { coordinates: route.coordinates, estimated: route.estimated };
+  map.setPaintProperty("route-dots", "circle-opacity", route.estimated ? parseFloat(cssToken("--route-estimated-opacity")) : 1);
+  map.setPaintProperty("route-dots", "circle-stroke-opacity", route.estimated ? parseFloat(cssToken("--route-estimated-opacity")) : 1);
+  drawRouteDots();
   setRouteBanner({ headline: `${formatDuration(route.duration)} · ${formatDistance(route.distance)}${route.estimated ? " (estimé)" : ""}`, destination });
 
   const lngs = route.coordinates.map(([lng]) => lng);
