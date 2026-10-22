@@ -154,6 +154,8 @@
 }
 
 .map-service[data-type="water"] { background: var(--color-pin-water); }
+.map-service[data-type="restauration"] { background: var(--color-cat-deambulation); }
+.map-service[data-type="buvette"] { background: var(--color-cat-danse); }
 .map-service[data-type="parking"],
 .map-service[data-type="parking-pmr"] { background: var(--color-pin-parking); }
 

@@ -244,6 +244,13 @@
   pointer-events: none;
 }
 
+/* Le panneau ne se fond pas en bloc : le bouton reste en place pendant que sa croix se forme,
+   et seule la carte de filtres apparaît et disparaît. */
+.mapfilters.overlay-panel {
+  opacity: 1;
+  transition: none;
+}
+
 /* Le bouton de validation prend la place du bouton filtre de la carte. */
 .device:has(.mapfilters) .map-filter {
   visibility: hidden;
@@ -266,6 +273,14 @@
   border-radius: var(--radius-sm);
   box-shadow: var(--shadow-card);
   pointer-events: auto;
+  opacity: 0;
+  transform: translateY(var(--space-3));
+  transition: opacity var(--duration-move) var(--ease-move), transform var(--duration-move) var(--ease-move);
+}
+
+.mapfilters.is-open .mapfilters__card {
+  opacity: 1;
+  transform: none;
 }
 
 .mapfilters__heading {
@@ -360,18 +375,38 @@
   border-radius: 50%;
 }
 
+/* Bouton rond identique au bouton filtre de la carte (blanc, 54 px) : il prend sa place à l'ouverture et la lui rend. */
 .mapfilters__confirm {
+  position: relative;
   display: grid;
   place-items: center;
   width: var(--filter-button-size);
   height: var(--filter-button-size);
-  background: var(--color-confirm);
+  background: var(--color-surface);
   border-radius: 50%;
   box-shadow: var(--shadow-float);
   pointer-events: auto;
 }
 
-.mapfilters__confirm img {
+/* Les deux icônes sont superposées : « curseurs » et croix pivotent et se fondent l'une dans l'autre. */
+.mapfilters__morph {
+  position: absolute;
   width: var(--filter-button-icon);
   height: var(--filter-button-icon);
+  transition: opacity var(--duration-move) var(--ease-move), transform var(--duration-move) var(--ease-move);
+}
+
+.mapfilters__morph--close {
+  opacity: 0;
+  transform: rotate(-90deg);
+}
+
+.mapfilters.is-open .mapfilters__morph--filter {
+  opacity: 0;
+  transform: rotate(90deg);
+}
+
+.mapfilters.is-open .mapfilters__morph--close {
+  opacity: 1;
+  transform: none;
 }

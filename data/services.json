@@ -454,5 +454,107 @@
     "label": "Place Ronde",
     "lat": 46.786003,
     "lng": 4.853316
+  },
+  {
+    "type": "restauration",
+    "label": "Les Frites Acrobates",
+    "lat": 46.781016,
+    "lng": 4.851731
+  },
+  {
+    "type": "restauration",
+    "label": "Gaufres Volantes",
+    "lat": 46.784306,
+    "lng": 4.859164
+  },
+  {
+    "type": "restauration",
+    "label": "Pizza du Chapiteau",
+    "lat": 46.784238,
+    "lng": 4.853569
+  },
+  {
+    "type": "restauration",
+    "label": "Crêpes en Scène",
+    "lat": 46.781237,
+    "lng": 4.853127
+  },
+  {
+    "type": "restauration",
+    "label": "Burgers de Rue",
+    "lat": 46.785213,
+    "lng": 4.865193
+  },
+  {
+    "type": "restauration",
+    "label": "La Cantine des Artistes",
+    "lat": 46.781338,
+    "lng": 4.847192
+  },
+  {
+    "type": "restauration",
+    "label": "Wok’n’Roll",
+    "lat": 46.781511,
+    "lng": 4.856185
+  },
+  {
+    "type": "restauration",
+    "label": "Glaces du Clown",
+    "lat": 46.784781,
+    "lng": 4.862898
+  },
+  {
+    "type": "buvette",
+    "label": "Bar du Clown",
+    "lat": 46.780166,
+    "lng": 4.851831
+  },
+  {
+    "type": "buvette",
+    "label": "Le Comptoir Ambulant",
+    "lat": 46.783388,
+    "lng": 4.853669
+  },
+  {
+    "type": "buvette",
+    "label": "Bières & Bobines",
+    "lat": 46.783456,
+    "lng": 4.859264
+  },
+  {
+    "type": "buvette",
+    "label": "Jus d’Équilibriste",
+    "lat": 46.780387,
+    "lng": 4.853227
+  },
+  {
+    "type": "buvette",
+    "label": "Café des Saltimbanques",
+    "lat": 46.784363,
+    "lng": 4.865293
+  },
+  {
+    "type": "buvette",
+    "label": "Le Tonneau Volant",
+    "lat": 46.780661,
+    "lng": 4.856285
+  },
+  {
+    "type": "buvette",
+    "label": "Buvette de la Cour",
+    "lat": 46.780488,
+    "lng": 4.847292
+  },
+  {
+    "type": "shower",
+    "label": "Douches du Funambule",
+    "lat": 46.781066,
+    "lng": 4.850931
+  },
+  {
+    "type": "shower",
+    "label": "Douches de la Cour",
+    "lat": 46.784356,
+    "lng": 4.858364
   }
 ]

@@ -6,12 +6,11 @@ import { createServicePin } from "../map/markers.js";
 /** Pastille de légende de chaque calque (couleurs = tokens de la carte). */
 const DOTS = {
   spectacle: "--color-brand",
-  restauration: "--color-cat-deambulation",
-  buvette: "--color-cat-danse",
   festival: "--color-pin-festival",
   convivialite: "--color-pin-convivialite",
 };
-const SERVICE_LAYERS = new Set(["water", "wc", "wc-pmr", "shower", "parking", "parking-pmr"]);
+// Calques dont la légende reprend le repère de la carte (même icône, même couleur).
+const SERVICE_LAYERS = new Set(["water", "wc", "wc-pmr", "shower", "parking", "parking-pmr", "restauration", "buvette"]);
 
 function createIcon(layer) {
   const box = h("span", { class: "mapfilters__icon", "aria-hidden": "true" });
@@ -43,15 +42,18 @@ export async function createMapFiltersPanel() {
       "div",
       { class: "mapfilters__stack" },
       h("div", { class: "mapfilters__card" }, h("h2", { class: "mapfilters__heading" }, "Filtrez les éléments de la carte"), h("ul", { class: "mapfilters__list" }, rows)),
+      // Le bouton reprend exactement la place et l'aspect du bouton filtre de la carte : son icône « curseurs »
+      // pivote et se change en croix à l'ouverture, puis fait le chemin inverse à la fermeture.
       h(
         "button",
         {
           class: "mapfilters__confirm",
           type: "button",
-          "aria-label": "Valider",
+          "aria-label": "Fermer",
           onclick: (event) => event.currentTarget.dispatchEvent(new CustomEvent("close-overlay", { bubbles: true })),
         },
-        img("assets/verifier.png")
+        img("assets/sliders.png", { class: "mapfilters__morph mapfilters__morph--filter" }),
+        img("assets/fermer.png", { class: "mapfilters__morph mapfilters__morph--close" })
       )
     )
   );
