@@ -15,7 +15,7 @@
   position: absolute;
   z-index: 2;
   top: var(--map-search-top);
-  inset-inline: var(--map-search-inset);
+  inset-inline: var(--map-search-inset) calc(var(--map-search-inset) + var(--touch-target) + var(--space-2)); /* laisse la place de la cloche, sur la même ligne */
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -111,7 +111,7 @@
 .route-banner {
   position: absolute;
   z-index: 2;
-  inset: var(--bell-floating-top) calc(var(--map-search-inset) + var(--touch-target) + var(--space-2)) auto var(--map-search-inset);
+  inset: var(--route-banner-top) var(--map-search-inset) auto;
   display: flex;
   align-items: center;
   justify-content: space-between;

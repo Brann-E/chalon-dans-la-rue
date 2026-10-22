@@ -75,7 +75,7 @@
   height: var(--bell-icon-size);
 }
 
-/* Sur la carte (pas d'en-tête) : rond blanc sous la recherche, comme le bouton des filtres. */
+/* Sur la carte (pas d'en-tête) : rond blanc à droite de la barre de recherche, comme le bouton des filtres. */
 .bell--floating {
   top: var(--bell-floating-top);
   right: var(--map-search-inset);

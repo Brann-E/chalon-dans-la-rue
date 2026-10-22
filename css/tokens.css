@@ -176,7 +176,8 @@
   /* ---- Actualités : cloche, pastille de non-lus, cartes ------------------- */
   --bell-icon-size: 28px;
   --bell-badge-size: 18px;
-  --bell-floating-top: 111px;      /* sous la barre de recherche de la carte (54 + 45 + 12) */
+  --bell-floating-top: var(--map-search-top);   /* sur la carte : sur la même ligne que la barre de recherche */
+  --route-banner-top: 111px;       /* bandeau d'itinéraire, sous la barre de recherche de la carte (54 + 45 + 12) */
   --news-dot-size: 10px;
 
   /* ---- Accessibilité : zone de toucher minimale, états désactivés -------- */
