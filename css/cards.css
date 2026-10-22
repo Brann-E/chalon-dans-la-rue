@@ -13,14 +13,6 @@
 [data-accent="cabaret"] { --accent: var(--color-cat-cabaret); }
 [data-accent="concert"] { --accent: var(--color-cat-concert); }
 
-/* Accents clairs ajoutés pour les catégories : texte sombre (le blanc n'atteint pas 3:1 de contraste). */
-[data-accent="danse"],
-[data-accent="enfants"],
-[data-accent="cirque"],
-[data-accent="deambulation"] {
-  --on-accent: var(--color-ink);
-}
-
 .show-card {
   width: var(--card-width);
   padding-bottom: var(--card-padding-bottom);
@@ -50,7 +42,7 @@
   font-size: var(--text-2xl);
   font-weight: var(--weight-black);
   line-height: 24.2px;
-  color: var(--on-accent, var(--color-surface));
+  color: var(--color-on-color);
   text-align: left;
   /* Un titre trop long reste sur une ligne, comme la bannière de la maquette. */
   min-width: 0;
@@ -71,12 +63,9 @@
   height: 100%;
 }
 
-/* Cœur vide blanc peu lisible sur un accent clair : un liseré sombre le détache sans le remplir
+/* Cœur vide blanc peu lisible sur une bannière claire : un liseré sombre le détache sans le remplir
    (un cœur noir plein se confondrait avec un cœur « aimé »). */
-[data-accent="danse"] .like[aria-pressed="false"] img,
-[data-accent="enfants"] .like[aria-pressed="false"] img,
-[data-accent="cirque"] .like[aria-pressed="false"] img,
-[data-accent="deambulation"] .like[aria-pressed="false"] img {
+.show-card__banner .like[aria-pressed="false"] img {
   filter: drop-shadow(0 0 0.5px var(--color-ink)) drop-shadow(0 0 0.5px var(--color-ink));
 }
 
@@ -190,8 +179,12 @@
   font-weight: var(--weight-semibold);
   line-height: var(--leading-xs);
   font-style: italic;
+  /* Texte noir ; la couleur de la catégorie passe dans le soulignement. */
   text-decoration: underline;
-  color: var(--accent);
+  text-decoration-color: var(--accent);
+  text-decoration-thickness: var(--underline-thickness);
+  text-underline-offset: var(--underline-offset);
+  color: var(--color-black);
 }
 
 .show-card__summary {
@@ -209,7 +202,7 @@
   font-size: var(--text-xs);
   font-weight: var(--weight-semibold);
   line-height: var(--leading-xs);
-  color: var(--on-accent, var(--color-surface));
+  color: var(--color-on-color);
 }
 
 /* ---- Représentations ----------------------------------------------------- */
@@ -296,7 +289,7 @@
   font-size: var(--text-2xs);
   font-weight: var(--weight-bold);
   line-height: 12.1px;
-  color: var(--color-surface);
+  color: var(--color-on-color);
 }
 
 .rep__venue {

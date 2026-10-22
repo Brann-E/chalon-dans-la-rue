@@ -65,6 +65,7 @@ img {
   position: relative;
   height: 0;
   border: 0;
+  overflow: visible; /* un <hr> masque par défaut ce qui dépasse : le trait est dessiné hors de sa boîte */
 }
 
 .rule::before {
@@ -111,10 +112,14 @@ img {
 .screen__title {
   position: absolute;
   inset: var(--header-title-top) 0 auto;
+  padding-inline: var(--space-8); /* laisse la place de la flèche de retour ; un titre trop long est abrégé */
+  overflow: hidden;
   text-align: center;
-  font-size: var(--text-sm);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: var(--text-2xl);
   font-weight: var(--weight-bold);
-  line-height: var(--leading-sm);
+  line-height: var(--header-title-leading);
 }
 
 /* Réglages d'accessibilité du Menu : animations coupées, contraste des textes et filets renforcé. */

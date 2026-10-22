@@ -2,9 +2,10 @@ import { h, img } from "../dom.js";
 import { loadJSON } from "../data.js";
 import { createScreen } from "../ui/screen.js";
 
-/** Une rubrique ouvre une sous-page (`page`), un site externe (`href`) ou rien. */
+/** Une rubrique ouvre une sous-page (`page`), un site externe (`href`), la feuille « Filtres carte » (`action`) ou rien. */
 const open = (item) => (event) => {
   if (item.href) window.open(item.href, "_blank", "noopener");
+  else if (item.action === "map-filters") event.currentTarget.dispatchEvent(new CustomEvent("show-map-filters", { bubbles: true }));
   else if (item.page) event.currentTarget.dispatchEvent(new CustomEvent("navigate", { bubbles: true, detail: { to: "page", params: { id: item.page } } }));
 };
 

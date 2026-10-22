@@ -85,7 +85,7 @@
   display: grid;
   place-items: center;
   width: var(--space-8);
-  height: calc(var(--leading-sm) + 2 * var(--space-2));
+  height: calc(var(--header-title-leading) + 2 * var(--space-2));
 }
 
 .screen__back img {
@@ -166,7 +166,7 @@
 }
 
 .prose a {
-  color: var(--color-brand);
+  color: var(--color-black);
   text-decoration: underline;
 }
 

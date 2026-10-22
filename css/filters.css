@@ -51,7 +51,7 @@
   font-size: var(--text-md);
   font-weight: var(--weight-bold);
   line-height: var(--leading-link);
-  color: var(--color-brand);
+  color: var(--color-black);
 }
 
 .filters__body {
@@ -87,6 +87,13 @@
 
 .filters__section[data-section="hours"] { padding-bottom: var(--filters-section-pad-bottom-hours); }
 .filters__section[data-section="programme"] { padding-bottom: var(--filters-section-pad-bottom-programme); }
+
+.filters__hint {
+  font-size: var(--text-xs);
+  font-weight: var(--weight-regular);
+  line-height: var(--leading-xs);
+  color: var(--color-black);
+}
 
 .filters__chips {
   display: flex;
@@ -211,7 +218,7 @@
   font-size: var(--text-sm);
   font-weight: var(--weight-semibold);
   line-height: var(--leading-sm);
-  color: var(--color-surface);
+  color: var(--color-on-color);
 }
 
 /* ---- Feuille « Filtres carte » : carte flottante au-dessus du plan --------------- */

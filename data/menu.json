@@ -13,7 +13,7 @@
     "label": "Paramètres",
     "items": [
       { "label": "Notifications", "page": "notifications" },
-      { "label": "Carte", "page": "reglages-carte" },
+      { "label": "Carte", "action": "map-filters" },
       { "label": "Accessibilité", "page": "accessibilite" },
       { "label": "Préférences", "page": "preferences" },
       { "label": "Changer d’avatar", "page": "avatar" }

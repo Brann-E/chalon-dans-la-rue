@@ -79,7 +79,12 @@ export async function createFiltersPanel({ section = "" } = {}) {
   const sections = [
     section_("hours", "Horaire", h("div", { class: "filters__hours" }, hourSelect("from"), "à", hourSelect("to"))),
     section_("days", "Date", chips("days", event.days.map((day) => ({ value: day.id, label: day.label })))),
-    section_("programme", "Programmation IN/OFF", chips("programme", plain(config.programme))),
+    section_(
+      "programme",
+      "Programmation IN/OFF",
+      chips("programme", plain(config.programme)),
+      h("p", { class: "filters__hint" }, "IN : projets sélectionnés par le festival. OFF : projets programmés.")
+    ),
     section_("categories", "Catégorie", chips("categories", config.categories.map((c) => ({ value: c.label, label: c.label, token: c.token })))),
     section_("emerging", "Compagnies émergentes", emergingSwitch),
     section_("zones", "Zone (autour de)", chips("zones", plain(config.zones)), h("button", { class: "filters__link", type: "button" }, "Découvrir les zones")),

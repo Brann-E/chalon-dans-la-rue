@@ -109,8 +109,24 @@
 
 /* ---- Repères ------------------------------------------------------------------ */
 /* Spécificité renforcée : les repères définissent leur propre « display ». */
-:is(.map-pin, .map-service, .map-user).is-hidden {
+:is(.map-pin, .map-service, .map-user).is-hidden,
+.map-pin.is-clustered {
   display: none;
+}
+
+/* Regroupement de repères voisins : pastille un peu plus grande portant leur nombre. */
+.map-cluster {
+  display: grid;
+  place-items: center;
+  width: var(--cluster-size);
+  height: var(--cluster-size);
+  background: var(--color-brand);
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 var(--cluster-border) var(--color-surface), var(--shadow-float);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-bold);
+  line-height: var(--leading-sm);
+  color: var(--color-on-color);
 }
 
 .map-pin {
@@ -125,7 +141,7 @@
   font-size: var(--pin-text);
   font-weight: var(--weight-bold);
   line-height: var(--pin-leading);
-  color: var(--color-surface);
+  color: var(--color-on-color);
 }
 
 .map-pin[data-kind="festival"] { background: var(--color-pin-festival); }
@@ -150,7 +166,7 @@
   font-size: var(--service-text);
   font-weight: var(--weight-bold);
   line-height: 1;
-  color: var(--color-surface);
+  color: var(--color-on-color);
 }
 
 .map-service[data-type="water"] { background: var(--color-pin-water); }

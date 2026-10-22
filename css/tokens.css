@@ -47,32 +47,33 @@
   --color-ink: #2a292b;            /* texte courant */
   --color-black: #000000;
   --color-white: #ffffff;
+  --color-on-color: var(--color-black); /* texte posé sur un aplat de couleur (bannières, pastilles, boutons) */
   --color-surface: #fbfbfb;        /* blanc cassé : cartes, boutons, texte sur aplat */
   --color-sky: #c7f3fe;            /* fond des écrans */
   --color-yellow: #ffff99;         /* en-têtes, barre du bas, bannières */
-  --color-brand: #ed6361;          /* pastilles, boutons principaux */
+  --color-brand: #f4a1a0; /* éclairci, était #ed6361 */          /* pastilles, boutons principaux */
   --color-like: #eb3530;           /* cœur et épingle actifs */
   --color-rose: #ffeeee;           /* cartes de représentation */
   --color-line: rgb(0 0 0 / 10%);  /* filets de séparation */
   --color-line-strong: rgb(0 0 0 / 30%);
-  --color-active-tab: rgb(237 99 97 / 80%);
+  --color-active-tab: rgb(244 161 160 / 80%); /* éclairci, était rgb(237 99 97 / 80%) */
 
   --color-line-medium: rgb(0 0 0 / 20%);
 
   /* ---- Catégories (pastilles de « Filtres », accent des cartes spectacle) -- */
-  --color-cat-musical: #5b6bfa;
-  --color-cat-clown: #ff4444;
-  --color-cat-danse: #e59cce;
-  --color-cat-enfants: #4cc9fe;
-  --color-cat-performance: #a267fc;
-  --color-cat-marionnette: #0d7c66;
-  --color-cat-cirque: #54c392;
-  --color-cat-deambulation: #fabc3f;
-  --color-cat-rue: #ff9f00;
-  --color-cat-cabaret: #ff1493;
-  --color-cat-concert: #708090;
-  --color-cat-lieux-festival: #654092;
-  --color-cat-lieux-convivialite: #00a7b6;
+  --color-cat-musical: #9da6fc; /* éclairci, était #5b6bfa */
+  --color-cat-clown: #ff8f8f; /* éclairci, était #ff4444 */
+  --color-cat-danse: #efc4e2; /* éclairci, était #e59cce */
+  --color-cat-enfants: #94dffe; /* éclairci, était #4cc9fe */
+  --color-cat-performance: #c7a4fd; /* éclairci, était #a267fc */
+  --color-cat-marionnette: #7ab7ab; /* éclairci, était #0d7c66 */
+  --color-cat-cirque: #98dbbe; /* éclairci, était #54c392 */
+  --color-cat-deambulation: #fcd78c; /* éclairci, était #fabc3f */
+  --color-cat-rue: #ffc566; /* éclairci, était #ff9f00 */
+  --color-cat-cabaret: #ff72be; /* éclairci, était #ff1493 */
+  --color-cat-concert: #a9b3bc; /* éclairci, était #708090 */
+  --color-cat-lieux-festival: #aa96c3; /* éclairci, était #654092 */
+  --color-cat-lieux-convivialite: #66cad3; /* éclairci, était #00a7b6 */
 
   /* ---- Typographie ----------------------------------------------------- */
   --font-sans: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
@@ -131,7 +132,8 @@
   --content-inset: var(--space-3);
   --content-width: 390px;
   --clearance-tabbar: 112px;       /* marge basse du contenu défilant sous la barre */
-  --header-title-top: 54px;
+  --header-title-top: 48px;        /* titre agrandi (20 px) : centré dans la bande jaune sous la barre d'état */
+  --header-title-leading: 24px;
   --header-title-offset: 3px;      /* décale le centre du titre de 1,5 px, comme dans Figma */
   --header-line-top: 82.5px;
   --color-stage: #1c1c1e;          /* fond autour de l'appli sur ordinateur */
@@ -167,6 +169,9 @@
   --hairline-thin: 0.5px;
   --clearance-cards: 134px;
 
+  --underline-thickness: 2px;      /* soulignement coloré de la catégorie */
+  --underline-offset: 2px;
+
   /* ---- Accessibilité : zone de toucher minimale, états désactivés -------- */
   --touch-target: 44px;
   --opacity-disabled: 0.4;
@@ -179,7 +184,7 @@
   --avatar-ring: 3px;
 
   /* ---- États vides (Favoris, Planning) --------------------------------- */
-  --color-cta: #eb6460;
+  --color-cta: #f3a2a0; /* éclairci, était #eb6460 */
   --color-border-soft: #f5f5f5;
   --shadow-cta: 0 1px 3px rgb(0 0 0 / 30%), 0 4px 8px 3px rgb(0 0 0 / 15%);
   --shadow-demo: 0 2px 3px rgb(0 0 0 / 30%), 0 6px 10px 4px rgb(0 0 0 / 15%);
@@ -214,8 +219,8 @@
   /* ---- Carte : couleurs du fond de plan (mesurées sur la maquette) ------- */
   --map-background: #c6d2d8;
   --map-road: #fcfcfc;
-  --map-water: #78ccf6;
-  --map-park: #96c01e;
+  --map-water: #a7def9; /* éclairci, était #78ccf6 */
+  --map-park: #c5dc83; /* éclairci, était #96c01e */
   --map-institution: #e4e4a8;
   --map-grey: #e4e4e4;
   --map-rail: #b4bec4;
@@ -228,11 +233,13 @@
   --pin-border: 1px;
   --pin-text: 12px;
   --pin-leading: 14px;
-  --color-pin-festival: #654092;
-  --color-pin-convivialite: #00a7b6;
-  --color-pin-service: #006e95;
-  --color-pin-water: #3099cd;
-  --color-pin-parking: #46bde7;
+  --color-pin-festival: #aa96c3; /* éclairci, était #654092 */
+  --color-pin-convivialite: #66cad3; /* éclairci, était #00a7b6 */
+  --color-pin-service: #73afc5; /* éclairci, était #006e95 */
+  --color-pin-water: #83c2e1; /* éclairci, était #3099cd */
+  --color-pin-parking: #90d7f1; /* éclairci, était #46bde7 */
+  --cluster-size: 32px;
+  --cluster-border: 2px;
   --service-size: 20px;
   --service-text: 9px;
   --service-glyph: 14px;
@@ -342,7 +349,6 @@
   --search-height: 24px;
   --chip-height: 34px;
   --chip-padding: 8px;
-  --chips-end-space: 50px;
   --filters-link-height: 19px;
   --text-link: 16px;
   --leading-link: 19px;

@@ -40,18 +40,14 @@
   opacity: 1;
 }
 
+/* Pastilles sur plusieurs lignes : aucune n'est coupée ni cachée derrière un défilement,
+   et leur ombre n'est plus rognée. */
 .chips {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   gap: var(--space-2);
-  height: var(--chip-height);
-  padding: 0 var(--chips-end-space) 0 var(--card-inset);
-  overflow-x: auto;
-  scrollbar-width: none;
-}
-
-.chips::-webkit-scrollbar {
-  display: none;
+  padding: var(--space-1) var(--card-inset);
 }
 
 .chip {
@@ -72,7 +68,7 @@
 /* Pastille sélectionnée : rouge plein comme les boutons IN/OFF de la feuille de filtres. */
 .chip[aria-pressed="true"] {
   background: var(--color-chip-selected);
-  color: var(--color-surface);
+  color: var(--color-on-color);
 }
 
 /* Choix sans aucun résultat : visible mais inactif. */

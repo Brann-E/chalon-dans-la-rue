@@ -114,7 +114,7 @@
 
 .pill--outline {
   background: var(--color-white);
-  color: var(--accent);
+  color: var(--color-black);
 }
 
 .spectacle__rule {

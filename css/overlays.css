@@ -160,5 +160,4 @@
 .round-close img {
   width: var(--round-close-icon);
   height: var(--round-close-icon);
-  filter: brightness(0) invert(1);
 }

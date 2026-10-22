@@ -67,6 +67,11 @@ app.addEventListener("open-filters", async (event) => {
 app.addEventListener("change-slot", async (event) => {
   openOverlay(await createSlotPicker(event.detail), { kind: "slide-up" });
 });
+// Menu > Paramètres > Carte : on va sur la carte et on ouvre la feuille « Filtres carte » (pas de liste en double).
+app.addEventListener("show-map-filters", async () => {
+  await navigate("carte");
+  openOverlay(await createMapFiltersPanel(), { kind: "fade" });
+});
 app.addEventListener("open-map-filters", async () => {
   openOverlay(await createMapFiltersPanel(), { kind: "fade" });
 });

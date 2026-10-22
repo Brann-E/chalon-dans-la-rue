@@ -185,16 +185,6 @@ function renderSwitches(id) {
   return page(id, title, [card(items.map((item) => switchRow(item.label, store.getSetting(item.key, item.fallback), (value) => store.setSetting(item.key, value)))), text && note(text)]);
 }
 
-async function renderMapSettings() {
-  const layers = await loadJSON("data/layers.json");
-  const rows = layers.map((layer) => switchRow(layer.label, store.isLayerOn(layer.key, layer.default), (value) => store.setLayer(layer.key, value)));
-  const reset = h("button", { class: "button-outline page-action", type: "button", onclick: () => store.resetLayers() }, "Rétablir les éléments par défaut");
-  reset.addEventListener("click", () => {
-    layers.forEach((layer, i) => rows[i].querySelector(".switch").setAttribute("aria-checked", String(layer.default)));
-  });
-  return page("reglages-carte", "Carte", [note("Choisissez les éléments affichés sur la carte."), card(rows), reset]);
-}
-
 async function renderAvatar() {
   const { avatars } = await loadJSON("data/menu.json");
   const current = store.getSetting("avatar", avatars[0].src);
@@ -258,7 +248,6 @@ const RENDERERS = {
   lieux: renderVenues,
   convivialite: renderConvivialite,
   zones: renderZones,
-  "reglages-carte": renderMapSettings,
   avatar: renderAvatar,
   aide: renderHelp,
   cgu: renderTerms,

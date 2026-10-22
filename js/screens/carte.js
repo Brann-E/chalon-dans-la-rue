@@ -4,7 +4,7 @@ import { loadShows } from "../shows.js";
 import * as store from "../store.js";
 import { buildStyle } from "../map/style.js";
 import { loadMapLibre } from "../map/loader.js";
-import { createVenuePin, createServicePin, createUserMarker, createHintBubble } from "../map/markers.js";
+import { createVenuePin, createServicePin, createUserMarker, createHintBubble, createClusterPin } from "../map/markers.js";
 
 /**
  * Écran Carte (Accueil) : vraie carte interactive MapLibre centrée sur le centre-ville de
@@ -16,9 +16,13 @@ const DEMO_HINT_SPOT = 7; // repère portant la bulle « CLICK HERE » (le plus 
 const USER_FALLBACK = [4.8545, 46.7809]; // position de démonstration du clown
 const DEFAULT_AVATAR = "assets/pitre.png";
 const FOCUS_ZOOM = 17;
+const CLUSTER_RADIUS = 26; // px : deux repères plus proches que cela sont regroupés
+const CLUSTER_MAX_ZOOM = 16.5; // au-delà, tous les repères sont affichés
 
 let screen = null;
 let map = null;
+let maplibre = null;
+const clusterMarkers = [];
 let building = null; // construction unique, même si l'écran est demandé plusieurs fois d'affilée
 let venues = [];
 let shows = [];
@@ -33,6 +37,37 @@ function applyLayers() {
   const byKey = new Map(layerDefs.map((layer) => [layer.key, layer]));
   for (const { layer, el } of layered) {
     el.classList.toggle("is-hidden", !store.isLayerOn(layer, byKey.get(layer)?.default ?? true));
+  }
+}
+
+/**
+ * Regroupe les repères de lieux qui se chevauchent à l'écran en une pastille portant leur nombre.
+ * Toucher la pastille zoome sur le groupe. Recalculé à chaque déplacement, zoom ou changement de calque.
+ */
+function updateClusters() {
+  clusterMarkers.splice(0).forEach((marker) => marker.remove());
+  const entries = [...venuePins.values()];
+  entries.forEach(({ el }) => el.classList.remove("is-clustered"));
+  if (map.getZoom() >= CLUSTER_MAX_ZOOM) return;
+
+  const points = entries
+    .filter(({ el }) => !el.classList.contains("is-hidden"))
+    .map((entry) => ({ entry, pixel: map.project([entry.venue.lng, entry.venue.lat]) }));
+  const taken = new Set();
+  for (const a of points) {
+    if (taken.has(a)) continue;
+    taken.add(a);
+    const group = [a, ...points.filter((b) => !taken.has(b) && Math.hypot(a.pixel.x - b.pixel.x, a.pixel.y - b.pixel.y) < CLUSTER_RADIUS)];
+    group.forEach((member) => taken.add(member));
+    if (group.length < 2) continue;
+
+    group.forEach(({ entry }) => entry.el.classList.add("is-clustered"));
+    const lngs = group.map(({ entry }) => entry.venue.lng);
+    const lats = group.map(({ entry }) => entry.venue.lat);
+    const bounds = [[Math.min(...lngs), Math.min(...lats)], [Math.max(...lngs), Math.max(...lats)]];
+    const el = createClusterPin(group.length, () => map.fitBounds(bounds, { padding: CLUSTER_RADIUS * 3, maxZoom: FOCUS_ZOOM + 1, duration: 600 }));
+    const center = [(bounds[0][0] + bounds[1][0]) / 2, (bounds[0][1] + bounds[1][1]) / 2];
+    clusterMarkers.push(new maplibre.Marker({ element: el, anchor: "center" }).setLngLat(center).addTo(map));
   }
 }
 
@@ -168,6 +203,7 @@ async function build() {
   screen = h("section", { class: "screen screen--map", dataset: { screen: "carte" } }, canvas, ...createSearch(), filterButton);
 
   const maplibregl = await loadMapLibre();
+  maplibre = maplibregl;
   map = new maplibregl.Map({
     container: canvas,
     style: buildStyle(),
@@ -205,8 +241,11 @@ async function build() {
   syncAvatar();
 
   applyLayers();
+  updateClusters();
+  map.on("moveend", updateClusters);
   store.subscribe(() => {
     applyLayers();
+    updateClusters();
     syncAvatar();
   });
 }
