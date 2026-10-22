@@ -50,7 +50,7 @@
   --color-on-color: var(--color-black); /* texte posé sur un aplat de couleur (bannières, pastilles, boutons) */
   --color-surface: #fbfbfb;        /* blanc cassé : cartes, boutons, texte sur aplat */
   --color-sky: #c7f3fe;            /* fond des écrans */
-  --color-action-icon: #0e7490;    /* bleu plus foncé que le ciel de la DA : icônes des pastilles, contraste 5:1 sur le jaune (AA, volontairement pas AAA) */
+  --color-action-icon: #4bd4f6;    /* bleu des icônes des pastilles : décoratif, le mot dessous porte le sens (contraste 1,7:1 sur le jaune, voulu) */
   --color-yellow: #ffff99;         /* en-têtes, barre du bas, bannières */
   --color-brand: #f4a1a0; /* éclairci, était #ed6361 */          /* pastilles, boutons principaux */
   --color-like: #eb3530;           /* cœur et épingle actifs */
