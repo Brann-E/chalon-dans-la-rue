@@ -53,7 +53,7 @@ export function createRep(rep, index, { slot = false } = {}) {
     h(
       "div",
       { class: "rep__actions" },
-      repAction("map", index, "Carte", "assets/emplacement.png", `Voir ${rep.venue} sur la carte`),
+      repAction("map", index, "Carte", "assets/action-carte.svg", `Voir ${rep.venue} sur la carte`),
       repAction("route", index, "Itinéraire", "assets/action-itineraire.svg", `Itinéraire à pied vers ${rep.venue}`),
       repAction("share", index, "Partager", "assets/action-partager.svg", `Partager la représentation du ${rep.date} à ${rep.time}`)
     )
