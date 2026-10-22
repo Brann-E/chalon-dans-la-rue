@@ -84,7 +84,7 @@
   width: var(--cta-width);
   height: var(--cta-height);
   padding: var(--space-1) var(--space-2);
-  background: var(--color-cta);
+  background: var(--color-yellow);
   border-radius: var(--radius-xs);
   box-shadow: var(--shadow-cta);
   font-size: var(--text-sm);

@@ -30,5 +30,5 @@ export function createEmptyState({ title, lead, art, hint, shortHint = false, na
   );
 }
 
-/** Bouton « Remplir la page » (raccourci de démonstration de la maquette). */
-export const createDemoFill = (onClick) => h("button", { class: "demo-fill", type: "button", onclick: onClick }, "Remplir la page");
+/** Bouton de démonstration en bas à droite : « Remplir la page » (maquette) ou « Vider la page » pour revenir à l'état vide. */
+export const createDemoFill = (onClick, label = "Remplir la page") => h("button", { class: "demo-fill", type: "button", onclick: onClick }, label);

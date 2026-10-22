@@ -40,11 +40,19 @@ export async function renderFavoris() {
 
   const byId = new Map(shows.map((show) => [show.id, show]));
   const cards = ids.filter((id) => byId.has(id)).map((id) => createShowCard(byId.get(id), { compact: true }));
-  return createScreen({
+  const screen = createScreen({
     id: "favoris",
     title: "Favoris",
     softLine: true,
     bodyClass: "screen__body--lists",
     body: h("div", { class: "cards" }, cards),
   });
+  // Retour à l'état vide (même emplacement que « Remplir la page »).
+  screen.append(
+    createDemoFill(() => {
+      store.clearFavorites();
+      screen.dispatchEvent(new CustomEvent("navigate", { bubbles: true, detail: { to: "favoris" } }));
+    }, "Vider la page")
+  );
+  return screen;
 }

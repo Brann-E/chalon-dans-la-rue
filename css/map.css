@@ -109,24 +109,8 @@
 
 /* ---- Repères ------------------------------------------------------------------ */
 /* Spécificité renforcée : les repères définissent leur propre « display ». */
-:is(.map-pin, .map-service, .map-user).is-hidden,
-.map-pin.is-clustered {
+:is(.map-pin, .map-service, .map-user).is-hidden {
   display: none;
-}
-
-/* Regroupement de repères voisins : pastille un peu plus grande portant leur nombre. */
-.map-cluster {
-  display: grid;
-  place-items: center;
-  width: var(--cluster-size);
-  height: var(--cluster-size);
-  background: var(--color-brand);
-  border-radius: 50%;
-  box-shadow: inset 0 0 0 var(--cluster-border) var(--color-surface), var(--shadow-float);
-  font-size: var(--text-sm);
-  font-weight: var(--weight-bold);
-  line-height: var(--leading-sm);
-  color: var(--color-on-color);
 }
 
 .map-pin {

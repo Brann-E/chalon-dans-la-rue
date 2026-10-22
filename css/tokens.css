@@ -238,8 +238,6 @@
   --color-pin-service: #73afc5; /* éclairci, était #006e95 */
   --color-pin-water: #83c2e1; /* éclairci, était #3099cd */
   --color-pin-parking: #90d7f1; /* éclairci, était #46bde7 */
-  --cluster-size: 32px;
-  --cluster-border: 2px;
   --service-size: 20px;
   --service-text: 9px;
   --service-glyph: 14px;

@@ -129,7 +129,7 @@ export async function renderPlanning() {
     h("hr", { class: "rule" })
   );
 
-  return createScreen({
+  const screen = createScreen({
     id: "planning",
     title: "Planning",
     softLine: true,
@@ -137,4 +137,12 @@ export async function renderPlanning() {
     bodyClass: "screen__body--lists",
     body: [list, empty],
   });
+  // Retour à l'état vide (même emplacement que « Remplir la page »).
+  screen.append(
+    createDemoFill(() => {
+      store.clearPlanning();
+      screen.dispatchEvent(new CustomEvent("navigate", { bubbles: true, detail: { to: "planning" } }));
+    }, "Vider la page")
+  );
+  return screen;
 }

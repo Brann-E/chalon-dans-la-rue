@@ -18,23 +18,6 @@ export function createVenuePin(venue, onSelect) {
   );
 }
 
-/** Pastille de regroupement : nombre de lieux voisins ; toucher = zoomer sur le groupe. */
-export function createClusterPin(count, onSelect) {
-  return h(
-    "button",
-    {
-      class: "map-cluster",
-      type: "button",
-      "aria-label": `${count} lieux regroupés, zoomer`,
-      onclick: (event) => {
-        event.stopPropagation();
-        onSelect();
-      },
-    },
-    String(count)
-  );
-}
-
 /** Repère de service (sanitaires, eau, parking…) : rond bleu avec son sigle. */
 const SERVICE_GLYPHS = { wc: "WC", "wc-pmr": "WC", parking: "P", "parking-pmr": "P" };
 const SERVICE_ICONS = { water: "assets/service-water.svg", shower: "assets/service-shower.svg" };

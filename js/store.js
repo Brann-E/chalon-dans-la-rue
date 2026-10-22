@@ -67,6 +67,15 @@ export function addFavorites(showIds) {
   commit({ ...state, favorites });
 }
 
+/** Vide d'un coup les favoris ou le planning (bouton « Vider la page »). */
+export function clearFavorites() {
+  commit({ ...state, favorites: [] });
+}
+
+export function clearPlanning() {
+  commit({ ...state, planning: {} });
+}
+
 /** Épingle une représentation ; un nouvel appui sur la même la retire (une seule par spectacle). */
 export function togglePin(showId, index) {
   const planning = { ...state.planning };
