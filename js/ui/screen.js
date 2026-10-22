@@ -1,4 +1,5 @@
 import { h, img } from "../dom.js";
+import { createNewsButton } from "./news-button.js";
 
 /**
  * Gabarit commun des écrans : en-tête jaune (titre centré) + corps défilant.
@@ -28,7 +29,8 @@ export function createScreen({ id, title, body, above, titleShifted = false, sof
       "header",
       { class: softLine ? "screen__header screen__header--soft" : "screen__header" },
       backButton,
-      h("h1", { class: titleShifted ? "screen__title screen__title--shifted" : "screen__title" }, title)
+      h("h1", { class: titleShifted ? "screen__title screen__title--shifted" : "screen__title" }, title),
+      createNewsButton() // la cloche des actualités, en haut à droite de chaque écran
     ),
     above,
     h("div", { class: `screen__body ${bodyClass}`.trim() }, body)

@@ -5,6 +5,7 @@ import * as store from "../store.js";
 import { buildStyle } from "../map/style.js";
 import { loadMapLibre } from "../map/loader.js";
 import { createVenuePin, createServicePin, createUserMarker } from "../map/markers.js";
+import { createNewsButton } from "../ui/news-button.js";
 
 /**
  * Écran Carte (Accueil) : vraie carte interactive MapLibre centrée sur le centre-ville de
@@ -163,7 +164,7 @@ async function build() {
     },
     img("assets/sliders.png")
   );
-  screen = h("section", { class: "screen screen--map", dataset: { screen: "carte" } }, canvas, ...createSearch(), filterButton);
+  screen = h("section", { class: "screen screen--map", dataset: { screen: "carte" } }, canvas, ...createSearch(), filterButton, createNewsButton({ floating: true }));
 
   const maplibregl = await loadMapLibre();
   map = new maplibregl.Map({

@@ -120,7 +120,7 @@ button:active:not(:disabled):not([aria-disabled="true"]):not(.maplibregl-marker)
     box-shadow: inset 0 0 0 var(--pin-border) var(--color-surface), 0 0 0 var(--pin-hover-ring) var(--color-yellow), var(--shadow-float);
   }
 
-  :is(.filters__reset, .filters-link, .filters__link, .range__end, .screen__back):hover {
+  :is(.filters__reset, .filters-link, .filters__link, .range__end, .screen__back, .bell):hover {
     opacity: 0.7;
   }
 }
@@ -202,7 +202,7 @@ button:active:not(:disabled):not([aria-disabled="true"]):not(.maplibregl-marker)
   position: absolute;
   inset: var(--header-title-top) 0 auto;
   pointer-events: none; /* le titre couvre toute la largeur : il ne doit pas capter le clic de la flèche de retour */
-  padding-inline: var(--space-8); /* laisse la place de la flèche de retour ; un titre trop long est abrégé */
+  padding-inline: calc(var(--touch-target) + var(--space-2)); /* laisse la place de la flèche de retour et de la cloche ; un titre trop long est abrégé */
   overflow: hidden;
   text-align: center;
   text-overflow: ellipsis;

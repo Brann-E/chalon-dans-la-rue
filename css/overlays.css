@@ -87,6 +87,82 @@
   color: var(--color-ink);
 }
 
+/* ---- Actualités ------------------------------------------------------------------ */
+.filters__body.news__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding-block: var(--space-3) var(--clearance-lists);
+}
+
+.news-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  padding: var(--space-3);
+  background: var(--color-surface);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-chip);
+  cursor: pointer;
+}
+
+.news-card__meta {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1-5);
+  padding-right: var(--space-5); /* laisse la place de la pastille « non lue » */
+  font-size: var(--text-xs);
+  line-height: var(--leading-xs);
+  color: var(--color-black);
+}
+
+.news-card__dot {
+  flex: none;
+  width: var(--news-dot-size);
+  height: var(--news-dot-size);
+  background: var(--dot);
+  border-radius: 50%;
+}
+
+.news-card__kind {
+  font-weight: var(--weight-semibold);
+}
+
+.news-card__title {
+  font-size: var(--text-sm);
+  font-weight: var(--weight-bold);
+  line-height: var(--leading-sm);
+  color: var(--color-black);
+}
+
+.news-card__text {
+  font-size: var(--text-sm);
+  font-weight: var(--weight-regular);
+  line-height: var(--leading-sm);
+  color: var(--color-ink);
+}
+
+.news-card .button-outline {
+  align-self: flex-start;
+  margin-top: var(--space-1);
+}
+
+/* Pastille rose : actualité non lue */
+.news-card__unread {
+  position: absolute;
+  top: var(--space-3);
+  right: var(--space-3);
+  width: var(--news-dot-size);
+  height: var(--news-dot-size);
+  background: var(--color-brand);
+  border-radius: 50%;
+}
+
+.news-card[data-read="true"] .news-card__unread {
+  display: none;
+}
+
 /* ---- Confirmation brève (« Ajouté aux favoris · Annuler ») ------------------------- */
 .toast-layer {
   position: absolute;

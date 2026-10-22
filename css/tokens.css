@@ -172,6 +172,12 @@
   --underline-thickness: 2px;      /* soulignement coloré de la catégorie */
   --underline-offset: 2px;
 
+  /* ---- Actualités : cloche, pastille de non-lus, cartes ------------------- */
+  --bell-icon-size: 28px;
+  --bell-badge-size: 18px;
+  --bell-floating-top: 111px;      /* sous la barre de recherche de la carte (54 + 45 + 12) */
+  --news-dot-size: 10px;
+
   /* ---- Accessibilité : zone de toucher minimale, états désactivés -------- */
   --touch-target: 44px;
   --opacity-disabled: 0.4;

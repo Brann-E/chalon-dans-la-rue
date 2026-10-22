@@ -1,0 +1,62 @@
+[
+  {
+    "id": "horaire-we-want-you",
+    "kind": "modif",
+    "title": "Horaire modifié : « We Want You! »",
+    "text": "La représentation du vendredi 24/07 passe de 20h20 à 21h00, Place Général de Gaulle.",
+    "when": "Il y a 12 min",
+    "show": "we-want-you"
+  },
+  {
+    "id": "happy-hour-cour",
+    "kind": "bon-plan",
+    "title": "Bon plan : happy hour à la Cour du festival",
+    "text": "Boissons à moitié prix de 18h à 19h, jeudi et vendredi.",
+    "when": "Il y a 40 min",
+    "spot": 13
+  },
+  {
+    "id": "hydratation",
+    "kind": "conseil",
+    "title": "Pensez à vous hydrater",
+    "text": "Il fera chaud cet après-midi. Des points d’eau sont répartis dans toute la ville : activez-les dans les filtres de la carte."
+  },
+  {
+    "id": "navette",
+    "kind": "info",
+    "title": "Navette gratuite depuis le parking",
+    "text": "Une navette relie le parking Edmé Vadot au centre-ville toutes les 15 minutes, de 10h à minuit.",
+    "when": "Il y a 1 h",
+    "spot": 35
+  },
+  {
+    "id": "gaufres",
+    "kind": "bon-plan",
+    "title": "Deux gaufres achetées, une offerte",
+    "text": "Les Gaufres Volantes vous régalent jusqu’à 17h, près de l’École primaire de l’Est.",
+    "when": "Ce matin",
+    "spot": 19
+  },
+  {
+    "id": "lieu-madame",
+    "kind": "modif",
+    "title": "Nouveau créneau : « MaDame »",
+    "text": "Une représentation supplémentaire est ajoutée dimanche. Pensez à l’ajouter à votre planning.",
+    "when": "Ce matin",
+    "show": "madame"
+  },
+  {
+    "id": "meteo",
+    "kind": "conseil",
+    "title": "Averses possibles vendredi soir",
+    "text": "Prévoyez un k-way : les spectacles ont lieu en extérieur, même s’il pleut un peu.",
+    "when": "Hier"
+  },
+  {
+    "id": "silence",
+    "kind": "conseil",
+    "title": "Les spectacles aiment le silence",
+    "text": "Mettez votre téléphone en silencieux pendant les représentations : les artistes vous disent merci.",
+    "when": "Hier"
+  }
+]
