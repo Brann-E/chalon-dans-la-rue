@@ -14,7 +14,7 @@ import { fetchWalkingRoute, straightRoute, formatDuration, formatDistance } from
  * une recherche à suggestions et le bouton filtre. Les calques se règlent dans « Filtres carte ».
  * L'écran est un singleton : le fond de carte garde sa vue quand on change d'onglet.
  */
-const USER_FALLBACK = [4.8545, 46.7809]; // position de démonstration du clown
+const USER_FALLBACK = [4.8531, 46.77942]; // position de démonstration du clown : sur le quai Gambetta, au niveau de la rue des Lancharres
 const DEFAULT_AVATAR = "assets/pitre.png";
 const FOCUS_ZOOM = 17;
 
@@ -63,8 +63,16 @@ function ensureRouteLayers() {
   if (map.getSource(ROUTE_SOURCE)) return;
   map.addSource(ROUTE_SOURCE, { type: "geojson", data: EMPTY_ROUTE });
   const layout = { "line-cap": "round", "line-join": "round" };
-  map.addLayer({ id: "route-casing", type: "line", source: ROUTE_SOURCE, layout, paint: { "line-color": cssToken("--color-ink"), "line-width": parseFloat(cssToken("--route-casing-width")) } });
-  map.addLayer({ id: "route-line", type: "line", source: ROUTE_SOURCE, layout, paint: { "line-color": cssToken("--color-yellow"), "line-width": parseFloat(cssToken("--route-width")) } });
+  const dotWidth = parseFloat(cssToken("--route-width"));
+  const casingWidth = parseFloat(cssToken("--route-casing-width"));
+  const spacing = parseFloat(cssToken("--route-dot-spacing"));
+  // Une longueur de tirets nulle + bout rond = une suite de points. Les écarts se comptent en largeurs de trait.
+  // Trois couches : liseré noir (tous les points), points bleus (tous), points jaunes (un sur deux, par-dessus).
+  const dots = (id, color, width, every) =>
+    map.addLayer({ id, type: "line", source: ROUTE_SOURCE, layout, paint: { "line-color": color, "line-width": width, "line-dasharray": [0, (spacing * every) / width] } });
+  dots("route-casing", cssToken("--color-black"), casingWidth, 1);
+  dots("route-blue", cssToken("--color-sky"), dotWidth, 1);
+  dots("route-line", cssToken("--color-yellow"), dotWidth, 2);
 }
 
 function setRouteBanner({ headline, destination }) {
@@ -100,7 +108,8 @@ async function routeTo(spot) {
   if (token !== routeToken) return;
 
   map.getSource(ROUTE_SOURCE).setData({ type: "Feature", properties: {}, geometry: { type: "LineString", coordinates: route.coordinates } });
-  map.setPaintProperty("route-line", "line-dasharray", route.estimated ? [2, 2] : [1]);
+  const opacity = route.estimated ? parseFloat(cssToken("--route-estimated-opacity")) : 1;
+  for (const id of ["route-casing", "route-blue", "route-line"]) map.setPaintProperty(id, "line-opacity", opacity);
   setRouteBanner({ headline: `${formatDuration(route.duration)} · ${formatDistance(route.distance)}${route.estimated ? " (estimé)" : ""}`, destination });
 
   const lngs = route.coordinates.map(([lng]) => lng);

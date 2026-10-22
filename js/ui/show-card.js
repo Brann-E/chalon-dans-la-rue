@@ -53,16 +53,21 @@ export function createRep(rep, index, { slot = false } = {}) {
     h(
       "div",
       { class: "rep__actions" },
-      repAction("map", index, "Voir sur la carte", "assets/action-carte.svg", `Voir ${rep.venue} sur la carte`),
+      repAction("map", index, "Carte", "assets/action-carte.svg", `Voir ${rep.venue} sur la carte`),
       repAction("route", index, "Itinéraire", "assets/action-itineraire.svg", `Itinéraire à pied vers ${rep.venue}`),
       repAction("share", index, "Partager", "assets/action-partager.svg", `Partager la représentation du ${rep.date} à ${rep.time}`)
     )
   );
 }
 
-/** Pastille d'action d'un créneau (icône + libellé). `label` accessible : plus précis que le texte affiché. */
+/** Pastille ronde d'un créneau : l'icône dans le rond, un seul mot dessous. `label` accessible : plus précis que le mot affiché. */
 function repAction(action, index, text, icon, label) {
-  return h("button", { class: `rep-action rep-action--${action}`, type: "button", "aria-label": label, dataset: { action, rep: index } }, img(icon), h("span", {}, text));
+  return h(
+    "button",
+    { class: `rep-action rep-action--${action}`, type: "button", "aria-label": label, dataset: { action, rep: index } },
+    h("span", { class: "rep-action__disc" }, img(icon)),
+    h("span", { class: "rep-action__label" }, text)
+  );
 }
 
 /**

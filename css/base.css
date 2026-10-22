@@ -72,7 +72,8 @@ button:active:not(:disabled):not([aria-disabled="true"]):not(.maplibregl-marker)
   .chip:not([aria-pressed="true"]):hover,
   .list-row:hover,
   .button-outline:hover,
-  .avatar:hover {
+  .avatar:hover,
+  .rep-action:hover .rep-action__disc {
     background-color: var(--color-hover-tint);
   }
 

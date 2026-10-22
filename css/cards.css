@@ -327,60 +327,42 @@
   color: var(--color-ink);
 }
 
-/* Bouton à contour (« Voir sur la carte ») : plus haut et en 14 px pour être lisible et facile à toucher. */
-/* Pastilles d'un créneau : « Voir sur la carte » sur toute la largeur, « Itinéraire » et « Partager » sur la ligne du dessous. */
+/* Trois pastilles rondes (Carte, Itinéraire, Partager) : l'icône dans le rond, un seul mot dessous. */
 .rep__actions {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--space-1);
+  display: flex;
+  justify-content: space-between;
 }
 
 .rep-action {
-  position: relative;
+  flex: 1;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  gap: var(--space-1);
-  min-height: var(--rep-action-height);
-  padding: 0 var(--space-1-5);
-  background: var(--color-white);
-  border: var(--hairline) solid var(--color-ink);
-  border-radius: var(--radius-sm);
-  font-size: var(--text-xs);
-  font-weight: var(--weight-semibold);
-  line-height: var(--leading-xs);
+  gap: var(--space-0-5);
+  min-height: var(--touch-target);
   color: var(--color-ink);
-  white-space: nowrap;
 }
 
-.rep-action img {
-  flex: none;
+.rep-action__disc {
+  display: grid;
+  place-items: center;
+  width: var(--rep-action-disc);
+  height: var(--rep-action-disc);
+  background: var(--color-white);
+  border: var(--hairline) solid var(--color-ink);
+  border-radius: 50%;
+}
+
+.rep-action__disc img {
   width: var(--rep-action-icon);
   height: var(--rep-action-icon);
 }
 
-.rep-action--map {
-  grid-column: 1 / -1;
-}
-
-/* Zone de toucher de 44 px de haut, sans changer l'aspect de la pastille. */
-.rep-action::after {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: 0;
-  width: 100%;
-  height: var(--touch-target);
-  transform: translateY(-50%);
-}
-
-/* Créneau pleine largeur (Planning, Favoris) : les trois pastilles côte à côte. */
-.rep--slot .rep__actions {
-  grid-template-columns: repeat(3, 1fr);
-}
-
-.rep--slot .rep-action--map {
-  grid-column: auto;
+.rep-action__label {
+  font-size: var(--text-xs);
+  font-weight: var(--weight-medium);
+  line-height: var(--leading-xs);
+  white-space: nowrap;
 }
 
 /* Favoris : un seul bloc de représentation, aligné comme la rangée de la carte spectacle. */
