@@ -13,7 +13,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: var(--space-6);
+  gap: var(--empty-gap);
   width: 100%;
   max-width: var(--content-width);
   padding: var(--empty-padding-top) var(--space-4) var(--space-4);
@@ -52,7 +52,7 @@
 
 .empty__lead {
   max-width: var(--empty-lead-width);
-  font-size: var(--text-xl);
+  font-size: var(--empty-lead-size);
   font-weight: var(--weight-bold);
   line-height: var(--empty-lead-leading);
   color: var(--color-black);
@@ -66,7 +66,7 @@
 
 .empty__hint {
   max-width: var(--empty-hint-width);
-  font-size: var(--text-md);
+  font-size: var(--empty-hint-size);
   font-weight: var(--weight-regular);
   line-height: var(--empty-hint-leading);
   color: var(--color-black);

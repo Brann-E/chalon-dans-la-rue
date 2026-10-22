@@ -143,6 +143,16 @@ button:active:not(:disabled):not([aria-disabled="true"]):not(.maplibregl-marker)
     height: 100dvh;
     border-radius: 0;
   }
+
+  /* Sans barre d'état factice : tout l'écran remonte de la hauteur de cette barre (la partie qui sort est rognée). */
+  .device .statusbar {
+    display: none;
+  }
+
+  .device .screens,
+  .device .overlay-layer {
+    inset: calc(-1 * var(--statusbar-height)) 0 0;
+  }
 }
 
 .screens {
