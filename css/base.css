@@ -68,15 +68,26 @@ button:active:not(:disabled):not([aria-disabled="true"]):not(.maplibregl-marker)
 }
 
 @media (hover: hover) {
-  /* Boutons de contenu : soulèvement + teinte jaune */
-  :is(.chip, .list-row, .button-outline, .avatar, .pill):hover:not(:disabled):not([aria-disabled="true"]) {
-    translate: 0 var(--hover-lift);
-  }
-
+  /* Boutons de contenu : teinte jaune, sans mouvement */
   .chip:not([aria-pressed="true"]):hover,
   .list-row:hover,
-  .button-outline:hover {
+  .button-outline:hover,
+  .avatar:hover {
     background-color: var(--color-hover-tint);
+  }
+
+  /* Lignes du Menu : fond pâle qui déborde un peu de la ligne, sans rien déplacer */
+  :is(.menu-row, .menu-setting):hover {
+    background-color: var(--color-hover-tint);
+    box-shadow: 0 0 0 var(--space-1) var(--color-hover-tint);
+    border-radius: var(--radius-sm);
+  }
+
+  /* Barre du bas : fond clair derrière l'onglet survolé */
+  .tabbar__item:hover {
+    background-color: var(--color-hover-pale);
+    box-shadow: 0 0 0 var(--space-0-5) var(--color-hover-pale);
+    border-radius: var(--radius-sm);
   }
 
   .chip[aria-pressed="true"]:hover {
@@ -85,7 +96,6 @@ button:active:not(:disabled):not([aria-disabled="true"]):not(.maplibregl-marker)
 
   /* Boutons d'action : un peu plus lumineux */
   :is(.cta, .filters__cta, .demo-fill, .pill):hover:not(:disabled) {
-    translate: 0 var(--hover-lift);
     filter: brightness(1.04);
   }
 
@@ -99,10 +109,10 @@ button:active:not(:disabled):not([aria-disabled="true"]):not(.maplibregl-marker)
     scale: var(--hover-scale-round);
   }
 
-  /* Repère de carte : un anneau, sans changer sa taille ni sa position (voir la note sur `scale` plus haut). */
+  /* Repère de carte : un liseré jaune, sans changer sa taille ni sa position (voir la note sur `scale` plus haut). */
   .map-pin:hover {
     z-index: 1;
-    box-shadow: inset 0 0 0 var(--pin-border) var(--color-surface), 0 0 0 var(--pin-hover-ring) var(--color-ink);
+    box-shadow: inset 0 0 0 var(--pin-border) var(--color-surface), 0 0 0 var(--pin-hover-ring) var(--color-yellow), var(--shadow-float);
   }
 
   :is(.filters__reset, .filters-link, .filters__link, .range__end, .screen__back):hover {

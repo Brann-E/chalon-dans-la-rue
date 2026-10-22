@@ -11,12 +11,20 @@ export function createVenuePin(venue, onSelect) {
       dataset: { kind: venue.kind, spot: venue.spot },
       onclick: (event) => {
         event.stopPropagation();
-        onSelect(venue);
+        const pin = event.currentTarget;
+        // Onde jaune au clic ; la fiche s'ouvre une fraction de seconde après, le temps de la voir partir.
+        pin.classList.remove("is-ping");
+        void pin.offsetWidth; // permet de rejouer l'animation à un second clic
+        pin.classList.add("is-ping");
+        pin.addEventListener("animationend", () => pin.classList.remove("is-ping"), { once: true });
+        setTimeout(() => onSelect(venue), PING_LEAD_MS);
       },
     },
     String(venue.spot)
   );
 }
+
+const PING_LEAD_MS = 180;
 
 /** Repère de service (sanitaires, eau, parking…) : rond bleu avec son sigle. */
 const SERVICE_GLYPHS = { wc: "WC", "wc-pmr": "WC" };

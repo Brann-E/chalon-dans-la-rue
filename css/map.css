@@ -135,6 +135,16 @@
   animation: pin-pulse var(--pulse-duration) ease-out 2;
 }
 
+/* Au clic : le liseré jaune s'élargit en une onde qui s'efface (seulement de l'ombre : le repère ne bouge pas). */
+.map-pin.is-ping {
+  animation: pin-ping var(--pin-ping-duration) ease-out;
+}
+
+@keyframes pin-ping {
+  from { box-shadow: inset 0 0 0 var(--pin-border) var(--color-surface), 0 0 0 var(--pin-hover-ring) var(--color-yellow), 0 0 0 0 var(--color-yellow); }
+  to { box-shadow: inset 0 0 0 var(--pin-border) var(--color-surface), 0 0 0 var(--pin-hover-ring) var(--color-yellow), 0 0 0 var(--pin-ping-spread) transparent; }
+}
+
 @keyframes pin-pulse {
   from { box-shadow: inset 0 0 0 var(--pin-border) var(--color-surface), 0 0 0 0 var(--color-cta); }
   to { box-shadow: inset 0 0 0 var(--pin-border) var(--color-surface), 0 0 0 var(--space-4) transparent; }

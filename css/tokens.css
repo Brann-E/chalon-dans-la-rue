@@ -231,7 +231,9 @@
   /* ---- Carte : repères, recherche et bouton filtre ---------------------- */
   --pin-size: 22px;
   --pin-border: 1px;
-  --pin-hover-ring: 2px;
+  --pin-hover-ring: 3px;
+  --pin-ping-spread: 18px;          /* l'onde jaune qui part du repère au clic */
+  --pin-ping-duration: 600ms;
   --pin-text: 12px;
   --pin-leading: 14px;
   --color-pin-festival: #aa96c3; /* éclairci, était #654092 */
@@ -385,11 +387,11 @@
   --ease-move: cubic-bezier(0.22, 0.61, 0.36, 1);
   --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);   /* léger rebond : cœur, épingle */
   --press-scale: 0.96;             /* un bouton enfoncé rétrécit légèrement */
-  --hover-lift: -1px;
   --hover-scale-icon: 1.1;
   --hover-scale-round: 1.06;
   --focus-ring: 2px;
   --color-hover-tint: color-mix(in srgb, var(--color-yellow) 45%, var(--color-surface));
+  --color-hover-pale: color-mix(in srgb, var(--color-surface) 60%, transparent);   /* sur fond jaune (barre du bas) */
   --loader-size: 40px;
   --loader-thickness: 4px;
   --toast-bottom: 120px;            /* au-dessus de la barre du bas */
