@@ -134,7 +134,6 @@
   --clearance-tabbar: 112px;       /* marge basse du contenu défilant sous la barre */
   --header-title-top: 48px;        /* titre agrandi (20 px) : centré dans la bande jaune sous la barre d'état */
   --header-title-leading: 24px;
-  --header-title-offset: 3px;      /* décale le centre du titre de 1,5 px, comme dans Figma */
   --header-line-top: 82.5px;
   --color-stage: #1c1c1e;          /* fond autour de l'appli sur ordinateur */
 

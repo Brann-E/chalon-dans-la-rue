@@ -40,5 +40,5 @@ export async function renderMenu() {
   for (const item of data.secondary) list.append(row(item), rule());
   list.append(h("p", { class: "menu-version" }, data.version));
 
-  return createScreen({ id: "menu", title: data.title, body: list, titleShifted: true });
+  return createScreen({ id: "menu", title: data.title, body: list });
 }

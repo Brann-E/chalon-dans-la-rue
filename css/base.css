@@ -254,11 +254,7 @@ button:active:not(:disabled):not([aria-disabled="true"]):not(.maplibregl-marker)
   .screen.enter-slide-right { animation: none; }
 }
 
-/* Variantes mesurées dans Figma : titre décalé (Menu) et filet d'en-tête léger (Découvrir). */
-.screen__title--shifted {
-  padding-left: var(--header-title-offset);
-}
-
+/* Variante mesurée dans Figma : filet d'en-tête léger (Découvrir). */
 .screen__header--soft::after {
   background: var(--color-line);
 }

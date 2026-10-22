@@ -3,12 +3,12 @@ import { createNewsButton } from "./news-button.js";
 
 /**
  * Gabarit commun des écrans : en-tête jaune (titre centré) + corps défilant.
- * @param {{id: string, title: string, body: Node|Node[], above?: Node, titleShifted?: boolean, softLine?: boolean, bodyClass?: string,
+ * @param {{id: string, title: string, body: Node|Node[], above?: Node, softLine?: boolean, bodyClass?: string,
  *   back?: {to: string, params?: object}}} options
  *   `above` : bloc fixe sous l'en-tête (ex. barre de recherche).
  *   `back` : écran vers lequel ramène la flèche à gauche du titre (sous-pages du Menu).
  */
-export function createScreen({ id, title, body, above, titleShifted = false, softLine = false, bodyClass = "", back = null }) {
+export function createScreen({ id, title, body, above, softLine = false, bodyClass = "", back = null }) {
   const backButton =
     back &&
     h(
@@ -29,7 +29,7 @@ export function createScreen({ id, title, body, above, titleShifted = false, sof
       "header",
       { class: softLine ? "screen__header screen__header--soft" : "screen__header" },
       backButton,
-      h("h1", { class: titleShifted ? "screen__title screen__title--shifted" : "screen__title" }, title),
+      h("h1", { class: "screen__title" }, title),
       createNewsButton() // la cloche des actualités, en haut à droite de chaque écran
     ),
     above,
