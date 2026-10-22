@@ -194,6 +194,12 @@
   border-top: var(--hairline) solid var(--color-line-strong);
 }
 
+.filters__cta:disabled,
+.switch:disabled {
+  opacity: var(--opacity-disabled);
+  cursor: default;
+}
+
 .filters__cta {
   display: grid;
   place-items: center;

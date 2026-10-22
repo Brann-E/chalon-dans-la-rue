@@ -117,10 +117,8 @@ export function createShowCard(show, { compact = false, plannedIndex = null, onl
     if (!target) return;
     if (target.classList.contains("like")) store.toggleFavorite(show.id);
     else if (target.classList.contains("pin")) store.togglePin(show.id, Number(target.dataset.pin));
-    else if (target.dataset.change !== undefined) {
-      const current = store.pinnedIndex(show.id) ?? plannedIndex ?? 0;
-      store.setPin(show.id, (current + 1) % show.reps.length);
-    } else if (target.dataset.onMap !== undefined) {
+    else if (target.dataset.change !== undefined) emit(card, "change-slot", { id: show.id, fallbackIndex: plannedIndex ?? 0 });
+    else if (target.dataset.onMap !== undefined) {
       const rep = show.reps[Number(target.dataset.onMap)];
       emit(card, "show-on-map", { id: show.id, spot: rep.spot, venue: rep.venue });
     } else if (target.dataset.open !== undefined || target.classList.contains("show-card__title")) emit(card, "open-show", { id: show.id });

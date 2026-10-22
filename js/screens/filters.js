@@ -1,6 +1,8 @@
 import { h, img } from "../dom.js";
 import { loadJSON } from "../data.js";
 import * as store from "../store.js";
+import { loadShows } from "../shows.js";
+import { matchesFilters, inZone } from "../filtering.js";
 
 /**
  * Feuille « Filtres » : horaire, date, programmation IN/OFF, catégorie, compagnies émergentes,
@@ -8,7 +10,14 @@ import * as store from "../store.js";
  * @param {{section?: string}} [options] section : groupe vers lequel défiler à l'ouverture
  */
 export async function createFiltersPanel({ section = "" } = {}) {
-  const [config, event] = await Promise.all([loadJSON("data/filters.json"), loadJSON("data/event.json")]);
+  const [config, event, shows] = await Promise.all([loadJSON("data/filters.json"), loadJSON("data/event.json"), loadShows()]);
+
+  // Un choix qu'aucun spectacle ne propose reste affiché mais inactif, pour ne pas mener à une liste vide.
+  const available = {
+    categories: (value) => shows.some((show) => show.category === value),
+    zones: (value) => shows.some((show) => inZone(show, value)),
+    regions: (value) => shows.some((show) => show.region === value),
+  };
 
   // « IN » et « OFF » s'affichent tous deux enfoncés tant qu'aucun filtre n'est posé (état de la maquette).
   const ALL_PROGRAMMES = config.programme;
@@ -26,7 +35,7 @@ export async function createFiltersPanel({ section = "" } = {}) {
   const chip = (group, value, label, token = null) => {
     const el = h(
       "button",
-      { class: "chip", type: "button", "aria-pressed": "false", dataset: { group, value }, onclick: () => toggleIn(group, value) },
+      { class: "chip", type: "button", "aria-pressed": "false", disabled: available[group] ? !available[group](value) : false, dataset: { group, value }, onclick: () => toggleIn(group, value) },
       token && h("span", { class: "chip__dot" }),
       label
     );
@@ -48,7 +57,14 @@ export async function createFiltersPanel({ section = "" } = {}) {
     return select;
   };
 
-  const emergingSwitch = h("button", { class: "switch", type: "button", role: "switch", "aria-checked": "false", "aria-label": "Compagnies émergentes" });
+  const emergingSwitch = h("button", {
+    class: "switch",
+    type: "button",
+    role: "switch",
+    "aria-checked": "false",
+    "aria-label": "Compagnies émergentes",
+    disabled: !shows.some((show) => show.emerging === true),
+  });
   emergingSwitch.addEventListener("click", () => store.setFilters({ emerging: !store.getFilters().emerging }));
 
   const THIN_RULE = new Set(["categories", "zones"]);
@@ -72,6 +88,12 @@ export async function createFiltersPanel({ section = "" } = {}) {
 
   const body = h("div", { class: "filters__body" }, sections);
 
+  const cta = h("button", {
+    class: "filters__cta",
+    type: "button",
+    onclick: (event_) => event_.currentTarget.dispatchEvent(new CustomEvent("apply-filters", { bubbles: true })),
+  });
+
   const close = (event_) => event_.currentTarget.dispatchEvent(new CustomEvent("close-overlay", { bubbles: true }));
   const panel = h(
     "section",
@@ -88,19 +110,7 @@ export async function createFiltersPanel({ section = "" } = {}) {
       )
     ),
     body,
-    h(
-      "footer",
-      { class: "filters__footer" },
-      h(
-        "button",
-        {
-          class: "filters__cta",
-          type: "button",
-          onclick: (event_) => event_.currentTarget.dispatchEvent(new CustomEvent("apply-filters", { bubbles: true })),
-        },
-        "Afficher les résultats"
-      )
-    )
+    h("footer", { class: "filters__footer" }, cta)
   );
 
   const sync = () => {
@@ -113,6 +123,11 @@ export async function createFiltersPanel({ section = "" } = {}) {
       select.classList.toggle("select--empty", select.value === "");
     });
     emergingSwitch.setAttribute("aria-checked", String(filters.emerging));
+
+    // Le bouton annonce le nombre de spectacles avant d'y aller.
+    const count = shows.filter((show) => matchesFilters(show, filters)).length;
+    cta.disabled = count === 0;
+    cta.textContent = count === 0 ? "Aucun résultat" : `Afficher ${count} résultat${count > 1 ? "s" : ""}`;
   };
   sync();
   const unsubscribe = store.subscribe(() => (panel.isConnected || !panel.__opened ? sync() : unsubscribe()));

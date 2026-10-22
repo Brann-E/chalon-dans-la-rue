@@ -25,7 +25,7 @@ function createCarousel(show, photos) {
 
 const paragraphs = (text) => text.split("\n").map((line) => (line.trim() ? h("p", {}, line) : h("br")));
 
-export async function renderSpectacle({ id }) {
+export async function renderSpectacle({ id, from }) {
   const shows = await loadShows();
   const show = shows.find((s) => s.id === id);
   const detail = show.detail ?? {};
@@ -107,5 +107,6 @@ export async function renderSpectacle({ id }) {
   });
   syncCard(body);
 
-  return createScreen({ id: "spectacle", title: show.title, body, softLine: true, bodyClass: "screen__body--bleed" });
+  // La flèche ramène à l'écran d'où l'on vient (Découvrir par défaut).
+  return createScreen({ id: "spectacle", title: show.title, body, softLine: true, bodyClass: "screen__body--bleed", back: { to: from ?? "decouvrir" } });
 }

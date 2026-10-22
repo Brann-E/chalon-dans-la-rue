@@ -167,6 +167,12 @@
   --hairline-thin: 0.5px;
   --clearance-cards: 134px;
 
+  /* ---- Accessibilité : zone de toucher minimale, états désactivés -------- */
+  --touch-target: 44px;
+  --opacity-disabled: 0.4;
+  --color-scrim: rgb(0 0 0 / 40%);
+  --sheet-max-height: 70%;
+
   /* ---- Sous-pages du Menu ---------------------------------------------- */
   --setting-row-height: 40px;
   --avatar-size: 72px;

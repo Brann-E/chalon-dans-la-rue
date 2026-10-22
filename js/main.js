@@ -15,6 +15,7 @@ import { createVenuePanel } from "./screens/venue.js";
 import { createFiltersPanel } from "./screens/filters.js";
 import { createMapFiltersPanel } from "./screens/map-filters.js";
 import { renderPage } from "./screens/pages.js";
+import { createSlotPicker } from "./screens/slot-picker.js";
 import * as store from "./store.js";
 
 const app = document.getElementById("app");
@@ -62,6 +63,9 @@ app.addEventListener("open-venue", async (event) => {
 });
 app.addEventListener("open-filters", async (event) => {
   openOverlay(await createFiltersPanel({ section: event.detail?.section }), { kind: "slide-up" });
+});
+app.addEventListener("change-slot", async (event) => {
+  openOverlay(await createSlotPicker(event.detail), { kind: "slide-up" });
 });
 app.addEventListener("open-map-filters", async () => {
   openOverlay(await createMapFiltersPanel(), { kind: "fade" });

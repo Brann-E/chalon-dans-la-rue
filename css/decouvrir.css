@@ -55,6 +55,7 @@
 }
 
 .chip {
+  position: relative;
   flex: none;
   height: var(--chip-height);
   padding: var(--chip-padding);
@@ -72,6 +73,12 @@
 .chip[aria-pressed="true"] {
   background: var(--color-chip-selected);
   color: var(--color-surface);
+}
+
+/* Choix sans aucun résultat : visible mais inactif. */
+.chip:disabled {
+  opacity: var(--opacity-disabled);
+  cursor: default;
 }
 
 .filters-link {
