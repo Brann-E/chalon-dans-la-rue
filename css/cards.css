@@ -360,10 +360,17 @@
   box-shadow: none;
 }
 
-.rep-action__disc img {
+/* Icône dessinée en masque : sa couleur vient d'un jeton, pas du fichier SVG. */
+.rep-action__icon {
   width: var(--rep-action-icon);
   height: var(--rep-action-icon);
+  background: var(--color-action-icon);
+  mask: var(--icon) center / contain no-repeat;
 }
+
+.rep-action--map { --icon: url("../assets/action-carte.svg"); }
+.rep-action--route { --icon: url("../assets/action-itineraire.svg"); }
+.rep-action--share { --icon: url("../assets/action-partager.svg"); }
 
 .rep-action__label {
   font-size: var(--text-xs);
