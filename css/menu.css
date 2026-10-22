@@ -80,6 +80,7 @@
 /* ---- Sous-pages du Menu ------------------------------------------------------------ */
 .screen__back {
   position: absolute;
+  z-index: 1;
   left: var(--space-2);
   top: calc(var(--header-title-top) - var(--space-2));
   display: grid;

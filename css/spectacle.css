@@ -22,6 +22,7 @@
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   scrollbar-width: none;
+  cursor: grab;
 }
 
 .carousel__track::-webkit-scrollbar {

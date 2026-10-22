@@ -10,9 +10,7 @@ const defaultFilters = () => ({
   days: [], // "10/07"…
   programme: [], // "IN" | "OFF"
   categories: [],
-  emerging: false,
   zones: [],
-  regions: [],
 });
 
 const defaults = () => ({

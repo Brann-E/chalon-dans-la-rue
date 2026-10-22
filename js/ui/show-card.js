@@ -1,5 +1,6 @@
 import { h, img } from "../dom.js";
 import * as store from "../store.js";
+import { enableDragScroll } from "./drag-scroll.js";
 
 /**
  * Carte spectacle (composant « Découvrir » de Figma) : bannière + photo recadrée,
@@ -22,6 +23,13 @@ function createPhoto(show) {
   }
   wrapper.append(img(photo.src, { class: photo.mode === "cover" ? "photo__img photo__img--cover" : "photo__img", alt: title, loading: "lazy", decoding: "async" }));
   return wrapper;
+}
+
+/** Rangée de représentations : un slider qu'on fait glisser (la carte suivante dépasse à droite pour le montrer). */
+export function createRepsRow(items) {
+  const row = h("div", { class: "reps__row" }, items);
+  enableDragScroll(row);
+  return row;
 }
 
 /** Carte de représentation ; `slot` : version pleine largeur du planning. */
@@ -106,7 +114,7 @@ export function createShowCard(show, { compact = false, plannedIndex = null, onl
             "div",
             { class: "reps" },
             h("h4", { class: "reps__title" }, "Représentations"),
-            h("div", { class: "reps__row" }, reps.map(({ rep, index }) => createRep(rep, index)))
+            createRepsRow(reps.map(({ rep, index }) => createRep(rep, index)))
           )
       )
     )

@@ -5,8 +5,9 @@ import { loadShows } from "../shows.js";
 import { matchesFilters, inZone } from "../filtering.js";
 
 /**
- * Feuille « Filtres » : horaire, date, programmation IN/OFF, catégorie, compagnies émergentes,
- * zone et région. Chaque changement met à jour l'état partagé ; la liste Découvrir suit en direct.
+ * Feuille « Filtres » : horaire, date, programmation IN/OFF, catégorie et zone. Chaque changement met à jour
+ * l'état partagé ; la liste Découvrir suit en direct. Seuls les choix qui correspondent à au moins un spectacle
+ * sont proposés (pas de catégorie ou de zone vide).
  * @param {{section?: string, only?: boolean}} [options] section : groupe visé ; only : n'afficher que ce groupe
  *   (feuille basse, ouverte depuis une pastille de Découvrir), sinon toute la page avec défilement jusqu'au groupe.
  */
@@ -14,61 +15,90 @@ export async function createFiltersPanel({ section = "", only = false } = {}) {
   const single = only && Boolean(section);
   const [config, event, shows] = await Promise.all([loadJSON("data/filters.json"), loadJSON("data/event.json"), loadShows()]);
 
-  // Un choix qu'aucun spectacle ne propose reste affiché mais inactif, pour ne pas mener à une liste vide.
-  const available = {
-    categories: (value) => shows.some((show) => show.category === value),
-    zones: (value) => shows.some((show) => inZone(show, value)),
-    regions: (value) => shows.some((show) => show.region === value),
-  };
-
-  // « IN » et « OFF » s'affichent tous deux enfoncés tant qu'aucun filtre n'est posé (état de la maquette).
-  const ALL_PROGRAMMES = config.programme;
-  const selected = (group) => {
-    const current = store.getFilters()[group];
-    return group === "programme" && current.length === 0 ? ALL_PROGRAMMES : current;
-  };
+  // ---- Choix multiples (date, catégorie, zone) ---------------------------------------------
   const toggleIn = (group, value) => {
-    const current = selected(group);
-    const next = current.includes(value) ? current.filter((v) => v !== value) : [...current, value];
-    const unfiltered = group === "programme" && (next.length === 0 || next.length === ALL_PROGRAMMES.length);
-    store.setFilters({ [group]: unfiltered ? [] : next });
+    const current = store.getFilters()[group];
+    store.setFilters({ [group]: current.includes(value) ? current.filter((v) => v !== value) : [...current, value] });
   };
 
   const chip = (group, value, label, token = null) => {
-    const el = h(
-      "button",
-      { class: "chip", type: "button", "aria-pressed": "false", disabled: available[group] ? !available[group](value) : false, dataset: { group, value }, onclick: () => toggleIn(group, value) },
-      token && h("span", { class: "chip__dot" }),
-      label
-    );
+    const el = h("button", { class: "chip", type: "button", "aria-pressed": "false", dataset: { group, value }, onclick: () => toggleIn(group, value) }, token && h("span", { class: "chip__dot" }), label);
     if (token) el.querySelector(".chip__dot").style.setProperty("--dot", `var(--color-cat-${token})`);
     return el;
   };
-
   const chips = (group, items) => h("div", { class: "filters__chips" }, items.map((item) => chip(group, item.value, item.label, item.token)));
-  const plain = (values) => values.map((value) => ({ value, label: value }));
 
-  const hourSelect = (key) => {
-    const select = h(
-      "select",
-      { class: "select", "aria-label": key === "from" ? "Heure de début" : "Heure de fin", dataset: { hour: key } },
-      h("option", { value: "" }, "9h"),
-      config.hours.map((hour) => h("option", { value: hour }, hour))
-    );
-    select.addEventListener("change", () => store.setFilters({ [key]: select.value }));
-    return select;
+  // ---- Programmation IN / OFF -----------------------------------------------------------------
+  // Les deux peuvent être choisis ensemble (état de départ) mais jamais aucun : le dernier choix restant ne se décoche pas.
+  const PROGRAMMES = [
+    { value: "IN", note: "Projets sélectionnés par le festival" },
+    { value: "OFF", note: "Projets programmés" },
+  ];
+  const selectedProgrammes = () => {
+    const current = store.getFilters().programme;
+    return current.length === 0 ? PROGRAMMES.map((p) => p.value) : current;
   };
+  const toggleProgramme = (value) => {
+    const current = selectedProgrammes();
+    if (current.includes(value)) {
+      if (current.length === 1) return; // dernier choix : on le garde
+      store.setFilters({ programme: current.filter((v) => v !== value) });
+    } else {
+      store.setFilters({ programme: [] }); // les deux choisis = pas de filtre
+    }
+  };
+  const programmeRows = h(
+    "div",
+    { class: "filters__programme" },
+    PROGRAMMES.map((p) =>
+      h(
+        "div",
+        { class: "filters__programme-row" },
+        h("button", { class: "chip", type: "button", "aria-pressed": "false", dataset: { group: "programme", value: p.value }, onclick: () => toggleProgramme(p.value) }, p.value),
+        h("span", { class: "filters__hint" }, p.note)
+      )
+    )
+  );
 
-  const emergingSwitch = h("button", {
-    class: "switch",
-    type: "button",
-    role: "switch",
-    "aria-checked": "false",
-    "aria-label": "Compagnies émergentes",
-    disabled: !shows.some((show) => show.emerging === true),
-  });
-  emergingSwitch.addEventListener("click", () => store.setFilters({ emerging: !store.getFilters().emerging }));
+  // ---- Horaire : un curseur à deux poignées ------------------------------------------------
+  const hourValues = config.hours.map((hour) => parseInt(hour, 10));
+  const MIN_HOUR = hourValues[0];
+  const MAX_HOUR = hourValues[hourValues.length - 1];
+  const toHour = (value) => (value === "" ? null : parseInt(value, 10));
 
+  const rangeInput = (key, label) => h("input", { class: `range__input range__input--${key}`, type: "range", min: MIN_HOUR, max: MAX_HOUR, step: 1, "aria-label": label });
+  const fromInput = rangeInput("from", "Heure de début");
+  const toInput = rangeInput("to", "Heure de fin");
+  const rangeReadout = h("output", { class: "range__readout" });
+  const range = h(
+    "div",
+    { class: "range" },
+    h("div", { class: "range__track" }, h("span", { class: "range__fill" })),
+    fromInput,
+    toInput
+  );
+  const onRangeInput = (changed) => {
+    let from = Number(fromInput.value);
+    let to = Number(toInput.value);
+    if (from > to) {
+      if (changed === "from") from = to;
+      else to = from;
+    }
+    // Aux extrémités, pas de filtre : « Toute la journée ».
+    store.setFilters({ from: from === MIN_HOUR ? "" : `${from}h`, to: to === MAX_HOUR ? "" : `${to}h` });
+  };
+  fromInput.addEventListener("input", () => onRangeInput("from"));
+  toInput.addEventListener("input", () => onRangeInput("to"));
+
+  const hoursBlock = h(
+    "div",
+    { class: "filters__hours" },
+    rangeReadout,
+    range,
+    h("div", { class: "range__ends" }, h("span", {}, `${MIN_HOUR}h`), h("span", {}, `${MAX_HOUR}h`))
+  );
+
+  // ---- Sections ----------------------------------------------------------------------------
   const THIN_RULE = new Set(["categories", "zones"]);
   const section_ = (key, title, ...content) =>
     h(
@@ -78,19 +108,23 @@ export async function createFiltersPanel({ section = "", only = false } = {}) {
       ...content
     );
 
+  const categories = config.categories.filter((c) => shows.some((show) => show.category === c.label));
+  const zones = config.zones.filter((zone) => shows.some((show) => inZone(show, zone)));
+
   const sections = [
-    section_("hours", "Horaire", h("div", { class: "filters__hours" }, hourSelect("from"), "à", hourSelect("to"))),
+    section_("hours", "Horaire", hoursBlock),
     section_("days", "Date", chips("days", event.days.map((day) => ({ value: day.id, label: day.label })))),
+    section_("programme", "Programmation IN/OFF", programmeRows),
+    section_("categories", "Catégorie", chips("categories", categories.map((c) => ({ value: c.label, label: c.label, token: c.token })))),
     section_(
-      "programme",
-      "Programmation IN/OFF",
-      chips("programme", plain(config.programme)),
-      h("p", { class: "filters__hint" }, "IN : projets sélectionnés par le festival. OFF : projets programmés.")
+      "zones",
+      "Zone (autour de)",
+      chips("zones", zones.map((zone) => ({ value: zone, label: zone }))),
+      h("button", { class: "filters__link", type: "button", onclick: (event_) => {
+        event_.currentTarget.dispatchEvent(new CustomEvent("close-overlay", { bubbles: true }));
+        event_.currentTarget.dispatchEvent(new CustomEvent("navigate", { bubbles: true, detail: { to: "page", params: { id: "zones" } } }));
+      } }, "Découvrir les zones")
     ),
-    section_("categories", "Catégorie", chips("categories", config.categories.map((c) => ({ value: c.label, label: c.label, token: c.token })))),
-    section_("emerging", "Compagnies émergentes", emergingSwitch),
-    section_("zones", "Zone (autour de)", chips("zones", plain(config.zones)), h("button", { class: "filters__link", type: "button" }, "Découvrir les zones")),
-    section_("regions", "Région (des compagnies)", chips("regions", plain(config.regions))),
   ];
 
   const body = h("div", { class: "filters__body" }, single ? sections.filter((s) => s.dataset.section === section) : sections);
@@ -127,14 +161,30 @@ export async function createFiltersPanel({ section = "", only = false } = {}) {
 
   const sync = () => {
     const filters = store.getFilters();
-    panel.querySelectorAll(".chip[data-group]").forEach((el) => {
-      el.setAttribute("aria-pressed", String(selected(el.dataset.group).includes(el.dataset.value)));
+
+    panel.querySelectorAll('.chip[data-group]:not([data-group="programme"])').forEach((el) => {
+      el.setAttribute("aria-pressed", String(filters[el.dataset.group].includes(el.dataset.value)));
     });
-    panel.querySelectorAll("select[data-hour]").forEach((select) => {
-      select.value = filters[select.dataset.hour];
-      select.classList.toggle("select--empty", select.value === "");
+
+    const programmes = selectedProgrammes();
+    panel.querySelectorAll('.chip[data-group="programme"]').forEach((el) => {
+      const on = programmes.includes(el.dataset.value);
+      el.setAttribute("aria-pressed", String(on));
+      // Dernier choix restant : on ne peut pas le décocher.
+      if (on && programmes.length === 1) el.setAttribute("aria-disabled", "true");
+      else el.removeAttribute("aria-disabled");
     });
-    emergingSwitch.setAttribute("aria-checked", String(filters.emerging));
+
+    const from = toHour(filters.from) ?? MIN_HOUR;
+    const to = toHour(filters.to) ?? MAX_HOUR;
+    fromInput.value = from;
+    toInput.value = to;
+    const span = MAX_HOUR - MIN_HOUR;
+    range.style.setProperty("--from", (from - MIN_HOUR) / span);
+    range.style.setProperty("--to", (to - MIN_HOUR) / span);
+    // La poignée du dessus est celle qui peut encore bouger quand les deux se rejoignent.
+    fromInput.classList.toggle("is-top", from >= (MIN_HOUR + MAX_HOUR) / 2);
+    rangeReadout.textContent = from === MIN_HOUR && to === MAX_HOUR ? "Toute la journée" : `De ${from}h à ${to}h`;
 
     // Le bouton annonce le nombre de spectacles avant d'y aller.
     const count = shows.filter((show) => matchesFilters(show, filters)).length;

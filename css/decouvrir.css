@@ -66,8 +66,10 @@
 }
 
 /* Pastille sélectionnée : rouge plein comme les boutons IN/OFF de la feuille de filtres. */
+/* Pastille choisie : jaune de la direction artistique et contour noir (le rouge d'avant est abandonné). */
 .chip[aria-pressed="true"] {
-  background: var(--color-chip-selected);
+  background: var(--color-yellow);
+  box-shadow: inset 0 0 0 var(--chip-selected-ring) var(--color-ink), var(--shadow-chip);
   color: var(--color-on-color);
 }
 

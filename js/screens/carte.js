@@ -4,7 +4,7 @@ import { loadShows } from "../shows.js";
 import * as store from "../store.js";
 import { buildStyle } from "../map/style.js";
 import { loadMapLibre } from "../map/loader.js";
-import { createVenuePin, createServicePin, createUserMarker, createHintBubble } from "../map/markers.js";
+import { createVenuePin, createServicePin, createUserMarker } from "../map/markers.js";
 
 /**
  * Écran Carte (Accueil) : vraie carte interactive MapLibre centrée sur le centre-ville de
@@ -12,7 +12,6 @@ import { createVenuePin, createServicePin, createUserMarker, createHintBubble } 
  * une recherche à suggestions et le bouton filtre. Les calques se règlent dans « Filtres carte ».
  * L'écran est un singleton : le fond de carte garde sa vue quand on change d'onglet.
  */
-const DEMO_HINT_SPOT = 7; // repère portant la bulle « CLICK HERE » (le plus proche du centre de l'écran)
 const USER_FALLBACK = [4.8545, 46.7809]; // position de démonstration du clown
 const DEFAULT_AVATAR = "assets/pitre.png";
 const FOCUS_ZOOM = 17;
@@ -45,7 +44,6 @@ function focusVenue(spot) {
 }
 
 function selectVenue(venue) {
-  venuePins.get(venue.spot)?.el.querySelector(".map-hint")?.remove();
   emit("open-venue", { spot: venue.spot });
 }
 
@@ -190,7 +188,6 @@ async function build() {
   }
   for (const venue of venues) {
     const el = createVenuePin(venue, selectVenue);
-    if (venue.spot === DEMO_HINT_SPOT) el.append(createHintBubble());
     venuePins.set(venue.spot, { venue, el });
     layered.push({ layer: venue.kind, el });
     new maplibregl.Marker({ element: el, anchor: "center" }).setLngLat([venue.lng, venue.lat]).addTo(map);

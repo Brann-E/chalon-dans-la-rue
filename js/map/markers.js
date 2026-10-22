@@ -45,8 +45,3 @@ export function createServicePin(service) {
 export function createUserMarker(onClick) {
   return h("button", { class: "map-user", type: "button", "aria-label": "Ma position", onclick: onClick }, img("assets/pitre.png"));
 }
-
-/** Bulle « CLICK HERE » de la maquette, accrochée au repère de démonstration. */
-export function createHintBubble() {
-  return h("span", { class: "map-hint", "aria-hidden": "true" }, img("assets/cliquez-ici.png"));
-}

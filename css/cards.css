@@ -225,7 +225,21 @@
   gap: var(--space-2);
   padding: 0 0 0 var(--card-inset);
   overflow-x: auto;
+  scroll-snap-type: x proximity;
+  scroll-padding-inline: var(--card-inset);
   scrollbar-width: none;
+  cursor: grab;
+}
+
+.reps__row > .rep {
+  scroll-snap-align: start;
+}
+
+/* Pendant un glissé à la souris : pas d'aimantation, curseur « attrapé », pas de texte sélectionné. */
+:is(.reps__row, .carousel__track).is-dragging {
+  scroll-snap-type: none;
+  cursor: grabbing;
+  user-select: none;
 }
 
 .reps__row::-webkit-scrollbar {

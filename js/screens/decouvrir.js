@@ -14,7 +14,6 @@ const CHIPS = [
   { label: "Date", section: "days", active: (f) => f.days.length > 0 },
   { label: "IN/OFF", section: "programme", active: (f) => f.programme.length > 0 },
   { label: "Catégorie", section: "categories", active: (f) => f.categories.length > 0 },
-  { label: "Compagnie émergente", section: "emerging", active: (f) => f.emerging },
   { label: "Zone", section: "zones", active: (f) => f.zones.length > 0 },
 ];
 

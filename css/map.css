@@ -193,20 +193,6 @@
   height: 100%;
 }
 
-.map-hint {
-  position: absolute;
-  top: calc(var(--pin-size) / 2 + var(--hint-bubble-dy) - var(--hint-bubble-size) / 2);
-  left: calc(var(--pin-size) / 2 + var(--hint-bubble-dx) - var(--hint-bubble-size) / 2);
-  width: var(--hint-bubble-size);
-  height: var(--hint-bubble-size);
-  pointer-events: none;
-}
-
-.map-hint img {
-  width: 100%;
-  height: 100%;
-}
-
 /* ---- Attribution (obligatoire) : discrète, au-dessus de la barre du bas ------- */
 .screen--map .maplibregl-ctrl-bottom-left {
   bottom: var(--attribution-bottom);

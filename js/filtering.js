@@ -14,7 +14,7 @@ export function inZone(show, zone) {
 
 /** Les groupes sont combinés en « et » ; plusieurs valeurs d'un même groupe, en « ou ». */
 export function matchesFilters(show, filters) {
-  const { from, to, days, programme, categories, emerging, zones, regions } = filters;
+  const { from, to, days, programme, categories, zones } = filters;
 
   if (days.length && !show.reps.some((rep) => days.includes(rep.date))) return false;
 
@@ -27,9 +27,6 @@ export function matchesFilters(show, filters) {
 
   if (programme.length && !programme.includes(show.programme)) return false;
   if (categories.length && !categories.includes(show.category)) return false;
-  if (emerging && show.emerging !== true) return false;
-  if (regions.length && !regions.includes(show.region)) return false;
-
   if (zones.length && !zones.some((zone) => inZone(show, zone))) return false;
   return true;
 }

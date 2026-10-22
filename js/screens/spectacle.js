@@ -2,7 +2,8 @@ import { h, img } from "../dom.js";
 import { loadShows } from "../shows.js";
 import * as store from "../store.js";
 import { createScreen } from "../ui/screen.js";
-import { createRep, syncCard } from "../ui/show-card.js";
+import { createRep, createRepsRow, syncCard } from "../ui/show-card.js";
+import { enableDragScroll } from "../ui/drag-scroll.js";
 
 /**
  * Fiche d'un spectacle (« Spectacle complet ») : carrousel de photos, bannière avec cœur,
@@ -11,6 +12,7 @@ import { createRep, syncCard } from "../ui/show-card.js";
  */
 function createCarousel(show, photos) {
   const track = h("div", { class: "carousel__track" }, photos.map((src, index) => h("div", { class: "carousel__slide" }, img(src, { alt: `${show.title} — photo ${index + 1}` }))));
+  enableDragScroll(track);
   const wrapper = h("div", { class: "carousel" }, track);
   if (photos.length > 1) {
     const counter = h("span", { class: "carousel__counter", "aria-live": "polite" }, `1 / ${photos.length}`);
@@ -83,7 +85,7 @@ export async function renderSpectacle({ id, from }) {
         "div",
         { class: "reps" },
         h("h3", { class: "reps__title" }, "Représentations"),
-        h("div", { class: "reps__row" }, show.reps.map((rep, index) => createRep(rep, index)))
+        createRepsRow(show.reps.map((rep, index) => createRep(rep, index)))
       ),
       links,
       detail.sections && h("hr", { class: "rule spectacle__rule" }),
