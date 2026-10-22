@@ -327,7 +327,7 @@
   color: var(--color-ink);
 }
 
-/* Trois pastilles rondes (Carte, Itinéraire, Partager) : l'icône dans le rond, un seul mot dessous. */
+/* Trois pastilles (Carte, Itinéraire, Partager) : une icône de la DA, sans cadre, et un seul mot dessous. */
 .rep__actions {
   display: flex;
   justify-content: space-between;
@@ -348,8 +348,6 @@
   place-items: center;
   width: var(--rep-action-disc);
   height: var(--rep-action-disc);
-  background: var(--color-white);
-  border: var(--hairline) solid var(--color-ink);
   border-radius: 50%;
 }
 

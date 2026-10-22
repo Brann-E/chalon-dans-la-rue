@@ -160,10 +160,10 @@
   --heart-size: 30px;
   --meta-icon-size: 16px;
   --pill-padding-y: 4px;
-  --rep-width: 190px;             /* 166 px dans la maquette : élargi pour loger les trois pastilles */
-  --rep-height: 128px;
-  --rep-action-disc: 36px;
-  --rep-action-icon: 20px;
+  --rep-width: 212px;             /* 166 px dans la maquette : élargi pour loger les trois pastilles */
+  --rep-height: 144px;
+  --rep-action-disc: 52px;
+  --rep-action-icon: 40px;
   --rep-top-height: 30px;
   --rep-spot-height: 20px;
   --rep-button-height: 34px;      /* était 19 px dans la maquette : trop étroit */
@@ -345,7 +345,7 @@
   /* ---- Fiche spectacle ------------------------------------------------- */
   --carousel-height: 276px;
   --carousel-nav-size: 36px;
-  --rep-width-wide: 190px;
+  --rep-width-wide: 212px;
   --rep-top-height-compact: 20px;
   --pin-size-compact: 20px;
 
