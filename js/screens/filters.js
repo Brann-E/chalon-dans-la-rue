@@ -7,9 +7,11 @@ import { matchesFilters, inZone } from "../filtering.js";
 /**
  * Feuille « Filtres » : horaire, date, programmation IN/OFF, catégorie, compagnies émergentes,
  * zone et région. Chaque changement met à jour l'état partagé ; la liste Découvrir suit en direct.
- * @param {{section?: string}} [options] section : groupe vers lequel défiler à l'ouverture
+ * @param {{section?: string, only?: boolean}} [options] section : groupe visé ; only : n'afficher que ce groupe
+ *   (feuille basse, ouverte depuis une pastille de Découvrir), sinon toute la page avec défilement jusqu'au groupe.
  */
-export async function createFiltersPanel({ section = "" } = {}) {
+export async function createFiltersPanel({ section = "", only = false } = {}) {
+  const single = only && Boolean(section);
   const [config, event, shows] = await Promise.all([loadJSON("data/filters.json"), loadJSON("data/event.json"), loadShows()]);
 
   // Un choix qu'aucun spectacle ne propose reste affiché mais inactif, pour ne pas mener à une liste vide.
@@ -91,7 +93,7 @@ export async function createFiltersPanel({ section = "" } = {}) {
     section_("regions", "Région (des compagnies)", chips("regions", plain(config.regions))),
   ];
 
-  const body = h("div", { class: "filters__body" }, sections);
+  const body = h("div", { class: "filters__body" }, single ? sections.filter((s) => s.dataset.section === section) : sections);
 
   const cta = h("button", {
     class: "filters__cta",
@@ -102,7 +104,12 @@ export async function createFiltersPanel({ section = "" } = {}) {
   const close = (event_) => event_.currentTarget.dispatchEvent(new CustomEvent("close-overlay", { bubbles: true }));
   const panel = h(
     "section",
-    { class: "filters", "aria-label": "Filtres" },
+    {
+      class: single ? "filters filters--single" : "filters",
+      "aria-label": "Filtres",
+      // Feuille basse : toucher le fond assombri la ferme.
+      onclick: (event_) => single && event_.target === event_.currentTarget && event_.currentTarget.dispatchEvent(new CustomEvent("close-overlay", { bubbles: true })),
+    },
     h(
       "header",
       { class: "filters__header" },
@@ -138,7 +145,7 @@ export async function createFiltersPanel({ section = "" } = {}) {
   const unsubscribe = store.subscribe(() => (panel.isConnected || !panel.__opened ? sync() : unsubscribe()));
   requestAnimationFrame(() => {
     panel.__opened = true;
-    const target = section && sections.find((s) => s.dataset.section === section);
+    const target = !single && section && sections.find((s) => s.dataset.section === section);
     if (target) body.scrollTo({ top: target.offsetTop, behavior: "smooth" });
   });
   return panel;

@@ -62,7 +62,7 @@ app.addEventListener("open-venue", async (event) => {
   openOverlay(await createVenuePanel(event.detail.spot), { kind: "fade" });
 });
 app.addEventListener("open-filters", async (event) => {
-  openOverlay(await createFiltersPanel({ section: event.detail?.section }), { kind: "slide-up" });
+  openOverlay(await createFiltersPanel({ section: event.detail?.section, only: event.detail?.only }), { kind: "slide-up" });
 });
 app.addEventListener("change-slot", async (event) => {
   openOverlay(await createSlotPicker(event.detail), { kind: "slide-up" });

@@ -203,6 +203,7 @@ const event = {
   name: "Chalon dans la rue",
   city: "Chalon-sur-Saône",
   center: CENTER,
+  today: "23/07", // l'appli est présentée comme au premier jour du festival
   days: [
     { id: "23/07", label: `${DAYS.jeudi} 23/07` },
     { id: "24/07", label: `${DAYS.vendredi} 24/07` },

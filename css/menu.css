@@ -238,10 +238,8 @@
   color: var(--color-black);
 }
 
-.page-action {
+.button-outline.page-action {
   align-self: flex-start;
-  height: auto;
-  padding: var(--space-1) var(--space-3);
 }
 
 .avatar-grid {

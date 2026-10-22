@@ -161,10 +161,10 @@
   --meta-icon-size: 16px;
   --pill-padding-y: 4px;
   --rep-width: 166px;
-  --rep-height: 93px;
+  --rep-height: 108px;
   --rep-top-height: 30px;
   --rep-spot-height: 20px;
-  --rep-button-height: 19px;
+  --rep-button-height: 34px;      /* était 19 px dans la maquette : trop étroit */
   --badge-size: 20px;
   --hairline-thin: 0.5px;
   --clearance-cards: 134px;
@@ -371,25 +371,21 @@
   --statusbar-battery-height: 13px;
 
   /* ---- Barre du bas ---------------------------------------------------- */
-  --tabbar-height: 66px;
+  /* Icônes agrandies (38 px au lieu de 32) et toutes carrées : les images sont carrées, des largeurs
+     différentes (ex. 36,4 × 32 pour le cœur) les étiraient. Barre portée de 66 à 72 px de haut. */
+  --tabbar-height: 72px;
   --tabbar-inset: var(--space-3);
   --tabbar-bottom: 34px;
   --tabbar-half-width: 195px;
   --tabbar-active-size: 86px;
-  --tabbar-icon-height: 32px;
+  --tabbar-icon-size: 38px;
   /* Centre de chaque onglet, mesuré dans la maquette (barre de 390 px). */
   --tabbar-center-planning: 31.5px;
   --tabbar-center-favoris: 113.5px;
   --tabbar-center-carte: 195.5px;
   --tabbar-center-decouvrir: 277.5px;
   --tabbar-center-menu: 360px;
-  --tabbar-item-top: 12px;
-  --tabbar-item-top-carte: 10px;
-  --tabbar-icon-width-planning: 33px;
-  --tabbar-icon-width-favoris: 36.4px;
-  --tabbar-icon-width-carte: 33px;
-  --tabbar-icon-width-decouvrir: 32px;
-  --tabbar-icon-width-menu: 32px;
+  --tabbar-item-top: 8px;
 
   /* ---- Mouvement ------------------------------------------------------- */
   --duration-move: 300ms;

@@ -6,6 +6,24 @@
   background: var(--color-sky);
 }
 
+/* Feuille basse (une seule brique, ouverte depuis une pastille de Découvrir) : le reste de l'écran reste visible. */
+.filters--single {
+  justify-content: flex-end;
+  background: var(--color-scrim);
+}
+
+.filters--single .filters__header {
+  height: auto;
+  overflow: hidden;
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+}
+
+.filters--single .filters__body {
+  flex: none;
+  max-height: var(--sheet-max-height);
+  background: var(--color-sky);
+}
+
 .filters__header {
   position: relative;
   flex: none;

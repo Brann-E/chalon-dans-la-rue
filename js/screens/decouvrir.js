@@ -1,4 +1,5 @@
 import { h, img } from "../dom.js";
+import { loadJSON } from "../data.js";
 import { loadShows } from "../shows.js";
 import * as store from "../store.js";
 import { matchesFilters } from "../filtering.js";
@@ -7,6 +8,8 @@ import { createShowCard, syncCard } from "../ui/show-card.js";
 
 /** Pastilles du haut : chacune ouvre la feuille « Filtres » sur sa section et s'allume si elle est active. */
 const CHIPS = [
+  // Raccourci : l'appli s'ouvre comme au premier jour du festival ; la pastille filtre directement sur ce jour.
+  { label: "Aujourd’hui", quick: true, active: (f, today) => f.days.length === 1 && f.days[0] === today },
   { label: "Horaire", section: "hours", active: (f) => Boolean(f.from || f.to) },
   { label: "Date", section: "days", active: (f) => f.days.length > 0 },
   { label: "IN/OFF", section: "programme", active: (f) => f.programme.length > 0 },
@@ -22,7 +25,8 @@ const LOAD_MARGIN = "800px";
 const normalize = (text) => text.normalize("NFD").replace(/\p{Diacritic}/gu, "").toLowerCase();
 
 export async function renderDecouvrir() {
-  const shows = await loadShows();
+  const [shows, event] = await Promise.all([loadShows(), loadJSON("data/event.json")]);
+  const today = event.today;
   const cards = h("div", { class: "cards" });
   const empty = h("p", { class: "empty-results", hidden: true }, "Aucun spectacle ne correspond à votre recherche.");
   const sentinel = h("div", { class: "cards__end", "aria-hidden": "true", hidden: true });
@@ -71,7 +75,11 @@ export async function renderDecouvrir() {
         class: "chip",
         type: "button",
         "aria-pressed": "false",
-        onclick: (event) => event.currentTarget.dispatchEvent(new CustomEvent("open-filters", { bubbles: true, detail: { section: chip.section } })),
+        onclick: (clickEvent) => {
+          // « Aujourd'hui » bascule le filtre de date ; les autres ouvrent uniquement leur brique de « Filtres ».
+          if (chip.quick) store.setFilters({ days: chip.active(store.getFilters(), today) ? [] : [today] });
+          else clickEvent.currentTarget.dispatchEvent(new CustomEvent("open-filters", { bubbles: true, detail: { section: chip.section, only: true } }));
+        },
       },
       chip.label
     )
@@ -82,7 +90,7 @@ export async function renderDecouvrir() {
   const apply = () => {
     const filters = store.getFilters();
     const query = normalize(input.value.trim());
-    CHIPS.forEach((chip, i) => chipEls[i].setAttribute("aria-pressed", String(chip.active(filters))));
+    CHIPS.forEach((chip, i) => chipEls[i].setAttribute("aria-pressed", String(chip.active(filters, today))));
 
     const next = JSON.stringify([filters, query]);
     if (next === signature) return;

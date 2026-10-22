@@ -300,16 +300,28 @@
   color: var(--color-ink);
 }
 
+/* Bouton à contour (« Voir sur la carte ») : plus haut et en 14 px pour être lisible et facile à toucher. */
 .button-outline {
+  position: relative;
   display: grid;
   place-items: center;
   height: var(--rep-button-height);
-  padding: 2px var(--space-1-5);
+  padding: var(--space-0-5) var(--space-3);
   background: var(--color-white);
   border: var(--hairline) solid var(--color-ink);
   border-radius: var(--radius-sm);
-  font-size: var(--text-xs);
+  font-size: var(--text-sm);
   font-weight: var(--weight-medium);
-  line-height: var(--leading-xs);
+  line-height: var(--leading-sm);
   color: var(--color-ink);
+}
+
+.button-outline::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: var(--touch-target);
+  transform: translateY(-50%);
 }
